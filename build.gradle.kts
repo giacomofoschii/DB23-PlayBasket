@@ -30,19 +30,19 @@ repositories {
 }
 
 dependencies {
-    
-    // Suppressions for SpotBugs
-    compileOnly("com.github.spotbugs:spotbugs-annotations:4.7.3")
 
     val jUnitVersion = "5.9.1"
     // JUnit API and testing engine
     testImplementation("org.junit.jupiter:junit-jupiter-api:$jUnitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
+
+    //JDBC driver for MYSQL
+    implementation("mysql:mysql-connector-java:8.0.27")
 }
 
 application {
     // Define the main class for the application.
-    mainClass.set("it.unibo.donkeykong.game.Donkeykong")
+    mainClass.set("it.unibo.playbasket.PlayBasket")
 }
 
 tasks.named<Test>("test") {
