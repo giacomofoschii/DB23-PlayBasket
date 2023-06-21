@@ -1,16 +1,22 @@
 package it.unibo.playbasket;
 
-import java.sql.SQLException;
-
-import it.unibo.playbasket.sql.ConnectClass;
+import it.unibo.playbasket.db.ConnectionManager;
+import it.unibo.playbasket.view.AppLauncher;
+import javafx.application.Application;
 
 /**
  * Main class.
  */
 public final class PlayBasket {
 
-    public static void main(final String[] args) throws SQLException, ClassNotFoundException {
-        final ConnectClass connectClass = new ConnectClass();
-        connectClass.getConnection();
+    /**
+     * Main application method.
+     *
+     * @param args
+     */
+    public static void main(final String[] args) {
+        final ConnectionManager connectClass = new ConnectionManager();
+        connectClass.getSQLConnection();
+        Application.launch(AppLauncher.class, args);
     }
 }
