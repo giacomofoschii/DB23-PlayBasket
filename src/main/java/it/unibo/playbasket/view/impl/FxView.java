@@ -19,8 +19,8 @@ public class FxView implements View {
         this.primaryStage = primaryStage;
         primaryStage.setTitle("PlayBasket");
         primaryStage.getIcons().add(new Image(ClassLoader.getSystemResource("images/Logo.png").toExternalForm()));
-        primaryStage.setResizable(false);
         primaryStage.centerOnScreen();
+        primaryStage.setResizable(false);
         this.setOpeningView();
         primaryStage.show();
     }
