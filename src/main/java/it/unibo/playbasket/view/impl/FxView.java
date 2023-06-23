@@ -1,9 +1,11 @@
 package it.unibo.playbasket.view.impl;
 
+import it.unibo.playbasket.controller.AdminController;
 import it.unibo.playbasket.controller.LoginController;
 import it.unibo.playbasket.controller.MainController;
 import it.unibo.playbasket.controller.OpeningController;
 import it.unibo.playbasket.view.api.View;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -78,7 +80,14 @@ public class FxView implements View {
 
     @Override
     public void setAdminView() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setAdminView'");
+        try{
+            final var loader = new FXMLLoader(ClassLoader.getSystemResource("fxml/AdminView.fxml"));
+            loader.setController(new AdminController(this));
+            final Parent root = loader.load();
+            final Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

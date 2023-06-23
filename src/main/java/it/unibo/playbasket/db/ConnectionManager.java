@@ -33,7 +33,6 @@ public class ConnectionManager {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            System.out.println("Connecting to database...");
             return DriverManager.getConnection(
                     dbLink, this.user, this.password);
         } catch (final SQLException e) {
