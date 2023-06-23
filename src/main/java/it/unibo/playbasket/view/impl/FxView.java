@@ -1,5 +1,7 @@
 package it.unibo.playbasket.view.impl;
 
+import it.unibo.playbasket.controller.MainViewController;
+import it.unibo.playbasket.controller.OpeningViewController;
 import it.unibo.playbasket.view.api.View;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,6 +17,11 @@ public class FxView implements View {
 
     private Stage primaryStage;
 
+    /**
+     * Constructor for the view.
+     * 
+     * @param primaryStage the stage.
+     */
     public FxView(final Stage primaryStage) {
         this.primaryStage = primaryStage;
         primaryStage.setTitle("PlayBasket");
@@ -32,6 +39,7 @@ public class FxView implements View {
     public void setOpeningView() {
         try {
             final var loader = new FXMLLoader(ClassLoader.getSystemResource("fxml/OpeningView.fxml"));
+            loader.setController(new OpeningViewController(this));
             final Parent root = loader.load();
             final Scene scene = new Scene(root);
             primaryStage.setScene(scene);
@@ -39,5 +47,17 @@ public class FxView implements View {
             e.printStackTrace();
         }
     }
-    
+
+    @Override
+    public void setMainView() {
+        try{
+            final var loader = new FXMLLoader(ClassLoader.getSystemResource("fxml/MainView.fxml"));
+            loader.setController(new MainViewController(this));
+            final Parent root = loader.load();
+            final Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }
