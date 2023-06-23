@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" />
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="349.0" layoutY="560.0" mnemonicParsing="false" onAction="#goHome" text="Torna alla home" />
+      <Button layoutX="79.0" layoutY="343.0" mnemonicParsing="false" onAction="#enterSocieta" prefHeight="86.0" prefWidth="179.0" text="Gestione Società" />
+      <Button layoutX="540.0" layoutY="134.0" mnemonicParsing="false" onAction="#enterCampionati" prefHeight="86.0" prefWidth="179.0" text="Gestione Campionati" />
+      <Button layoutX="540.0" layoutY="343.0" mnemonicParsing="false" onAction="#enterPalestre" prefHeight="86.0" prefWidth="179.0" text="Gestione Palestre" />
+      <Button layoutX="79.0" layoutY="134.0" mnemonicParsing="false" onAction="#enterTesserati" prefHeight="86.0" prefWidth="179.0" text="Gestione Tesserati" />
+      <Button layoutX="310.0" layoutY="257.0" mnemonicParsing="false" onAction="#enterPartite" prefHeight="86.0" prefWidth="179.0" text="Gestione Partite" />
+   </children>
+</AnchorPane>

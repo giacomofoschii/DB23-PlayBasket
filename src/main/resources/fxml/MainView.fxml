@@ -13,8 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <MenuBar layoutY="2.0" prefHeight="22.0" prefWidth="800.0">
         <menus>
@@ -129,7 +128,7 @@
       </Label>
       <AnchorPane layoutX="562.0" layoutY="67.0" prefHeight="510.0" prefWidth="200.0">
          <children>
-            <TableView layoutX="-8.0" prefHeight="514.0" prefWidth="210.0" />
+            <TableView layoutY="7.0" prefHeight="514.0" prefWidth="210.0" />
          </children>
       </AnchorPane>
       <ImageView fitHeight="32.0" fitWidth="29.0" layoutX="428.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
@@ -147,7 +146,7 @@
             <Image url="@../images/Classifica.png" />
          </image>
       </ImageView>
-      <Button layoutX="217.0" layoutY="487.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="90.0" text="More stats">
+      <Button layoutX="217.0" layoutY="487.0" mnemonicParsing="false" onAction="#enterMoreStatsPage" prefHeight="48.0" prefWidth="90.0" text="More stats">
          <font>
             <Font name="Times New Roman Bold" size="15.0" />
          </font>

@@ -1,9 +1,15 @@
 package it.unibo.playbasket.view.impl;
 
 import it.unibo.playbasket.controller.AdminController;
+import it.unibo.playbasket.controller.CampionatiController;
 import it.unibo.playbasket.controller.LoginController;
 import it.unibo.playbasket.controller.MainController;
+import it.unibo.playbasket.controller.MoreStatsController;
 import it.unibo.playbasket.controller.OpeningController;
+import it.unibo.playbasket.controller.PalestreController;
+import it.unibo.playbasket.controller.PartiteController;
+import it.unibo.playbasket.controller.SocietaController;
+import it.unibo.playbasket.controller.TesseratiController;
 import it.unibo.playbasket.view.api.View;
 
 import javafx.fxml.FXMLLoader;
@@ -91,6 +97,84 @@ public class FxView implements View {
         try{
             final var loader = new FXMLLoader(ClassLoader.getSystemResource("fxml/AdminView.fxml"));
             loader.setController(new AdminController(this));
+            final Parent root = loader.load();
+            final Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setMoreStatsView() {
+        try{
+            final var loader = new FXMLLoader(ClassLoader.getSystemResource("fxml/MoreStatsView.fxml"));
+            loader.setController(new MoreStatsController(this));
+            final Parent root = loader.load();
+            final Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setTesseratiView() {
+        try{
+            final var loader = new FXMLLoader(ClassLoader.getSystemResource("fxml/TesseratiView.fxml"));
+            loader.setController(new TesseratiController(this));
+            final Parent root = loader.load();
+            final Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setSocietaView() {
+        try{
+            final var loader = new FXMLLoader(ClassLoader.getSystemResource("fxml/SocietaView.fxml"));
+            loader.setController(new SocietaController(this));
+            final Parent root = loader.load();
+            final Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setPalestreView() {
+        try{
+            final var loader = new FXMLLoader(ClassLoader.getSystemResource("fxml/PalestreView.fxml"));
+            loader.setController(new PalestreController(this));
+            final Parent root = loader.load();
+            final Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setCampionatiView() {
+        try{
+            final var loader = new FXMLLoader(ClassLoader.getSystemResource("fxml/CampionatiView.fxml"));
+            loader.setController(new CampionatiController(this));
+            final Parent root = loader.load();
+            final Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setPartiteView() {
+        try{
+            final var loader = new FXMLLoader(ClassLoader.getSystemResource("fxml/PartiteView.fxml"));
+            loader.setController(new PartiteController(this));
             final Parent root = loader.load();
             final Scene scene = new Scene(root);
             primaryStage.setScene(scene);
