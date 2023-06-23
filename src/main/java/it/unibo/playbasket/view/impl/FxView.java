@@ -51,6 +51,9 @@ public class FxView implements View {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setMainView() {
         try{
@@ -64,7 +67,9 @@ public class FxView implements View {
         }
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setLoginView() {
         try{
@@ -78,6 +83,9 @@ public class FxView implements View {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setAdminView() {
         try{

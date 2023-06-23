@@ -9,8 +9,10 @@ import it.unibo.playbasket.view.impl.FxView;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
 
+/**
+ * Controller for the login page.
+ */
 public class LoginController {
 
     private FxView view;
@@ -23,6 +25,10 @@ public class LoginController {
     @FXML
     private PasswordField password;
 
+    /**
+     * Constructor for the controller.
+     * @param view the view.
+     */
     public LoginController(FxView view){
         this.view = view;
         this.user = "admin";
