@@ -13,7 +13,7 @@
             <Image url="@../images/Screensaver.jpg" />
          </image>
       </ImageView>
-      <Button alignment="CENTER" layoutX="499.0" layoutY="245.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="224.0" text="Accedi" textAlignment="CENTER">
+      <Button alignment="CENTER" layoutX="499.0" layoutY="245.0" mnemonicParsing="false" onAction="#enterMainPage" prefHeight="84.0" prefWidth="224.0" text="Accedi" textAlignment="CENTER">
          <font>
             <Font name="Bauhaus 93" size="37.0" />
          </font>
