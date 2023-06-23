@@ -14,8 +14,6 @@ public final class PlayBasket {
      * @param args
      */
     public static void main(final String[] args) {
-        final ConnectionManager connectClass = new ConnectionManager();
-        connectClass.getSQLConnection();
         Application.launch(AppLauncher.class, args);
     }
 }

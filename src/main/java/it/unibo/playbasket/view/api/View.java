@@ -14,4 +14,14 @@ public interface View {
      * Method that sets the main view.
      */
     void setMainView();
+
+    /**
+     * Method that sets the login page.
+     */
+    void setLoginView();
+
+    /**
+     * Method that sets the admin page.
+     */
+    void setAdminView();
 }

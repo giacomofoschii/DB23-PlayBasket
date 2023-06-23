@@ -1,7 +1,8 @@
 package it.unibo.playbasket.view.impl;
 
-import it.unibo.playbasket.controller.MainViewController;
-import it.unibo.playbasket.controller.OpeningViewController;
+import it.unibo.playbasket.controller.LoginController;
+import it.unibo.playbasket.controller.MainController;
+import it.unibo.playbasket.controller.OpeningController;
 import it.unibo.playbasket.view.api.View;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -39,7 +40,7 @@ public class FxView implements View {
     public void setOpeningView() {
         try {
             final var loader = new FXMLLoader(ClassLoader.getSystemResource("fxml/OpeningView.fxml"));
-            loader.setController(new OpeningViewController(this));
+            loader.setController(new OpeningController(this));
             final Parent root = loader.load();
             final Scene scene = new Scene(root);
             primaryStage.setScene(scene);
@@ -52,12 +53,32 @@ public class FxView implements View {
     public void setMainView() {
         try{
             final var loader = new FXMLLoader(ClassLoader.getSystemResource("fxml/MainView.fxml"));
-            loader.setController(new MainViewController(this));
+            loader.setController(new MainController(this));
             final Parent root = loader.load();
             final Scene scene = new Scene(root);
             primaryStage.setScene(scene);
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+
+    @Override
+    public void setLoginView() {
+        try{
+            final var loader = new FXMLLoader(ClassLoader.getSystemResource("fxml/LoginView.fxml"));
+            loader.setController(new LoginController(this));
+            final Parent root = loader.load();
+            final Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setAdminView() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setAdminView'");
     }
 }

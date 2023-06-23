@@ -30,8 +30,10 @@ public class ConnectionManager {
     public Connection getSQLConnection() {
 
         final String dbLink = "jdbc:mysql://localhost:3306/" + this.dbname;
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
+            System.out.println("Connecting to database...");
             return DriverManager.getConnection(
                     dbLink, this.user, this.password);
         } catch (final SQLException e) {
