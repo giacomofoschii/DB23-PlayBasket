@@ -1,7 +1,6 @@
 package it.unibo.playbasket;
 
 import it.unibo.playbasket.db.ConnectionManager;
-import it.unibo.playbasket.view.AppLauncher;
 import javafx.application.Application;
 
 /**
