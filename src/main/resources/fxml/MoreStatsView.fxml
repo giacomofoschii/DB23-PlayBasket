@@ -28,7 +28,7 @@
                      <left>
                         <FlowPane prefHeight="476.0" prefWidth="147.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Separator prefHeight="10.0" prefWidth="147.0" />
+                              <Separator prefHeight="20.0" prefWidth="157.0" />
                               <TextField prefHeight="25.0" prefWidth="156.0" promptText="Inserisci anno campionato" />
                               <Separator prefHeight="10.0" prefWidth="147.0" />
                               <TextField promptText="Inserisci ID campionato" />
@@ -51,7 +51,7 @@
                      <left>
                         <FlowPane prefHeight="476.0" prefWidth="147.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Separator prefHeight="10.0" prefWidth="147.0" />
+                              <Separator prefHeight="20.0" prefWidth="157.0" />
                               <TextField prefHeight="25.0" prefWidth="156.0" promptText="Inserisci anno campionato" />
                               <Separator prefHeight="10.0" prefWidth="147.0" />
                               <TextField promptText="Inserisci ID campionato" />
@@ -76,7 +76,7 @@
                      <left>
                         <FlowPane prefHeight="476.0" prefWidth="147.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Separator prefHeight="10.0" prefWidth="147.0" />
+                              <Separator prefHeight="20.0" prefWidth="157.0" />
                               <TextField prefHeight="25.0" prefWidth="156.0" promptText="Inserisci anno" />
                               <Separator prefHeight="10.0" prefWidth="147.0" />
                               <TextField promptText="Inserisci ID palestra" />
@@ -97,7 +97,7 @@
                      <left>
                         <FlowPane prefHeight="476.0" prefWidth="147.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Separator prefHeight="10.0" prefWidth="147.0" />
+                              <Separator prefHeight="20.0" prefWidth="157.0" />
                               <TextField prefHeight="25.0" prefWidth="156.0" promptText="Inserisci anno" />
                               <Separator prefHeight="10.0" prefWidth="147.0" />
                               <TextField promptText="Inserisci numero meccanografico" />

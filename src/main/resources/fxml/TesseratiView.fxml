@@ -1,11 +1,165 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Button layoutX="14.0" layoutY="560.0" mnemonicParsing="false" onAction="#goManagement" text="Torna alla gestione" />
-   </children>
-</AnchorPane>
+<TabPane prefHeight="626.0" prefWidth="853.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <tabs>
+      <Tab closable="false" text="Giocatore">
+        <content>
+            <BorderPane prefHeight="500.0" prefWidth="785.0">
+               <left>
+                  <FlowPane alignment="TOP_CENTER" orientation="VERTICAL" prefHeight="516.0" prefWidth="216.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Separator focusTraversable="false" prefHeight="20.0" prefWidth="200.0" visible="false" />
+                        <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="I campi con * sono obbligatori" wrappingWidth="193.68119748737445">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Text>
+                        <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
+                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Nome*" />
+                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Cognome*" />
+                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Codice Fiscale*" />
+                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Tessera FIP*" />
+                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Età*" />
+                        <ChoiceBox prefHeight="25.0" prefWidth="200.0" />
+                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Altezza*" />
+                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Peso*" />
+                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Apertura alare" />
+                        <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
+                        <Button mnemonicParsing="false" onAction="#viewSuppliersOnClick" prefHeight="25.0" prefWidth="200.0" text="Aggiungi giocatore">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </FlowPane>
+               </left>
+               <center>
+                  <TableView fx:id="plantView" prefHeight="612.0" prefWidth="645.0" />
+               </center>
+            </BorderPane>
+        </content>
+      </Tab>
+      <Tab closable="false" text="Arbitro">
+        <content>
+            <BorderPane prefHeight="500.0" prefWidth="785.0">
+               <left>
+                  <FlowPane alignment="TOP_CENTER" orientation="VERTICAL" prefHeight="516.0" prefWidth="216.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Separator focusTraversable="false" prefHeight="20.0" prefWidth="200.0" visible="false" />
+                        <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="I campi con * sono obbligatori" wrappingWidth="193.68119748737445">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Text>
+                        <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
+                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Età*" />
+                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Nome*" />
+                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Cognome*" />
+                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Codice Fiscale*" />
+                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Tessera FIP*" />
+                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Sezione*" />
+                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Grado*" />
+                        <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
+                        <Button mnemonicParsing="false" onAction="#viewSuppliersOnClick" prefHeight="25.0" prefWidth="200.0" text="Aggiungi arbitro">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </FlowPane>
+               </left>
+               <center>
+                  <TableView fx:id="supplierView" />
+               </center>
+            </BorderPane>
+        </content>
+      </Tab>
+      <Tab closable="false" text="Ufficiale di campo">
+        <content>
+            <BorderPane prefHeight="500.0" prefWidth="785.0">
+               <left>
+                  <FlowPane alignment="TOP_CENTER" orientation="VERTICAL" prefHeight="516.0" prefWidth="216.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Separator focusTraversable="false" prefHeight="20.0" prefWidth="200.0" visible="false" />
+                        <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="I campi con * sono obbligatori" wrappingWidth="193.68119748737445">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Text>
+                        <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
+                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Età*" />
+                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Nome*" />
+                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Cognome*" />
+                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Codice Fiscale*" />
+                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Tessera FIP*" />
+                        <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Cronometrista" />
+                        <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Refertista" />
+                        <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Segnapunti" />
+                        <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
+                        <Button mnemonicParsing="false" onAction="#viewSuppliersOnClick" prefHeight="25.0" prefWidth="200.0" text="Aggiungi ufficiale di campo">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </FlowPane>
+               </left>
+               <center>
+                  <TableView fx:id="employeeView" />
+               </center>
+            </BorderPane>
+        </content>
+      </Tab>
+      <Tab closable="false" text="Staff">
+        <content>
+            <BorderPane prefHeight="500.0" prefWidth="785.0">
+               <left>
+                  <FlowPane alignment="TOP_CENTER" orientation="VERTICAL" prefHeight="516.0" prefWidth="216.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Separator focusTraversable="false" prefHeight="20.0" prefWidth="200.0" visible="false" />
+                        <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="I campi con * sono obbligatori" wrappingWidth="193.68119748737445">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Text>
+                        <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
+                        <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Preparatore fisico" />
+                        <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Medico" />
+                        <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Accopmagnatore" />
+                        <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Direttore addetto arbitri" />
+                        <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Massaggiatore" />
+                        <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Aiuto-allenatore" />
+                        <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Allenatore" />
+                        <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Scorer" />
+                        <TextField promptText="Nome*" />
+                        <TextField promptText="Cognome*" />
+                        <TextField promptText="Codice FIscale*" />
+                        <TextField promptText="Tessera FIP*" />
+                        <TextField promptText="Età*" />
+                        <TextField promptText="Anno patentino" />
+                        <TextField promptText="Specializzazione" />
+                        <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="204.0" text="Aggiungi staff" />
+                     </children>
+                  </FlowPane>
+               </left>
+               <center>
+                  <TableView fx:id="statView" />
+               </center>
+            </BorderPane>
+        </content>
+      </Tab>
+   </tabs>
+</TabPane>
