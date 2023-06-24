@@ -37,11 +37,13 @@
                         <TextField prefHeight="25.0" prefWidth="190.0" promptText="Peso*" />
                         <TextField prefHeight="25.0" prefWidth="190.0" promptText="Apertura alare" />
                         <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                        <Button mnemonicParsing="false" onAction="#viewSuppliersOnClick" prefHeight="25.0" prefWidth="200.0" text="Aggiungi giocatore">
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Aggiungi giocatore">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
+                        <Separator focusTraversable="false" prefHeight="257.0" prefWidth="200.0" visible="false" />
+                        <Button mnemonicParsing="false" text="Torna alla gestone" />
                      </children>
                   </FlowPane>
                </left>
@@ -72,11 +74,13 @@
                         <TextField prefHeight="25.0" prefWidth="190.0" promptText="Sezione*" />
                         <TextField prefHeight="25.0" prefWidth="190.0" promptText="Grado*" />
                         <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                        <Button mnemonicParsing="false" onAction="#viewSuppliersOnClick" prefHeight="25.0" prefWidth="200.0" text="Aggiungi arbitro">
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Aggiungi arbitro">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
+                        <Separator focusTraversable="false" prefHeight="310.0" prefWidth="200.0" visible="false" />
+                        <Button mnemonicParsing="false" text="Torna alla gestone" />
                      </children>
                   </FlowPane>
                </left>
@@ -104,15 +108,21 @@
                         <TextField prefHeight="25.0" prefWidth="190.0" promptText="Cognome*" />
                         <TextField prefHeight="25.0" prefWidth="190.0" promptText="Codice Fiscale*" />
                         <TextField prefHeight="25.0" prefWidth="190.0" promptText="Tessera FIP*" />
-                        <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Cronometrista" />
+                        <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Cronometrista">
+                           <font>
+                              <Font name="Times New Roman" size="12.0" />
+                           </font>
+                        </CheckBox>
                         <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Refertista" />
                         <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Segnapunti" />
                         <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                        <Button mnemonicParsing="false" onAction="#viewSuppliersOnClick" prefHeight="25.0" prefWidth="200.0" text="Aggiungi ufficiale di campo">
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Aggiungi ufficiale di campo">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
+                        <Separator focusTraversable="false" prefHeight="285.0" prefWidth="200.0" visible="false" />
+                        <Button mnemonicParsing="false" text="Torna alla gestone" />
                      </children>
                   </FlowPane>
                </left>
@@ -152,6 +162,8 @@
                         <TextField promptText="Specializzazione" />
                         <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
                         <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="204.0" text="Aggiungi staff" />
+                        <Separator focusTraversable="false" prefHeight="111.0" prefWidth="204.0" visible="false" />
+                        <Button mnemonicParsing="false" text="Torna alla gestone" />
                      </children>
                   </FlowPane>
                </left>
