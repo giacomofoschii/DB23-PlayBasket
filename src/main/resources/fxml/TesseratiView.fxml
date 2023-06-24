@@ -43,7 +43,7 @@
                            </font>
                         </Button>
                         <Separator focusTraversable="false" prefHeight="234.0" prefWidth="200.0" visible="false" />
-                        <Button mnemonicParsing="false" text="Torna alla gestone" />
+                        <Button mnemonicParsing="false" onAction="#goManagement" text="Torna alla gestone" />
                      </children>
                   </FlowPane>
                </left>
@@ -80,7 +80,7 @@
                            </font>
                         </Button>
                         <Separator focusTraversable="false" prefHeight="282.0" prefWidth="200.0" visible="false" />
-                        <Button mnemonicParsing="false" text="Torna alla gestone" />
+                        <Button mnemonicParsing="false" onAction="#goManagement" text="Torna alla gestone" />
                      </children>
                   </FlowPane>
                </left>
@@ -122,7 +122,7 @@
                            </font>
                         </Button>
                         <Separator focusTraversable="false" prefHeight="261.0" prefWidth="200.0" visible="false" />
-                        <Button mnemonicParsing="false" text="Torna alla gestone" />
+                        <Button mnemonicParsing="false" onAction="#goManagement" text="Torna alla gestone" />
                      </children>
                   </FlowPane>
                </left>
@@ -163,7 +163,7 @@
                         <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
                         <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="204.0" text="Aggiungi staff" />
                         <Separator focusTraversable="false" prefHeight="86.0" prefWidth="204.0" visible="false" />
-                        <Button mnemonicParsing="false" text="Torna alla gestone" />
+                        <Button mnemonicParsing="false" onAction="#goManagement" text="Torna alla gestone" />
                      </children>
                   </FlowPane>
                </left>
@@ -184,7 +184,7 @@
                         <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
                         <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="204.0" text="Rimuovi tesserato" />
                         <Separator focusTraversable="false" prefHeight="472.0" prefWidth="204.0" visible="false" />
-                        <Button mnemonicParsing="false" text="Torna alla gestone" />
+                        <Button mnemonicParsing="false" onAction="#goManagement" text="Torna alla gestone" />
                      </children>
                   </FlowPane>
                </left>
