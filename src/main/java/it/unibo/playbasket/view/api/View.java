@@ -1,5 +1,7 @@
 package it.unibo.playbasket.view.api;
 
+import java.sql.Connection;
+
 /**
  * Interface for the view.
  */
@@ -54,4 +56,9 @@ public interface View {
      * Method that sets partite management page.
      */
     void setPartiteView();
+
+    /**
+     * Method that adds connection to features.
+     */
+    void addConnection(Connection connection);
 }

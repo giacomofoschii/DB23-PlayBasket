@@ -1,6 +1,4 @@
-package it.unibo.playbasket.db.impl;
-
-import it.unibo.playbasket.db.api.Features;
+package it.unibo.playbasket.db.features;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +10,11 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.Collection;
 
-public class FeaturesImpl implements Features{
-    
+public class FeaturesMoreStats{
+
+    private Connection connection;
+
+    public FeaturesMoreStats(Connection connection){
+        this.connection = connection;
+    }
 }

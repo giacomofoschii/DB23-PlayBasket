@@ -1,6 +1,8 @@
 package it.unibo.playbasket.controller;
 
-import it.unibo.playbasket.db.impl.ConnectionManager;
+import java.sql.Connection;
+
+import it.unibo.playbasket.db.ConnectionManager;
 import it.unibo.playbasket.view.impl.FxView;
 import javafx.fxml.FXML;
 
@@ -23,6 +25,7 @@ public class OpeningController{
     public void enterMainPage(){
         this.view.setMainView();
         final ConnectionManager connectClass = new ConnectionManager();
-        connectClass.getSQLConnection();
+        Connection connection = connectClass.getSQLConnection();
+        this.view.addConnection(connection);
     }
 }
