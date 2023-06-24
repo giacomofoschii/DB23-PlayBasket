@@ -1,6 +1,6 @@
 package it.unibo.playbasket.controller;
 
-import it.unibo.playbasket.db.ConnectionManager;
+import it.unibo.playbasket.db.impl.ConnectionManager;
 import it.unibo.playbasket.view.impl.FxView;
 import javafx.fxml.FXML;
 

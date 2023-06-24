@@ -1,4 +1,4 @@
-package it.unibo.playbasket.db;
+package it.unibo.playbasket.db.impl;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
