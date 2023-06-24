@@ -156,10 +156,10 @@
             <Font name="Times New Roman Bold" size="17.0" />
          </font>
       </Label>
-      <TableView layoutX="355.0" layoutY="63.0" prefHeight="88.0" prefWidth="204.0" />
-      <TextField layoutX="11.0" layoutY="95.0" prefHeight="25.0" prefWidth="112.0" promptText="Inserisci girone" />
-      <Button layoutX="33.0" layoutY="126.0" mnemonicParsing="false" text="Visualizza" />
-      <TextField layoutX="11.0" layoutY="64.0" prefHeight="25.0" prefWidth="112.0" promptText="Inserisci ID campionato" />
-      <TextField layoutX="11.0" layoutY="36.0" prefHeight="25.0" prefWidth="112.0" promptText="Inserisci anno" />
+      <TableView fx:id="bestDefense" layoutX="355.0" layoutY="63.0" prefHeight="88.0" prefWidth="204.0" />
+      <TextField fx:id="nomeGirone" layoutX="11.0" layoutY="95.0" prefHeight="25.0" prefWidth="112.0" promptText="Inserisci girone" />
+      <Button layoutX="33.0" layoutY="126.0" mnemonicParsing="false" onAction="#viewAll" text="Visualizza" />
+      <TextField fx:id="idCampionato" layoutX="11.0" layoutY="64.0" prefHeight="25.0" prefWidth="112.0" promptText="Inserisci ID campionato" />
+      <TextField fx:id="anno" layoutX="11.0" layoutY="36.0" prefHeight="25.0" prefWidth="112.0" promptText="Inserisci anno" />
    </children>
 </AnchorPane>

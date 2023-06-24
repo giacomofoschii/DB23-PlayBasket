@@ -13,13 +13,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<TabPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <tabs>
       <Tab closable="false" text="Giocatore">
         <content>
             <BorderPane prefHeight="500.0" prefWidth="785.0">
                <left>
-                  <FlowPane alignment="TOP_CENTER" orientation="VERTICAL" prefHeight="516.0" prefWidth="216.0" BorderPane.alignment="CENTER">
+                  <FlowPane alignment="TOP_CENTER" orientation="VERTICAL" prefHeight="571.0" prefWidth="213.0" BorderPane.alignment="CENTER">
                      <children>
                         <Separator focusTraversable="false" prefHeight="20.0" prefWidth="200.0" visible="false" />
                         <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="I campi con * sono obbligatori" wrappingWidth="193.68119748737445">
@@ -27,28 +27,30 @@
                               <Font name="System Bold" size="12.0" />
                            </font></Text>
                         <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Nome*" />
-                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Cognome*" />
-                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Codice Fiscale*" />
-                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Tessera FIP*" />
-                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Età*" />
-                        <ChoiceBox prefHeight="25.0" prefWidth="200.0" />
-                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Altezza*" />
-                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Peso*" />
-                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Apertura alare" />
-                        <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Aggiungi giocatore">
+                        <TextField fx:id="nomeGiocatore" prefHeight="25.0" prefWidth="190.0" promptText="Nome*" />
+                        <TextField fx:id="cognomeGiocatore" prefHeight="25.0" prefWidth="190.0" promptText="Cognome*" />
+                        <TextField fx:id="cfGiocatore" prefHeight="25.0" prefWidth="190.0" promptText="Codice Fiscale*" />
+                        <TextField fx:id="tesseraGiocatore" prefHeight="25.0" prefWidth="190.0" promptText="Tessera FIP*" />
+                        <TextField fx:id="etaGiocatore" prefHeight="25.0" prefWidth="190.0" promptText="Età*" />
+                        <ChoiceBox fx:id="ruolo" prefHeight="25.0" prefWidth="200.0" />
+                        <TextField fx:id="altezza" prefHeight="25.0" prefWidth="190.0" promptText="Altezza*" />
+                        <TextField fx:id="peso" prefHeight="25.0" prefWidth="190.0" promptText="Peso*" />
+                        <TextField fx:id="aperturaAlare" prefHeight="25.0" prefWidth="190.0" promptText="Apertura alare" />
+                        <Separator prefHeight="9.0" prefWidth="200.0" />
+                        <Button mnemonicParsing="false" onAction="#addGiocatore" prefHeight="25.0" prefWidth="200.0" text="Aggiungi giocatore">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Separator focusTraversable="false" prefHeight="234.0" prefWidth="200.0" visible="false" />
-                        <Button mnemonicParsing="false" onAction="#goManagement" text="Torna alla gestone" />
+                        <Separator prefHeight="10.0" prefWidth="200.0" />
+                        <Button mnemonicParsing="false" onAction="#viewPlayers" prefHeight="26.0" prefWidth="200.0" text="Visualizza Giocatori" />
+                        <Separator focusTraversable="false" prefHeight="181.0" prefWidth="200.0" visible="false" />
+                        <Button mnemonicParsing="false" onAction="#goManagement" prefHeight="26.0" prefWidth="199.0" text="Torna alla gestone" />
                      </children>
                   </FlowPane>
                </left>
                <center>
-                  <TableView fx:id="plantView" prefHeight="612.0" prefWidth="645.0" />
+                  <TableView fx:id="giocatoriView" prefHeight="612.0" prefWidth="645.0" />
                </center>
             </BorderPane>
         </content>
@@ -57,7 +59,7 @@
         <content>
             <BorderPane prefHeight="500.0" prefWidth="785.0">
                <left>
-                  <FlowPane alignment="TOP_CENTER" orientation="VERTICAL" prefHeight="516.0" prefWidth="216.0" BorderPane.alignment="CENTER">
+                  <FlowPane alignment="TOP_CENTER" orientation="VERTICAL" prefHeight="527.0" prefWidth="216.0" BorderPane.alignment="CENTER">
                      <children>
                         <Separator focusTraversable="false" prefHeight="20.0" prefWidth="200.0" visible="false" />
                         <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="I campi con * sono obbligatori" wrappingWidth="193.68119748737445">
@@ -66,26 +68,28 @@
                            </font>
                         </Text>
                         <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Età*" />
-                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Nome*" />
-                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Cognome*" />
-                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Codice Fiscale*" />
-                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Tessera FIP*" />
-                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Sezione*" />
-                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Grado*" />
+                        <TextField fx:id="nomeArbitro" prefHeight="25.0" prefWidth="190.0" promptText="Nome*" />
+                        <TextField fx:id="cognomeArbitro" prefHeight="25.0" prefWidth="190.0" promptText="Cognome*" />
+                        <TextField fx:id="etaArbitro" prefHeight="25.0" prefWidth="190.0" promptText="Età*" />
+                        <TextField fx:id="cfArbitro" prefHeight="25.0" prefWidth="190.0" promptText="Codice Fiscale*" />
+                        <TextField fx:id="tesseraArbitro" prefHeight="25.0" prefWidth="190.0" promptText="Tessera FIP*" />
+                        <TextField fx:id="sezione" prefHeight="25.0" prefWidth="190.0" promptText="Sezione*" />
+                        <TextField fx:id="grado" prefHeight="25.0" prefWidth="190.0" promptText="Grado*" />
                         <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Aggiungi arbitro">
+                        <Button mnemonicParsing="false" onAction="#addArbitro" prefHeight="26.0" prefWidth="200.0" text="Aggiungi arbitro" />
+                        <Separator prefHeight="12.0" prefWidth="200.0" />
+                        <Button mnemonicParsing="false" onAction="#viewArbitri" prefHeight="25.0" prefWidth="200.0" text="Visualizza arbitri">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Separator focusTraversable="false" prefHeight="282.0" prefWidth="200.0" visible="false" />
-                        <Button mnemonicParsing="false" onAction="#goManagement" text="Torna alla gestone" />
+                        <Separator focusTraversable="false" prefHeight="218.0" prefWidth="200.0" visible="false" />
+                        <Button mnemonicParsing="false" onAction="#goManagement" prefHeight="26.0" prefWidth="198.0" text="Torna alla gestone" />
                      </children>
                   </FlowPane>
                </left>
                <center>
-                  <TableView fx:id="supplierView" />
+                  <TableView fx:id="arbitriView" />
                </center>
             </BorderPane>
         </content>
@@ -103,31 +107,37 @@
                            </font>
                         </Text>
                         <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Età*" />
-                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Nome*" />
-                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Cognome*" />
-                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Codice Fiscale*" />
-                        <TextField prefHeight="25.0" prefWidth="190.0" promptText="Tessera FIP*" />
-                        <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Cronometrista">
+                        <TextField fx:id="nomeUfficiale" prefHeight="25.0" prefWidth="190.0" promptText="Nome*" />
+                        <TextField fx:id="cognomeUfficiale" prefHeight="25.0" prefWidth="190.0" promptText="Cognome*" />
+                        <TextField fx:id="etaUfficiale" prefHeight="25.0" prefWidth="190.0" promptText="Età*" />
+                        <TextField fx:id="cfUfficiale" prefHeight="25.0" prefWidth="190.0" promptText="Codice Fiscale*" />
+                        <TextField fx:id="tesseraUfficiale" prefHeight="25.0" prefWidth="190.0" promptText="Tessera FIP*" />
+                        <CheckBox fx:id="cronometrista" mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Cronometrista">
                            <font>
                               <Font name="Times New Roman" size="12.0" />
                            </font>
                         </CheckBox>
-                        <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Refertista" />
-                        <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Segnapunti" />
+                        <CheckBox fx:id="refertista" mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Refertista" />
+                        <CheckBox fx:id="segnapunti" mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Segnapunti" />
                         <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Aggiungi ufficiale di campo">
+                        <Button mnemonicParsing="false" onAction="#addUfficiale" prefHeight="25.0" prefWidth="200.0" text="Aggiungi ufficiale di campo">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Separator focusTraversable="false" prefHeight="261.0" prefWidth="200.0" visible="false" />
-                        <Button mnemonicParsing="false" onAction="#goManagement" text="Torna alla gestone" />
+                        <Separator prefHeight="10.0" prefWidth="200.0" />
+                        <Button mnemonicParsing="false" onAction="#viewUfficiali" prefHeight="25.0" prefWidth="200.0" text="Visualizza ufficiali di campo">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Separator focusTraversable="false" prefHeight="201.0" prefWidth="200.0" visible="false" />
+                        <Button mnemonicParsing="false" onAction="#goManagement" prefHeight="26.0" prefWidth="197.0" text="Torna alla gestone" />
                      </children>
                   </FlowPane>
                </left>
                <center>
-                  <TableView fx:id="employeeView" />
+                  <TableView fx:id="ufficialiView" />
                </center>
             </BorderPane>
         </content>
@@ -145,30 +155,36 @@
                            </font>
                         </Text>
                         <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                        <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Preparatore fisico" />
-                        <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Medico" />
-                        <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Accopmagnatore" />
-                        <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Direttore addetto arbitri" />
-                        <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Massaggiatore" />
-                        <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Aiuto-allenatore" />
-                        <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Allenatore" />
-                        <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Scorer" />
-                        <TextField promptText="Nome*" />
-                        <TextField promptText="Cognome*" />
-                        <TextField promptText="Codice FIscale*" />
-                        <TextField promptText="Tessera FIP*" />
-                        <TextField promptText="Età*" />
-                        <TextField promptText="Anno patentino" />
-                        <TextField promptText="Specializzazione" />
+                        <TextField fx:id="nomeStaff" promptText="Nome*" />
+                        <TextField fx:id="cognomeStaff" promptText="Cognome*" />
+                        <TextField fx:id="cfStaff" promptText="Codice FIscale*" />
+                        <TextField fx:id="tesseraStaff" promptText="Tessera FIP*" />
+                        <TextField fx:id="etaStaff" promptText="Età*" />
+                        <TextField fx:id="annoPatentino" promptText="Anno patentino" />
+                        <TextField fx:id="specializzazione" promptText="Specializzazione" />
+                        <CheckBox fx:id="preparatoreFisico" mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Preparatore fisico" />
+                        <CheckBox fx:id="medico" mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Medico" />
+                        <CheckBox fx:id="accompagnatore" mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Accompagnatore" />
+                        <CheckBox fx:id="addettoArbitri" mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Direttore addetto arbitri" />
+                        <CheckBox fx:id="massaggiatore" mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Massaggiatore" />
+                        <CheckBox fx:id="aiutoAllenatore" mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Aiuto-allenatore" />
+                        <CheckBox fx:id="allenatore" mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Allenatore" />
+                        <CheckBox fx:id="scorer" mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Scorer" />
                         <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="204.0" text="Aggiungi staff" />
-                        <Separator focusTraversable="false" prefHeight="86.0" prefWidth="204.0" visible="false" />
-                        <Button mnemonicParsing="false" onAction="#goManagement" text="Torna alla gestone" />
+                        <Button mnemonicParsing="false" onAction="#addStaff" prefHeight="25.0" prefWidth="204.0" text="Aggiungi staff" />
+                        <Separator prefHeight="10.0" prefWidth="204.0" />
+                        <Button mnemonicParsing="false" onAction="#viewStaff" prefHeight="25.0" prefWidth="200.0" text="Visualizza membri staff">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Separator focusTraversable="false" prefHeight="27.0" prefWidth="204.0" visible="false" />
+                        <Button mnemonicParsing="false" onAction="#goManagement" prefHeight="26.0" prefWidth="202.0" text="Torna alla gestone" />
                      </children>
                   </FlowPane>
                </left>
                <center>
-                  <TableView fx:id="statView" />
+                  <TableView fx:id="staffView" />
                </center>
             </BorderPane>
         </content>
@@ -180,11 +196,11 @@
                   <FlowPane alignment="TOP_CENTER" orientation="VERTICAL" prefHeight="516.0" prefWidth="216.0" BorderPane.alignment="CENTER">
                      <children>
                         <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                        <TextField promptText="Tessera FIP*" />
+                        <TextField fx:id="tesseraRimozione" promptText="Tessera FIP*" />
                         <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="204.0" text="Rimuovi tesserato" />
-                        <Separator focusTraversable="false" prefHeight="472.0" prefWidth="204.0" visible="false" />
-                        <Button mnemonicParsing="false" onAction="#goManagement" text="Torna alla gestone" />
+                        <Button mnemonicParsing="false" onAction="#removeTesserato" prefHeight="25.0" prefWidth="204.0" text="Rimuovi tesserato" />
+                        <Separator focusTraversable="false" prefHeight="455.0" prefWidth="204.0" visible="false" />
+                        <Button mnemonicParsing="false" onAction="#goManagement" prefHeight="26.0" prefWidth="203.0" text="Torna alla gestone" />
                      </children>
                   </FlowPane>
                </left>

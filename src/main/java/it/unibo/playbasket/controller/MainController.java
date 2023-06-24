@@ -2,7 +2,6 @@ package it.unibo.playbasket.controller;
 
 import com.google.protobuf.Value;
 
-import it.unibo.playbasket.db.entities.Squadra;
 import it.unibo.playbasket.db.features.FeaturesMainPage;
 import it.unibo.playbasket.view.impl.FxView;
 
@@ -70,6 +69,7 @@ public class MainController {
         viewMinuti();*/
     }
 
+/* 
     private void viewBestAttack(){
         this.bestAttack.getColumns().clear();
         TableColumn<Squadra, String> nomeSquadra = new TableColumn<>("Nome Squadra");
@@ -81,4 +81,5 @@ public class MainController {
         this.bestAttack.getColumns().addAll(nomeSquadra, anno, puntiSegnati);
         this.bestAttack.setItems(features.viewBestAttack(this.idCampionato.getText(), Integer.parseInt(this.anno.getText()), this.nomeGirone.getText()));
     }
+    */
 }

@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import it.unibo.playbasket.db.entities.Squadra;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -17,7 +16,7 @@ public class FeaturesMainPage{
         this.connection = connection;
     }
 
-    public ObservableList<Squadra> viewBestAttack(String idCampionato, int anno, String nomeGirone) {
+    /*public ObservableList<Squadra> viewBestAttack(String idCampionato, int anno, String nomeGirone) {
         final String query = "SELECT S.Nome_squadra, S.Anno_campionato, S.punti_segnati "
                             + "FROM Squadra S "
                             + "WHERE S.IDCampionato = ? "
@@ -38,5 +37,5 @@ public class FeaturesMainPage{
         } catch (final SQLException e) {
             throw new IllegalStateException("Cannot execute the query!", e);
         }
-    }
+    }*/
 }
