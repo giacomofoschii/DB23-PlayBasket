@@ -23,9 +23,9 @@ public class OpeningController{
 
     @FXML
     public void enterMainPage(){
-        this.view.setMainView();
         final ConnectionManager connectClass = new ConnectionManager();
         Connection connection = connectClass.getSQLConnection();
         this.view.addConnection(connection);
+        this.view.setMainView();
     }
 }

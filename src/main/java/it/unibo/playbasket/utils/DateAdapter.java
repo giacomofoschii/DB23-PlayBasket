@@ -9,15 +9,16 @@ public final class DateAdapter {
 
     public static java.util.Date sqlDateToDate(final java.sql.Date sqlDate) {
         return sqlDate == null ? null : new java.util.Date(sqlDate.getTime());
+        
     }
-    
+
     public static java.sql.Date dateToSqlDate(final java.util.Date date) {
         return date == null ? null : new java.sql.Date(date.getTime());
     }
-    
+
     public static Optional<java.util.Date> buildDate(final String dateString) {
         try {
-            final String dateFormatString = "dd/MM/yyyy";
+            final String dateFormatString = "yyyy-MM-dd HH:mm:ss";
             final java.util.Date date = new SimpleDateFormat(dateFormatString, Locale.ITALIAN).parse(dateString);
             return Optional.of(date);
         } catch (final ParseException e) {
@@ -25,8 +26,8 @@ public final class DateAdapter {
         }
     }
 
-    public static Optional<java.util.Date> buildDate(final int day, final int month, final int year) {
-        final String dateString = day + "/" + month + "/" + year;
+    public static Optional<java.util.Date> buildDate(final int day, final int month, final int year, final int hour, final int minute, final int second) {
+        final String dateString = day + "-" + month + "-" + year + " " + hour + ":" + minute + ":" + second;
         return buildDate(dateString);
     }
 }
