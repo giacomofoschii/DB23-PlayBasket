@@ -18,13 +18,6 @@
    <children>
       <MenuBar layoutY="2.0" prefHeight="22.0" prefWidth="800.0">
         <menus>
-            <Menu mnemonicParsing="false" text="Campionato">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="A" />
-                  <MenuItem mnemonicParsing="false" text="B" />
-                  <MenuItem mnemonicParsing="false" text="C gold" />
-               </items>
-            </Menu>
           <Menu mnemonicParsing="false" text="Administration">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#enterLoginPage" text="Accedi" />
@@ -166,5 +159,7 @@
       <TableView layoutX="355.0" layoutY="63.0" prefHeight="88.0" prefWidth="204.0" />
       <TextField layoutX="11.0" layoutY="95.0" prefHeight="25.0" prefWidth="112.0" promptText="Inserisci girone" />
       <Button layoutX="33.0" layoutY="126.0" mnemonicParsing="false" text="Visualizza" />
+      <TextField layoutX="11.0" layoutY="64.0" prefHeight="25.0" prefWidth="112.0" promptText="Inserisci ID campionato" />
+      <TextField layoutX="11.0" layoutY="36.0" prefHeight="25.0" prefWidth="112.0" promptText="Inserisci anno" />
    </children>
 </AnchorPane>
