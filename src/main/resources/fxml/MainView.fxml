@@ -90,7 +90,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="Rimablzi">
+            <Tab text="Rimbalzi">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="239.0" prefWidth="519.0">
                      <children>
