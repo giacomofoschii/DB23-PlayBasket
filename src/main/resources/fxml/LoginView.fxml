@@ -19,7 +19,10 @@
          <font>
             <Font name="Times New Roman Bold" size="12.0" />
          </font></Button>
-      <Button layoutX="14.0" layoutY="360.0" mnemonicParsing="false" onAction="#goHome" text="Torna alla home" />
+      <Button layoutX="14.0" layoutY="360.0" mnemonicParsing="false" onAction="#goHome" text="Torna alla home">
+         <font>
+            <Font name="Times New Roman Bold" size="12.0" />
+         </font></Button>
       <ImageView fitHeight="102.0" fitWidth="89.0" layoutX="105.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/login.png" />
