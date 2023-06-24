@@ -1,23 +1,21 @@
 package it.unibo.playbasket.db.views;
 
-public class Stoppate {
+public class Under21 {
 
     private String nome;
     private String cognome;
     private int eta;
     private String ruolo;
     private String nome_squadra;
-    private int stoppate;
-    private float stoppate_pg;
+    private int punti;
 
-    public Stoppate(String nome, String cognome, int eta, String ruolo, String nome_squadra, int stoppate, float stoppate_pg) {
+    public Under21(String nome, String cognome, int eta, String ruolo, String nome_squadra, int punti) {
         this.nome = nome;
         this.cognome = cognome;
         this.eta = eta;
         this.ruolo = ruolo;
         this.nome_squadra = nome_squadra;
-        this.stoppate = stoppate;
-        this.stoppate_pg = stoppate_pg;
+        this.punti = punti;
     }
 
     public String getNome() {
@@ -40,11 +38,7 @@ public class Stoppate {
         return nome_squadra;
     }
 
-    public int getStoppate() {
-        return stoppate;
-    }
-
-    public float getStoppate_pg() {
-        return stoppate_pg;
+    public int getPunti() {
+        return punti;
     }
 }

@@ -5,13 +5,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import it.unibo.playbasket.db.views.Assist;
 import it.unibo.playbasket.db.views.Classifica;
+import it.unibo.playbasket.db.views.Falli;
 import it.unibo.playbasket.db.views.MigliorAttacco;
 import it.unibo.playbasket.db.views.MigliorDifesa;
+import it.unibo.playbasket.db.views.Minuti;
 import it.unibo.playbasket.db.views.PallePerse;
 import it.unibo.playbasket.db.views.PalleRubate;
 import it.unibo.playbasket.db.views.Punti;
 import it.unibo.playbasket.db.views.Rimbalzi;
+import it.unibo.playbasket.db.views.Stoppate;
 import it.unibo.playbasket.db.views.Valutazione;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -222,6 +226,108 @@ public class FeaturesMainPage{
             while (rs.next()) {
                 list.add(new Rimbalzi(rs.getString("nome"), rs.getString("cognome"), rs.getInt("eta"), rs.getString("ruolo"),
                                              rs.getString("nome_squadra"), rs.getInt("rimbalzi"), rs.getFloat("rimbalzi_pg")));
+            }
+            return list;
+        } catch (final SQLException e) {
+            throw new IllegalStateException("Cannot execute the query!", e);
+        }
+    }
+
+    public ObservableList<Assist> viewAssist(String idCampionato, int anno) {
+        final String query = "SELECT t.Nome, t.Cognome, t.Eta, g.Ruolo, s.Nome_squadra, sum(p.assist) as assist, "
+                            + "cast(avg(p.assist) as decimal(3,1)) as assist_pg "
+                            + "FROM Tesserato T, Performance P, Giocatore G, Campionato C, Partita M, Membro_giocatore S "
+                            + "WHERE c.idcampionato=? and c.anno_campionato=? "
+                            + "AND c.idcampionato=m.idcampionato AND c.anno_campionato=m.anno_campionato "
+                            + "AND m.data_ora=p.data_ora AND m.codicepalestra=p.codicepalestra "
+                            + "AND p.tesserafip=g.tesserafip AND g.tesserafip=t.tesserafip AND g.tesserafip=s.tesserafip "
+                            + "group by s.nome_squadra, t.tesserafip order by assist desc limit 10";
+        try (PreparedStatement stmt = this.connection.prepareStatement(query)) {
+            stmt.setString(1, idCampionato);
+            stmt.setInt(2, anno);
+            final ResultSet rs = stmt.executeQuery();
+
+            final ObservableList<Assist> list = FXCollections.observableArrayList();
+            while (rs.next()) {
+                list.add(new Assist(rs.getString("nome"), rs.getString("cognome"), rs.getInt("eta"), rs.getString("ruolo"),
+                                             rs.getString("nome_squadra"), rs.getInt("assist"), rs.getFloat("assist_pg")));
+            }
+            return list;
+        } catch (final SQLException e) {
+            throw new IllegalStateException("Cannot execute the query!", e);
+        }
+    }
+
+    public ObservableList<Minuti> viewMinuti(String idCampionato, int anno) {
+        final String query = "SELECT t.Nome, t.Cognome, t.Eta, g.Ruolo, s.Nome_squadra, sum(p.minuti) as minuti, "
+                            + "cast(avg(p.minuti) as decimal(3,1)) as minuti_pg "
+                            + "FROM Tesserato T, Performance P, Giocatore G, Campionato C, Partita M, Membro_giocatore S "
+                            + "WHERE c.idcampionato=? and c.anno_campionato=? "
+                            + "AND c.idcampionato=m.idcampionato AND c.anno_campionato=m.anno_campionato "
+                            + "AND m.data_ora=p.data_ora AND m.codicepalestra=p.codicepalestra "
+                            + "AND p.tesserafip=g.tesserafip AND g.tesserafip=t.tesserafip AND g.tesserafip=s.tesserafip "
+                            + "group by s.nome_squadra, t.tesserafip order by minuti desc limit 10";
+        try (PreparedStatement stmt = this.connection.prepareStatement(query)) {
+            stmt.setString(1, idCampionato);
+            stmt.setInt(2, anno);
+            final ResultSet rs = stmt.executeQuery();
+
+            final ObservableList<Minuti> list = FXCollections.observableArrayList();
+            while (rs.next()) {
+                list.add(new Minuti(rs.getString("nome"), rs.getString("cognome"), rs.getInt("eta"), rs.getString("ruolo"),
+                                             rs.getString("nome_squadra"), rs.getInt("minuti"), rs.getFloat("minuti_pg")));
+            }
+            return list;
+        } catch (final SQLException e) {
+            throw new IllegalStateException("Cannot execute the query!", e);
+        }
+    }
+
+    public ObservableList<Stoppate> viewStoppate(String idCampionato, int anno) {
+        final String query = "SELECT t.Nome, t.Cognome, t.Eta, g.Ruolo, s.Nome_squadra, sum(p.stoppate) as stoppate, "
+                            + "cast(avg(p.stoppate) as decimal(3,1)) as stoppate_pg "
+                            + "FROM Tesserato T, Performance P, Giocatore G, Campionato C, Partita M, Membro_giocatore S "
+                            + "WHERE c.idcampionato=? and c.anno_campionato=? "
+                            + "AND c.idcampionato=m.idcampionato AND c.anno_campionato=m.anno_campionato "
+                            + "AND m.data_ora=p.data_ora AND m.codicepalestra=p.codicepalestra "
+                            + "AND p.tesserafip=g.tesserafip AND g.tesserafip=t.tesserafip AND g.tesserafip=s.tesserafip "
+                            + "group by s.nome_squadra, t.tesserafip order by stoppate desc limit 10";
+        try (PreparedStatement stmt = this.connection.prepareStatement(query)) {
+            stmt.setString(1, idCampionato);
+            stmt.setInt(2, anno);
+            final ResultSet rs = stmt.executeQuery();
+
+            final ObservableList<Stoppate> list = FXCollections.observableArrayList();
+            while (rs.next()) {
+                list.add(new Stoppate(rs.getString("nome"), rs.getString("cognome"), rs.getInt("eta"), rs.getString("ruolo"),
+                                             rs.getString("nome_squadra"), rs.getInt("stoppate"), rs.getFloat("stoppate_pg")));
+            }
+            return list;
+        } catch (final SQLException e) {
+            throw new IllegalStateException("Cannot execute the query!", e);
+        }
+    }
+
+    public ObservableList<Falli> viewFalli(String idCampionato, int anno) {
+        final String query = "SELECT t.Nome, t.Cognome, t.Eta, g.Ruolo, s.Nome_squadra, "
+                            + "sum(p.falli_fatti) as falli_fatti, cast(avg(p.falli_fatti) as decimal(3,1)) as falli_fatti_pg, "
+                            + "sum(p.falli_subiti) as falli_subiti, cast(avg(p.falli_subiti) as decimal(3,1)) as falli_subiti_pg "
+                            + "FROM Tesserato T, Performance P, Giocatore G, Campionato C, Partita M, Membro_giocatore S "
+                            + "WHERE c.idcampionato=? and c.anno_campionato=? "
+                            + "AND c.idcampionato=m.idcampionato AND c.anno_campionato=m.anno_campionato "
+                            + "AND m.data_ora=p.data_ora AND m.codicepalestra=p.codicepalestra "
+                            + "AND p.tesserafip=g.tesserafip AND g.tesserafip=t.tesserafip AND g.tesserafip=s.tesserafip "
+                            + "group by s.nome_squadra, t.tesserafip order by falli_fatti desc, falli_subiti desc limit 10";
+        try(PreparedStatement stmt = this.connection.prepareStatement(query)) {
+            stmt.setString(1, idCampionato);
+            stmt.setInt(2, anno);
+            final ResultSet rs = stmt.executeQuery();
+
+            final ObservableList<Falli> list = FXCollections.observableArrayList();
+            while (rs.next()) {
+                list.add(new Falli(rs.getString("nome"), rs.getString("cognome"), rs.getInt("eta"), rs.getString("ruolo"),
+                                             rs.getString("nome_squadra"), rs.getInt("falli_fatti"), rs.getFloat("falli_fatti_pg"),
+                                             rs.getInt("falli_subiti"), rs.getFloat("falli_subiti_pg")));
             }
             return list;
         } catch (final SQLException e) {

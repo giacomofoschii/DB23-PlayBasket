@@ -10,17 +10,19 @@ public class Falli {
     private int falli_fatti;
     private float falli_fatti_pg;
     private int falli_subiti;
-    private int falli_subiti_pg;
+    private float falli_subiti_pg;
 
-    public Falli(String nome, String cognome, int eta, String ruolo, String nome_squadra, int Falli,
-            float falli_pg, int falli_subiti, int falli_subiti_pg) {
+    public Falli(String nome, String cognome, int eta, String ruolo, String nome_squadra, int falli_fatti, 
+                    float falli_fatti_pg, int falli_subiti, float falli_subiti_pg) {
         this.nome = nome;
         this.cognome = cognome;
         this.eta = eta;
         this.ruolo = ruolo;
         this.nome_squadra = nome_squadra;
-        this.falli = falli;
-        this.falli_pg = falli_pg;
+        this.falli_fatti = falli_fatti;
+        this.falli_fatti_pg = falli_fatti_pg;
+        this.falli_subiti = falli_subiti;
+        this.falli_subiti_pg = falli_subiti_pg;
     }
 
     public String getNome() {
@@ -43,7 +45,7 @@ public class Falli {
         return nome_squadra;
     }
 
-    public int getFalli_Fatti() {
+    public int getFalli_fatti() {
         return falli_fatti;
     }
 

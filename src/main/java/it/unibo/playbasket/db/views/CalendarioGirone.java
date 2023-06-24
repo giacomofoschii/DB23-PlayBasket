@@ -1,6 +1,6 @@
 package it.unibo.playbasket.db.views;
 
-public class CalendarioSquadra {
+public class CalendarioGirone {
 
     private String nome_squadra1;
     private String nome_squadra2;
@@ -8,7 +8,7 @@ public class CalendarioSquadra {
     private String indirizzo;
     private String data_ora;
 
-    public CalendarioSquadra(String nome_squadra1, String nome_squadra2, String nome_palestra, String indirizzo, String data_ora) {
+    public CalendarioGirone(String nome_squadra1, String nome_squadra2, String nome_palestra, String indirizzo, String data_ora) {
         this.nome_squadra1 = nome_squadra1;
         this.nome_squadra2 = nome_squadra2;
         this.nome_palestra = nome_palestra;

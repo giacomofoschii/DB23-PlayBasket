@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button layoutX="14.0" layoutY="560.0" mnemonicParsing="false" onAction="#goHome" text="Torna alla home">
          <font>
@@ -29,18 +29,18 @@
                         <FlowPane prefHeight="476.0" prefWidth="151.0" BorderPane.alignment="CENTER">
                            <children>
                               <Separator prefHeight="20.0" prefWidth="150.0" />
-                              <TextField prefHeight="25.0" prefWidth="147.0" promptText="Inserisci anno campionato" />
+                              <TextField fx:id="annoCampionato" prefHeight="25.0" prefWidth="147.0" promptText="Inserisci anno campionato" />
                               <Separator prefHeight="10.0" prefWidth="147.0" />
-                              <TextField promptText="Inserisci ID campionato" />
+                              <TextField fx:id="idCampionato" promptText="Inserisci ID campionato" />
                               <Separator prefHeight="10.0" prefWidth="147.0" />
-                              <TextField promptText="Inserisci nome girone" />
+                              <TextField fx:id="nomeGirone" promptText="Inserisci nome girone" />
                               <Separator prefHeight="20.0" prefWidth="147.0" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Visualizza calendario" />
+                              <Button mnemonicParsing="false" onAction="#viewCalendarGirone" prefHeight="25.0" prefWidth="149.0" text="Visualizza calendario" />
                            </children>
                         </FlowPane>
                      </left>
                      <center>
-                        <TableView prefHeight="476.0" prefWidth="306.0" BorderPane.alignment="CENTER" />
+                        <TableView fx:id="girone" prefHeight="476.0" prefWidth="306.0" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
                </content>
@@ -52,20 +52,20 @@
                         <FlowPane prefHeight="476.0" prefWidth="147.0" BorderPane.alignment="CENTER">
                            <children>
                               <Separator prefHeight="20.0" prefWidth="150.0" />
-                              <TextField prefHeight="25.0" prefWidth="150.0" promptText="Inserisci anno campionato" />
+                              <TextField fx:id="annoSquadra" prefHeight="25.0" prefWidth="150.0" promptText="Inserisci anno campionato" />
                               <Separator prefHeight="10.0" prefWidth="150.0" />
-                              <TextField promptText="Inserisci ID campionato" />
+                              <TextField fx:id="idCampionatoSquadra" promptText="Inserisci ID campionato" />
                               <Separator prefHeight="10.0" prefWidth="150.0" />
-                              <TextField promptText="Inserisci nome girone" />
+                              <TextField fx:id="nomeGironeSquadra" promptText="Inserisci nome girone" />
                               <Separator prefHeight="20.0" prefWidth="147.0" />
-                              <TextField promptText="Inserisci nome squadra" />
+                              <TextField fx:id="nomeSquadra" promptText="Inserisci nome squadra" />
                               <Separator prefHeight="20.0" prefWidth="150.0" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Visualizza calendario" />
+                              <Button mnemonicParsing="false" onAction="#viewCalendarSquadra" prefHeight="25.0" prefWidth="150.0" text="Visualizza calendario" />
                            </children>
                         </FlowPane>
                      </left>
                      <center>
-                        <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                        <TableView fx:id="squadra" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
                </content>
@@ -77,16 +77,16 @@
                         <FlowPane prefHeight="476.0" prefWidth="141.0" BorderPane.alignment="CENTER">
                            <children>
                               <Separator prefHeight="20.0" prefWidth="150.0" />
-                              <TextField prefHeight="25.0" prefWidth="148.0" promptText="Inserisci anno" />
+                              <TextField fx:id="annoPalestra" prefHeight="25.0" prefWidth="148.0" promptText="Inserisci anno" />
                               <Separator prefHeight="10.0" prefWidth="147.0" />
-                              <TextField promptText="Inserisci ID palestra" />
+                              <TextField fx:id="idPalestra" promptText="Inserisci ID palestra" />
                               <Separator prefHeight="10.0" prefWidth="147.0" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Visualizza calendario" />
+                              <Button mnemonicParsing="false" onAction="#viewCalendarPalestra" prefHeight="25.0" prefWidth="150.0" text="Visualizza calendario" />
                            </children>
                         </FlowPane>
                      </left>
                      <center>
-                        <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                        <TableView fx:id="palestra" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
                </content>
@@ -98,16 +98,16 @@
                         <FlowPane prefHeight="476.0" prefWidth="147.0" BorderPane.alignment="CENTER">
                            <children>
                               <Separator prefHeight="20.0" prefWidth="150.0" />
-                              <TextField prefHeight="25.0" prefWidth="148.0" promptText="Inserisci anno" />
+                              <TextField fx:id="annoSocieta" prefHeight="25.0" prefWidth="148.0" promptText="Inserisci anno" />
                               <Separator prefHeight="10.0" prefWidth="147.0" />
-                              <TextField promptText="Inserisci numero meccanografico" />
+                              <TextField fx:id="codiceMeccanografico" promptText="Inserisci codiceMeccanografico" />
                               <Separator prefHeight="10.0" prefWidth="147.0" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="148.0" text="Visualizza calendario" />
+                              <Button mnemonicParsing="false" onAction="#viewCalendarSocieta" prefHeight="25.0" prefWidth="148.0" text="Visualizza calendario" />
                            </children>
                         </FlowPane>
                      </left>
                      <center>
-                        <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                        <TableView fx:id="societa" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
                </content>
@@ -119,40 +119,48 @@
             <Font name="Times New Roman Bold" size="20.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="484.0" layoutY="22.0" prefHeight="23.0" prefWidth="300.0" text="Squadra che ha vinto più partite">
+      <Label alignment="CENTER" layoutX="506.0" layoutY="10.0" prefHeight="23.0" prefWidth="300.0" text="Squadra che ha vinto più partite">
          <font>
             <Font name="Times New Roman Bold" size="17.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="484.0" layoutY="45.0" prefHeight="23.0" prefWidth="300.0" text="come ospite">
+      <Label alignment="CENTER" layoutX="506.0" layoutY="33.0" prefHeight="23.0" prefWidth="300.0" text="come ospite">
          <font>
             <Font name="Times New Roman Bold" size="17.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="486.0" layoutY="179.0" prefHeight="23.0" prefWidth="300.0" text="Miglior Under21 per punti nei">
+      <Label alignment="CENTER" layoutX="506.0" layoutY="450.0" prefHeight="23.0" prefWidth="300.0" text="Miglior Under21 per punti nei">
          <font>
             <Font name="Times New Roman Bold" size="17.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="486.0" layoutY="202.0" prefHeight="23.0" prefWidth="300.0" text="campionati Senior">
+      <Label alignment="CENTER" layoutX="506.0" layoutY="474.0" prefHeight="23.0" prefWidth="300.0" text="campionati Senior">
          <font>
             <Font name="Times New Roman Bold" size="17.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="484.0" layoutY="408.0" prefHeight="23.0" prefWidth="300.0" text="Stipendio totale di un arbitro">
+      <Label alignment="CENTER" layoutX="507.0" layoutY="239.0" prefHeight="23.0" prefWidth="300.0" text="Stipendio totale di un arbitro">
          <font>
             <Font name="Times New Roman Bold" size="17.0" />
          </font>
       </Label>
-      <TableView layoutX="534.0" layoutY="68.0" prefHeight="88.0" prefWidth="204.0" />
-      <TableView layoutX="534.0" layoutY="225.0" prefHeight="88.0" prefWidth="204.0" />
-      <TableView layoutX="532.0" layoutY="431.0" prefHeight="88.0" prefWidth="204.0" />
+      <TableView fx:id="vittoriaOspite" layoutX="554.0" layoutY="56.0" prefHeight="88.0" prefWidth="204.0" />
+      <TableView fx:id="stipendioArbitro" layoutX="554.0" layoutY="286.0" prefHeight="88.0" prefWidth="204.0" />
+      <TableView fx:id="under21" layoutX="554.0" layoutY="498.0" prefHeight="88.0" prefWidth="204.0" />
       <ImageView fitHeight="23.0" fitWidth="30.0" layoutX="291.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/calendario.png" />
          </image>
       </ImageView>
-      <TextField layoutX="545.0" layoutY="334.0" prefHeight="25.0" prefWidth="182.0" promptText="Inserisci TesseraFIP dell'arbitro" />
-      <Button layoutX="554.0" layoutY="368.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="165.0" text="Visualizza stipendio arbitro" />
+      <TextField fx:id="tesseraArbitro" layoutX="565.0" layoutY="380.0" prefHeight="25.0" prefWidth="182.0" promptText="Inserisci TesseraFIP dell'arbitro" />
+      <Button layoutX="573.0" layoutY="406.0" mnemonicParsing="false" onAction="#calculateStipendio" prefHeight="25.0" prefWidth="165.0" text="Visualizza stipendio arbitro" />
+      <TextField fx:id="idCampionatoOspite" layoutX="566.0" layoutY="153.0" prefHeight="26.0" prefWidth="182.0" promptText="Inserisci id Campionato" />
+      <TextField fx:id="annoCampionatoOspite" layoutX="566.0" layoutY="180.0" prefHeight="26.0" prefWidth="182.0" promptText="Inserisci anno" />
+      <Button layoutX="572.0" layoutY="206.0" mnemonicParsing="false" onAction="#viewVittoriaOspite" prefHeight="26.0" prefWidth="166.0" text="Visualizza squadra" />
+      <Label alignment="CENTER" layoutX="506.0" layoutY="262.0" prefHeight="23.0" prefWidth="300.0" text="o ufficiale di campo">
+         <font>
+            <Font name="Times New Roman Bold" size="17.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
