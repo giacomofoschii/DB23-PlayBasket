@@ -46,7 +46,7 @@
                                  </font>
                               </Button>
                               <Separator focusTraversable="false" prefHeight="323.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" text="Torna alla gestone" />
+                              <Button mnemonicParsing="false" onAction="#goManagement" text="Torna alla gestone" />
                            </children>
                         </FlowPane>
                      </left>
@@ -69,7 +69,7 @@
                                  </font>
                               </Text>
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="ID campionato" />
+                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="ID campionato*" />
                               <TextField prefHeight="25.0" prefWidth="190.0" promptText="Anno*" />
                               <TextField prefHeight="25.0" prefWidth="190.0" promptText="Nome*" />
                               <TextField prefHeight="25.0" prefWidth="190.0" promptText="Regione" />

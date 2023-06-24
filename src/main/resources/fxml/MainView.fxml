@@ -161,5 +161,10 @@
       <Button layoutX="33.0" layoutY="126.0" mnemonicParsing="false" text="Visualizza" />
       <TextField layoutX="11.0" layoutY="64.0" prefHeight="25.0" prefWidth="112.0" promptText="Inserisci ID campionato" />
       <TextField layoutX="11.0" layoutY="36.0" prefHeight="25.0" prefWidth="112.0" promptText="Inserisci anno" />
+      <ImageView fitHeight="32.0" fitWidth="29.0" layoutX="335.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/Trofeo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
