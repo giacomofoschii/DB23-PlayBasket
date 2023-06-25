@@ -23,7 +23,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class TesseratiController implements Initializable{
 
     private FxView view;
-    private FeaturesTesserato features;
+    private FeaturesTesserato featuresTesserato;
     @FXML private TextField nomeGiocatore;
     @FXML private TextField cognomeGiocatore;
     @FXML private TextField cfGiocatore;
@@ -75,14 +75,18 @@ public class TesseratiController implements Initializable{
      * Constructor for the controller.
      * @param view the view.
      */
-    public TesseratiController(FxView view, FeaturesTesserato featuresTesserato){
+    public TesseratiController(FxView view, FeaturesTesserato featuresTesseratoTesserato){
         this.view = view;
-        this.features = featuresTesserato;
+        this.featuresTesserato = featuresTesseratoTesserato;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ruolo.getItems().addAll(ruoli);
+        this.viewPlayers();
+        this.viewArbitri();
+        this.viewUfficiali();
+        this.viewStaff();
     }
 
     @FXML
@@ -94,11 +98,11 @@ public class TesseratiController implements Initializable{
     public void addGiocatore() {
         try{
             if(aperturaAlare.getText().equals("")) {
-                features.addGiocatore(nomeGiocatore.getText(), cognomeGiocatore.getText(),
+                featuresTesserato.addGiocatore(nomeGiocatore.getText(), cognomeGiocatore.getText(),
                                         cfGiocatore.getText(), Integer.parseInt(etaGiocatore.getText()), tesseraGiocatore.getText(),
                                         Integer.parseInt(peso.getText()), Integer.parseInt(altezza.getText()), ruolo.getValue(), 0);
             } else {
-                features.addGiocatore(nomeGiocatore.getText(), cognomeGiocatore.getText(),
+                featuresTesserato.addGiocatore(nomeGiocatore.getText(), cognomeGiocatore.getText(),
                                         cfGiocatore.getText(), Integer.parseInt(etaGiocatore.getText()), tesseraGiocatore.getText(),
                                         Integer.parseInt(peso.getText()), Integer.parseInt(altezza.getText()), 
                                         ruolo.getValue(), Integer.parseInt(aperturaAlare.getText()));
@@ -112,6 +116,7 @@ public class TesseratiController implements Initializable{
             altezza.clear();
             ruolo.setValue(null);
             aperturaAlare.clear();
+            this.viewPlayers();
         } catch (SQLException e) {
             nomeGiocatore.clear();
             nomeGiocatore.setPromptText("Errore di inserimento");
@@ -123,7 +128,7 @@ public class TesseratiController implements Initializable{
     @FXML
     public void addArbitro() {
         try{
-            features.addArbitro(nomeArbitro.getText(), cognomeArbitro.getText(),
+            featuresTesserato.addArbitro(nomeArbitro.getText(), cognomeArbitro.getText(),
                                     cfArbitro.getText(), Integer.parseInt(etaArbitro.getText()), tesseraArbitro.getText(),
                                     sezione.getText(), Integer.parseInt(grado.getText()));
             nomeArbitro.clear();
@@ -133,6 +138,7 @@ public class TesseratiController implements Initializable{
             tesseraArbitro.clear();
             sezione.clear();
             grado.clear();
+            this.viewArbitri();
         } catch (SQLException e) {
             nomeArbitro.clear();
             nomeArbitro.setPromptText("Errore di inserimento");
@@ -144,7 +150,7 @@ public class TesseratiController implements Initializable{
     @FXML
     public void addUfficiale() {
         try{
-            features.addUfficiale(nomeUfficiale.getText(), cognomeUfficiale.getText(),
+            featuresTesserato.addUfficiale(nomeUfficiale.getText(), cognomeUfficiale.getText(),
                                     cfUfficiale.getText(), Integer.parseInt(etaUfficiale.getText()), tesseraUfficiale.getText(),
                                     refertista.isSelected(), cronometrista.isSelected(), segnapunti.isSelected());
             nomeUfficiale.clear();
@@ -155,6 +161,7 @@ public class TesseratiController implements Initializable{
             refertista.setSelected(false);
             cronometrista.setSelected(false);
             segnapunti.setSelected(false);
+            this.viewUfficiali();
         } catch (SQLException e) {
             nomeArbitro.clear();
             nomeArbitro.setPromptText("Errore di inserimento");
@@ -167,14 +174,14 @@ public class TesseratiController implements Initializable{
     public void addStaff(){
         try{
             if(annoPatentino.getText().equals("")) {
-                features.addTesseratoStaff(nomeStaff.getText(), cognomeStaff.getText(),
+                featuresTesserato.addTesseratoStaff(nomeStaff.getText(), cognomeStaff.getText(),
                                         cfStaff.getText(), tesseraStaff.getText(), Integer.parseInt(etaStaff.getText()),
                                         preparatoreFisico.isSelected(), medico.isSelected(), accompagnatore.isSelected(),
                                         allenatore.isSelected(), aiutoAllenatore.isSelected(), massaggiatore.isSelected(),
                                         addettoArbitri.isSelected(), scorer.isSelected(),
                                         specializzazione.getText(), 0);
             } else {
-                features.addTesseratoStaff(nomeStaff.getText(), cognomeStaff.getText(),
+                featuresTesserato.addTesseratoStaff(nomeStaff.getText(), cognomeStaff.getText(),
                                         cfStaff.getText(), tesseraStaff.getText(), Integer.parseInt(etaStaff.getText()),
                                         preparatoreFisico.isSelected(), medico.isSelected(), accompagnatore.isSelected(),
                                         allenatore.isSelected(), aiutoAllenatore.isSelected(), massaggiatore.isSelected(),
@@ -196,6 +203,7 @@ public class TesseratiController implements Initializable{
             scorer.setSelected(false);
             annoPatentino.clear();
             specializzazione.clear();
+            this.viewStaff();
         } catch (SQLException e) {
             nomeStaff.clear();
             nomeStaff.setPromptText("Errore di inserimento");
@@ -207,8 +215,12 @@ public class TesseratiController implements Initializable{
     @FXML
     public void removeTesserato() {
         try{
-            features.removeTesserato(tesseraRimozione.getText());
+            featuresTesserato.removeTesserato(tesseraRimozione.getText());
             tesseraRimozione.clear();
+            this.viewArbitri();
+            this.viewPlayers();
+            this.viewStaff();
+            this.viewUfficiali();
         } catch (SQLException e) {
             tesseraRimozione.clear();
             tesseraRimozione.setPromptText("Errore di rimozione");
@@ -217,8 +229,7 @@ public class TesseratiController implements Initializable{
         }
     }
 
-    @FXML
-    public void viewPlayers() {
+    private void viewPlayers() {
         giocatoriView.getColumns().clear();
         TableColumn<Giocatore,String> nome = new TableColumn<>("Nome");
         nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -239,11 +250,10 @@ public class TesseratiController implements Initializable{
         TableColumn<Giocatore,Integer> aperturaAlare = new TableColumn<>("Apertura alare");
         aperturaAlare.setCellValueFactory(new PropertyValueFactory<>("apertura_Alare"));
         giocatoriView.getColumns().addAll(Arrays.asList(nome, cognome, CF, tesseraFip, eta, peso, altezza, ruolo, aperturaAlare));
-        giocatoriView.setItems(features.viewPlayers());
+        giocatoriView.setItems(featuresTesserato.viewPlayers());
     }
 
-    @FXML
-    public void viewArbitri() {
+    private void viewArbitri() {
         arbitriView.getColumns().clear();
         TableColumn<Arbitro,String> nome = new TableColumn<>("Nome");
         nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -262,11 +272,10 @@ public class TesseratiController implements Initializable{
         TableColumn<Arbitro,Integer> stipendioTotale = new TableColumn<>("Stipendio totale");
         stipendioTotale.setCellValueFactory(new PropertyValueFactory<>("stipendio_totale"));
         arbitriView.getColumns().addAll(Arrays.asList(nome, cognome, CF, tesseraFip, eta, sezione, grado, stipendioTotale));
-        arbitriView.setItems(features.viewArbitri());
+        arbitriView.setItems(featuresTesserato.viewArbitri());
     }
 
-    @FXML
-    public void viewUfficiali() {
+    private void viewUfficiali() {
         ufficialiView.getColumns().clear();
         TableColumn<Ufficiale,String> nome = new TableColumn<>("Nome");
         nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -287,11 +296,10 @@ public class TesseratiController implements Initializable{
         TableColumn<Ufficiale,Integer> stipendioTotale = new TableColumn<>("Stipendio totale");
         stipendioTotale.setCellValueFactory(new PropertyValueFactory<>("stipendio_totale"));
         ufficialiView.getColumns().addAll(Arrays.asList(nome, cognome, CF, tesseraFip, eta, refertista, cronometrista, segnapunti, stipendioTotale));
-        ufficialiView.setItems(features.viewUfficiali());
+        ufficialiView.setItems(featuresTesserato.viewUfficiali());
     }
 
-    @FXML
-    public void viewStaff() {
+    private void viewStaff() {
         staffView.getColumns().clear();
         TableColumn<Staff,String> nome = new TableColumn<>("Nome");
         nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -326,6 +334,6 @@ public class TesseratiController implements Initializable{
         staffView.getColumns().addAll(Arrays.asList(nome, cognome, CF, tesseraFip, eta, preparatoreFisico, allenatore,
                                         aiutoAllenatore, medico, massaggiatore, accompagnatore, scorer,
                                         addettoArbitri, annoPatentino, specializzazione));
-        staffView.setItems(features.viewStaff());
+        staffView.setItems(featuresTesserato.viewStaff());
     }
 }

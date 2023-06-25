@@ -22,4 +22,6 @@ public class PartiteController {
     public void goManagement(){
         this.view.setAdminView();
     }
+
+    
 }

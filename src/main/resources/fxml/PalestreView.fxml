@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TabPane prefHeight="600.0" prefWidth="853.0">
          <tabs>
@@ -29,27 +29,27 @@
                                  </font>
                               </Text>
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Codice*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Nome*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Via*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Civico*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Superficie*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Capienza*" />
+                              <TextField fx:id="id" prefHeight="25.0" prefWidth="190.0" promptText="Codice*" />
+                              <TextField fx:id="nome" prefHeight="25.0" prefWidth="190.0" promptText="Nome*" />
+                              <TextField fx:id="via" prefHeight="25.0" prefWidth="190.0" promptText="Via*" />
+                              <TextField fx:id="civico" prefHeight="25.0" prefWidth="190.0" promptText="Civico*" />
+                              <TextField fx:id="superficie" prefHeight="25.0" prefWidth="190.0" promptText="Superficie*" />
+                              <TextField fx:id="capienza" prefHeight="25.0" prefWidth="190.0" promptText="Capienza*" />
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Aggiungi palestra">
+                              <Button mnemonicParsing="false" onAction="#addPalestra" prefHeight="25.0" prefWidth="200.0" text="Aggiungi palestra">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
                               </Button>
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="199.0" text="Rimuovi palestra" />
-                              <Separator focusTraversable="false" prefHeight="275.0" prefWidth="200.0" visible="false" />
+                              <Button mnemonicParsing="false" onAction="#removePalestra" prefHeight="25.0" prefWidth="199.0" text="Rimuovi palestra" />
+                              <Separator focusTraversable="false" prefHeight="250.0" prefWidth="200.0" visible="false" />
                               <Button mnemonicParsing="false" onAction="#goManagement" text="Torna alla gestone" />
                            </children>
                         </FlowPane>
                      </left>
                      <center>
-                        <TableView fx:id="plantView" prefHeight="612.0" prefWidth="645.0" />
+                        <TableView fx:id="palestreView" prefHeight="612.0" prefWidth="645.0" />
                      </center>
                   </BorderPane>
                </content>

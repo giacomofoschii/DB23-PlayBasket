@@ -42,9 +42,7 @@
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Separator prefHeight="10.0" prefWidth="200.0" />
-                        <Button mnemonicParsing="false" onAction="#viewPlayers" prefHeight="26.0" prefWidth="200.0" text="Visualizza Giocatori" />
-                        <Separator focusTraversable="false" prefHeight="181.0" prefWidth="200.0" visible="false" />
+                        <Separator focusTraversable="false" prefHeight="210.0" prefWidth="200.0" visible="false" />
                         <Button mnemonicParsing="false" onAction="#goManagement" prefHeight="26.0" prefWidth="199.0" text="Torna alla gestone" />
                      </children>
                   </FlowPane>
@@ -77,13 +75,7 @@
                         <TextField fx:id="grado" prefHeight="25.0" prefWidth="190.0" promptText="Grado*" />
                         <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
                         <Button mnemonicParsing="false" onAction="#addArbitro" prefHeight="26.0" prefWidth="200.0" text="Aggiungi arbitro" />
-                        <Separator prefHeight="12.0" prefWidth="200.0" />
-                        <Button mnemonicParsing="false" onAction="#viewArbitri" prefHeight="25.0" prefWidth="200.0" text="Visualizza arbitri">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                        </Button>
-                        <Separator focusTraversable="false" prefHeight="218.0" prefWidth="200.0" visible="false" />
+                        <Separator focusTraversable="false" prefHeight="263.0" prefWidth="200.0" visible="false" />
                         <Button mnemonicParsing="false" onAction="#goManagement" prefHeight="26.0" prefWidth="198.0" text="Torna alla gestone" />
                      </children>
                   </FlowPane>
@@ -125,13 +117,7 @@
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Separator prefHeight="10.0" prefWidth="200.0" />
-                        <Button mnemonicParsing="false" onAction="#viewUfficiali" prefHeight="25.0" prefWidth="200.0" text="Visualizza ufficiali di campo">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                        </Button>
-                        <Separator focusTraversable="false" prefHeight="201.0" prefWidth="200.0" visible="false" />
+                        <Separator focusTraversable="false" prefHeight="240.0" prefWidth="200.0" visible="false" />
                         <Button mnemonicParsing="false" onAction="#goManagement" prefHeight="26.0" prefWidth="197.0" text="Torna alla gestone" />
                      </children>
                   </FlowPane>
@@ -172,13 +158,7 @@
                         <CheckBox fx:id="scorer" mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Scorer" />
                         <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
                         <Button mnemonicParsing="false" onAction="#addStaff" prefHeight="25.0" prefWidth="204.0" text="Aggiungi staff" />
-                        <Separator prefHeight="10.0" prefWidth="204.0" />
-                        <Button mnemonicParsing="false" onAction="#viewStaff" prefHeight="25.0" prefWidth="200.0" text="Visualizza membri staff">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                        </Button>
-                        <Separator focusTraversable="false" prefHeight="27.0" prefWidth="204.0" visible="false" />
+                        <Separator focusTraversable="false" prefHeight="62.0" prefWidth="204.0" visible="false" />
                         <Button mnemonicParsing="false" onAction="#goManagement" prefHeight="26.0" prefWidth="202.0" text="Torna alla gestone" />
                      </children>
                   </FlowPane>
@@ -204,9 +184,6 @@
                      </children>
                   </FlowPane>
                </left>
-               <center>
-                  <TableView fx:id="statView1" />
-               </center>
             </BorderPane>
          </content>
       </Tab>
