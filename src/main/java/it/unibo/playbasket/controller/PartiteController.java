@@ -128,7 +128,7 @@ public class PartiteController implements Initializable{
     @FXML
     public void addPerformance() {
         try {
-            this.featuresPartita.addPerformance(codicePalestraPerformance.getText(), dataOraPerformance.getText(),
+            this.featuresPartita.addPerformance(codicePalestraPerformance.getText(), DateAdapter.dateToSqlDate(DateAdapter.buildDate(dataOraPerformance.getText()).get()),
                     tesseraFIP.getText(), Integer.parseInt(rimbalzi.getText()), Integer.parseInt(assist.getText()),
                     Integer.parseInt(falliFatti.getText()), Integer.parseInt(falliSubiti.getText()),
                     Integer.parseInt(minuti.getText()), Integer.parseInt(tiri2.getText()),

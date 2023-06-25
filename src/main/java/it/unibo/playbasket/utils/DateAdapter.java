@@ -7,13 +7,12 @@ import java.util.Optional;
 
 public final class DateAdapter {
 
-    public static java.util.Date sqlDateToDate(final java.sql.Date sqlDate) {
+    public static java.util.Date sqlDateToDate(final java.sql.Timestamp sqlDate) {
         return sqlDate == null ? null : new java.util.Date(sqlDate.getTime());
-        
     }
 
-    public static java.sql.Date dateToSqlDate(final java.util.Date date) {
-        return date == null ? null : new java.sql.Date(date.getTime());
+    public static java.sql.Timestamp dateToSqlDate(final java.util.Date date) {
+        return date == null ? null : new java.sql.Timestamp(date.getTime());
     }
 
     public static Optional<java.util.Date> buildDate(final String dateString) {

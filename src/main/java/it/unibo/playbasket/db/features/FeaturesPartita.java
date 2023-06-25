@@ -1,12 +1,12 @@
 package it.unibo.playbasket.db.features;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 
 import it.unibo.playbasket.db.views.Partita;
 import javafx.collections.FXCollections;
@@ -20,14 +20,14 @@ public class FeaturesPartita{
         this.connection = connection;
     }
 
-    private void addSquadraCasa(String codicePalestra, Date dataOra, int puntiFatti, int annoCampioanto,
+    private void addSquadraCasa(String codicePalestra, Timestamp dataOra, int puntiFatti, int annoCampioanto,
             String nomeGirone, String nomeSquadra, String idCampionato) throws SQLException{
         final String query = "INSERT INTO PARTECIPAZIONE_CASA "
                 + "(CODICEPALESTRA, DATA_ORA, PUNTI_FATTI, IDCAMPIONATO, ANNO_CAMPIONATO, NOME_GIRONE, NOME_SQUADRA) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, codicePalestra);
-            statement.setDate(2, dataOra);
+            statement.setTimestamp(2, dataOra);
             statement.setInt(3, puntiFatti);
             statement.setString(4, idCampionato);
             statement.setInt(5, annoCampioanto);
@@ -41,14 +41,14 @@ public class FeaturesPartita{
         }
     }
     
-    private void addSquadraOspite(String codicePalestra, Date dataOra, int puntiFatti, int annoCampioanto,
+    private void addSquadraOspite(String codicePalestra, Timestamp dataOra, int puntiFatti, int annoCampioanto,
             String nomeGirone, String nomeSquadra, String idCampionato) throws SQLException{
         final String query = "INSERT INTO PARTECIPAZIONE_OSPITI "
                              + "(CODICEPALESTRA, DATA_ORA, PUNTI_FATTI, IDCAMPIONATO, ANNO_CAMPIONATO, NOME_GIRONE, NOME_SQUADRA)"
                              + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, codicePalestra);
-            statement.setDate(2, dataOra);
+            statement.setTimestamp(2, dataOra);
             statement.setInt(3, puntiFatti);
             statement.setString(4, idCampionato);
             statement.setInt(5, annoCampioanto);
@@ -62,14 +62,14 @@ public class FeaturesPartita{
         }
     }
     
-    public void addPartita(String codicePalestra, Date dataOra, String idCampionato, int annoCampionato,
+    public void addPartita(String codicePalestra, Timestamp dataOra, String idCampionato, int annoCampionato,
             String nomeGirone, String nomeCasa, int puntiCasa, String nomeOspiti, int puntiOspiti) throws SQLException {
         final String query = "INSERT INTO PARTITA "
                 + "(CODICEPALESTRA, DATA_ORA, IDCAMPIONATO, ANNO_CAMPIONATO, NOME_GIRONE) "
                 + "VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, codicePalestra);
-            statement.setDate(2, dataOra);
+            statement.setTimestamp(2, dataOra);
             statement.setString(3, idCampionato);
             statement.setInt(4, annoCampionato);
             statement.setString(5, nomeGirone);
@@ -91,7 +91,7 @@ public class FeaturesPartita{
 
     }
     
-    public void addPerformance(String codicePalestra, String dataOra, String tesseraFIP, int rimb, int assist,
+    public void addPerformance(String codicePalestra, Timestamp dataOra, String tesseraFIP, int rimb, int assist,
             int falliFatti, int falliSubiti, int min, int tiri2, int tiri3, int tiriLiberi, int tiri2_segnati,
             int tiri3_segnati, int tiriLiberi_segnati, int palleRubate, int pallePerse, int stoppate) throws SQLException {
         
@@ -102,7 +102,7 @@ public class FeaturesPartita{
                              + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, codicePalestra);
-            statement.setString(2, dataOra);
+            statement.setTimestamp(2, dataOra);
             statement.setString(3, tesseraFIP);
             statement.setInt(4, rimb);
             statement.setInt(5, assist);
@@ -150,23 +150,23 @@ public class FeaturesPartita{
         }
     }*/
 
-    public void removePartita(String codicePalestra, Date dataOra) throws SQLException {
+    public void removePartita(String codicePalestra, Timestamp dataOra) throws SQLException {
         final String query = "DELETE PARTITA WHERE CODICE_PALESTRA=? AND DATA_ORA=?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, codicePalestra);
-            statement.setDate(2, dataOra);
+            statement.setTimestamp(2, dataOra);
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
     }
 
-    public void removePerformance(String codicePalestra, String dataOra, String tesseraFIP) throws SQLException {
+    public void removePerformance(String codicePalestra, Timestamp dataOra, String tesseraFIP) throws SQLException {
         final String query = "DELETE PERFORMANCE WHERE  CODICEPALESTRA=? AND TESSERAFIP=? AND DATA_ORA=?;";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, codicePalestra);
             statement.setString(2, tesseraFIP);
-            statement.setString(3, dataOra);
+            statement.setTimestamp(3, dataOra);
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new IllegalStateException(e);

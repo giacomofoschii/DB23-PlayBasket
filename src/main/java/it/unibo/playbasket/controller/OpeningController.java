@@ -26,9 +26,19 @@ public class OpeningController{
 
     @FXML
     public void enterMainPage(){
-        final ConnectionManager connectClass = new ConnectionManager(this.username.getText(), this.password.getText());
-        Connection connection = connectClass.getSQLConnection();
-        this.view.addConnection(connection);
+        try {
+            final ConnectionManager connectClass = new ConnectionManager(this.username.getText(), this.password.getText());
+            Connection connection = connectClass.getSQLConnection();
+            this.view.addConnection(connection);
+        } catch (Exception e) {
+            this.username.clear();
+            this.password.clear();
+            this.username.setPromptText("Username errato");
+            this.password.setPromptText("Password errata");
+            this.username.setStyle("-fx-prompt-text-fill: red");
+            this.password.setStyle("-fx-prompt-text-fill: red");
+            throw new IllegalStateException(e);
+        }
         this.view.setMainView();
     }
 }
