@@ -2,6 +2,7 @@ package it.unibo.playbasket.controller;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
@@ -117,6 +118,11 @@ public class TesseratiController implements Initializable{
             ruolo.setValue(null);
             aperturaAlare.clear();
             this.viewPlayers();
+        } catch (SQLIntegrityConstraintViolationException e) {
+            nomeGiocatore.clear();
+            nomeGiocatore.setPromptText("Errore di inserimento");
+            nomeGiocatore.setStyle("-fx-prompt-text-fill: red;");
+            throw new IllegalArgumentException(e);
         } catch (SQLException e) {
             nomeGiocatore.clear();
             nomeGiocatore.setPromptText("Errore di inserimento");
@@ -139,6 +145,11 @@ public class TesseratiController implements Initializable{
             sezione.clear();
             grado.clear();
             this.viewArbitri();
+        } catch (SQLIntegrityConstraintViolationException e) {
+            nomeArbitro.clear();
+            nomeArbitro.setPromptText("Errore di inserimento");
+            nomeArbitro.setStyle("-fx-prompt-text-fill: red;");
+            throw new IllegalArgumentException(e);
         } catch (SQLException e) {
             nomeArbitro.clear();
             nomeArbitro.setPromptText("Errore di inserimento");
@@ -162,10 +173,15 @@ public class TesseratiController implements Initializable{
             cronometrista.setSelected(false);
             segnapunti.setSelected(false);
             this.viewUfficiali();
+        } catch (SQLIntegrityConstraintViolationException e) {
+            nomeUfficiale.clear();
+            nomeUfficiale.setPromptText("Errore di inserimento");
+            nomeUfficiale.setStyle("-fx-prompt-text-fill: red;");
+            throw new IllegalArgumentException(e);
         } catch (SQLException e) {
-            nomeArbitro.clear();
-            nomeArbitro.setPromptText("Errore di inserimento");
-            nomeArbitro.setStyle("-fx-prompt-text-fill: red;");
+            nomeUfficiale.clear();
+            nomeUfficiale.setPromptText("Errore di inserimento");
+            nomeUfficiale.setStyle("-fx-prompt-text-fill: red;");
             throw new IllegalStateException(e);
         }
     }
@@ -204,6 +220,11 @@ public class TesseratiController implements Initializable{
             annoPatentino.clear();
             specializzazione.clear();
             this.viewStaff();
+        } catch (SQLIntegrityConstraintViolationException e) {
+            nomeStaff.clear();
+            nomeStaff.setPromptText("Errore di inserimento");
+            nomeStaff.setStyle("-fx-prompt-text-fill: red;");
+            throw new IllegalArgumentException(e);
         } catch (SQLException e) {
             nomeStaff.clear();
             nomeStaff.setPromptText("Errore di inserimento");

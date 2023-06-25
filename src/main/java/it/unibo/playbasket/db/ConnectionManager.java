@@ -14,9 +14,9 @@ public class ConnectionManager {
     /**
      * Constructor.
      */
-    public ConnectionManager() {
-        this.user = "root";
-        this.password = "VisualStudioCode13";
+    public ConnectionManager(String user, String password) {
+        this.user = user;
+        this.password = password;
         this.dbname = "db23_playbasket";
     }
 

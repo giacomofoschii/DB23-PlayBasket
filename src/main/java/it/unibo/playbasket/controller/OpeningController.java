@@ -5,6 +5,7 @@ import java.sql.Connection;
 import it.unibo.playbasket.db.ConnectionManager;
 import it.unibo.playbasket.view.impl.FxView;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 
 /**
  * Controller for the opening page.
@@ -12,6 +13,8 @@ import javafx.fxml.FXML;
 public class OpeningController{
 
     private FxView view;
+    @FXML TextField username;
+    @FXML TextField password;
 
     /**
      * Constructor for the controller.
@@ -23,7 +26,7 @@ public class OpeningController{
 
     @FXML
     public void enterMainPage(){
-        final ConnectionManager connectClass = new ConnectionManager();
+        final ConnectionManager connectClass = new ConnectionManager(this.username.getText(), this.password.getText());
         Connection connection = connectClass.getSQLConnection();
         this.view.addConnection(connection);
         this.view.setMainView();

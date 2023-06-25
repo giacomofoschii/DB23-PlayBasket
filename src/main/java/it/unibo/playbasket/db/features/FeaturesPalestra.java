@@ -37,7 +37,8 @@ public class FeaturesPalestra{
         }
     }
 
-    public void addPalestra(String nome, String id, String via, int civico, String superficie, int capienza) throws SQLException {
+    public void addPalestra(String nome, String id, String via, int civico, String superficie, int capienza) 
+                            throws SQLIntegrityConstraintViolationException, SQLException {
         final String query = "INSERT INTO Palestra (via, civico, nome_palestra, codicepalestra, superficie, capienza) "
                              + "VALUES (?, ?, ?, ?, ?, ?)";
         try (final PreparedStatement stmt = this.connection.prepareStatement(query)) {
@@ -49,9 +50,9 @@ public class FeaturesPalestra{
             stmt.setInt(6, capienza);
             stmt.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException e) {
-            throw new SQLIntegrityConstraintViolationException();
+            throw new IllegalArgumentException("Palestra già presente");
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new IllegalStateException(e);
         }
     }
 

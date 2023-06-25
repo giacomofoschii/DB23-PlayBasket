@@ -44,7 +44,7 @@
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
                               <Button mnemonicParsing="false" onAction="#removePalestra" prefHeight="25.0" prefWidth="199.0" text="Rimuovi palestra" />
                               <Separator focusTraversable="false" prefHeight="250.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" onAction="#goManagement" text="Torna alla gestone" />
+                              <Button mnemonicParsing="false" onAction="#goManagement" prefHeight="26.0" prefWidth="196.0" text="Torna alla gestone" />
                            </children>
                         </FlowPane>
                      </left>

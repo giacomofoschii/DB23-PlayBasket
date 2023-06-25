@@ -2,6 +2,7 @@ package it.unibo.playbasket.controller;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
@@ -74,6 +75,11 @@ public class PalestreController implements Initializable{
             superficie.clear();
             capienza.clear();
             this.viewPalestre();
+        } catch (SQLIntegrityConstraintViolationException e) {
+            id.clear();
+            id.setPromptText("Errore di inserimento");
+            id.setStyle("-fx-prompt-text-fill: red;");
+            throw new IllegalArgumentException(e);
         } catch (SQLException e) {
             id.clear();
             id.setPromptText("Errore di inserimento");

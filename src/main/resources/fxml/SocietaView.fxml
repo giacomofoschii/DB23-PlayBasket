@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TabPane prefHeight="600.0" prefWidth="800.0">
          <tabs>
@@ -30,52 +31,79 @@
                                  </font>
                               </Text>
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="ID campionato*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Anno campionato*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Nome girone*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Nome squadra*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Codice palestra*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Codice meccanografico*" />
+                              <TextField fx:id="idCampionatoSquadra" prefHeight="25.0" prefWidth="190.0" promptText="ID campionato*" />
+                              <TextField fx:id="annoCampionatoSquadra" prefHeight="25.0" prefWidth="190.0" promptText="Anno campionato*" />
+                              <TextField fx:id="nomeGironeSquadra" prefHeight="25.0" prefWidth="190.0" promptText="Nome girone*" />
+                              <TextField fx:id="nomeSquadra" prefHeight="25.0" prefWidth="190.0" promptText="Nome squadra*" />
+                              <TextField fx:id="codicePalestra" prefHeight="25.0" prefWidth="190.0" promptText="Codice palestra*" />
+                              <TextField fx:id="codiceMeccanograficoSquadra" prefHeight="25.0" prefWidth="190.0" promptText="Codice meccanografico*" />
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Aggiungi squadra">
+                              <Button mnemonicParsing="false" onAction="#addSquadra" prefHeight="25.0" prefWidth="200.0" text="Aggiungi squadra">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
                               </Button>
-                              <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Rimuovi squadra">
+                              <Separator focusTraversable="false" prefHeight="5.0" prefWidth="200.0" visible="false" />
+                              <Button mnemonicParsing="false" onAction="#removeSquadra" prefHeight="25.0" prefWidth="200.0" text="Rimuovi squadra">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
                               </Button>
-                              <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Schema" wrappingWidth="193.68119748737445" />
-                              <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="ID campionato*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Anno campionato*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Nome girone*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Nome squadra*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Nome schema*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Tipo*" />
-                              <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Aggiungi schema">
-                                 <font>
-                                    <Font size="12.0" />
-                                 </font>
-                              </Button>
-                              <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Rimuovi schema">
-                                 <font>
-                                    <Font size="12.0" />
-                                 </font>
-                              </Button>
-                              <Separator focusTraversable="false" prefHeight="19.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" onAction="#goManagement" text="Torna alla gestone" />
+                              <Separator focusTraversable="false" prefHeight="243.0" prefWidth="200.0" visible="false" />
+                              <Button mnemonicParsing="false" onAction="#goManagement" prefHeight="26.0" prefWidth="199.0" text="Torna alla gestone" />
                            </children>
                         </FlowPane>
                      </left>
                      <center>
-                        <TableView fx:id="plantView" prefHeight="612.0" prefWidth="645.0" />
+                        <TableView fx:id="squadraView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+               </content>
+            </Tab>
+            <Tab closable="false" text="Schemi">
+               <content>
+                  <BorderPane prefHeight="500.0" prefWidth="785.0">
+                     <left>
+                        <FlowPane alignment="TOP_CENTER" orientation="VERTICAL" prefHeight="516.0" prefWidth="216.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Separator focusTraversable="false" prefHeight="20.0" prefWidth="200.0" visible="false" />
+                              <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="I campi con * sono obbligatori" wrappingWidth="193.68119748737445">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Text>
+                              <Separator prefHeight="14.0" prefWidth="200.0" />
+                              <TextField fx:id="idSchema" prefHeight="25.0" prefWidth="190.0" promptText="ID campionato*" />
+                              <TextField fx:id="annoSchema" prefHeight="25.0" prefWidth="190.0" promptText="Anno campionato*" />
+                              <TextField fx:id="gironeSchema" prefHeight="25.0" prefWidth="190.0" promptText="Nome girone*" />
+                              <TextField fx:id="squadraSchema" prefHeight="25.0" prefWidth="190.0" promptText="Nome squadra*" />
+                              <TextField fx:id="nomeSchema" prefHeight="25.0" prefWidth="190.0" promptText="Nome schema*" />
+                              <ChoiceBox fx:id="tipoSchema" prefWidth="150.0" />
+                              <Separator prefHeight="13.0" prefWidth="200.0" visible="false" />
+                              <Button mnemonicParsing="false" onAction="#addSchema" prefHeight="25.0" prefWidth="200.0" text="Aggiungi schema">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Button>
+                              <Separator prefHeight="6.0" prefWidth="200.0" visible="false" />
+                              <Button mnemonicParsing="false" onAction="#removeSchema" prefHeight="25.0" prefWidth="200.0" text="Rimuovi schema">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Button>
+                              <Separator prefHeight="6.0" prefWidth="200.0" visible="false" />
+                              <Button mnemonicParsing="false" onAction="#viewSchemi" prefHeight="25.0" prefWidth="200.0" text="Visualizza schemi squadra">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Button>
+                              <Separator focusTraversable="false" prefHeight="212.0" prefWidth="200.0" visible="false" />
+                              <Button mnemonicParsing="false" onAction="#goManagement" prefHeight="26.0" prefWidth="198.0" text="Torna alla gestone" />
+                           </children>
+                        </FlowPane>
+                     </left>
+                     <center>
+                        <TableView fx:id="schemaView" />
                      </center>
                   </BorderPane>
                </content>
@@ -103,16 +131,16 @@
                               <TextField prefHeight="25.0" prefWidth="190.0" promptText="Civico*" />
                               <TextField prefHeight="25.0" prefWidth="190.0" promptText="Codice fiscale proprietario*" />
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Aggiungi società" />
-                              <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="199.0" text="Rimuovi società" />
-                              <Separator focusTraversable="false" prefHeight="200.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" onAction="#goManagement" text="Torna alla gestone" />
+                              <Button mnemonicParsing="false" onAction="#addSocieta" prefHeight="25.0" prefWidth="200.0" text="Aggiungi società" />
+                              <Separator focusTraversable="false" prefHeight="6.0" prefWidth="200.0" visible="false" />
+                              <Button mnemonicParsing="false" onAction="#removeSocieta" prefHeight="25.0" prefWidth="199.0" text="Rimuovi società" />
+                              <Separator focusTraversable="false" prefHeight="177.0" prefWidth="200.0" visible="false" />
+                              <Button mnemonicParsing="false" onAction="#goManagement" prefHeight="26.0" prefWidth="198.0" text="Torna alla gestone" />
                            </children>
                         </FlowPane>
                      </left>
                      <center>
-                        <TableView fx:id="supplierView" />
+                        <TableView fx:id="societaView" />
                      </center>
                   </BorderPane>
                </content>
@@ -131,27 +159,79 @@
                               </Text>
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
                               <TextField prefHeight="25.0" prefWidth="190.0" promptText="Codice fiscale*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Nome" />
+                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Nome*" />
                               <TextField prefHeight="25.0" prefWidth="190.0" promptText="Cognome*" />
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Aggiungi proprietario">
+                              <Button mnemonicParsing="false" onAction="#addProprietario" prefHeight="25.0" prefWidth="200.0" text="Aggiungi proprietario">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
                               </Button>
-                              <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Rimuovi proprietario">
+                              <Separator focusTraversable="false" prefHeight="5.0" prefWidth="200.0" visible="false" />
+                              <Button mnemonicParsing="false" onAction="#removeProprietario" prefHeight="25.0" prefWidth="200.0" text="Rimuovi proprietario">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
                               </Button>
-                              <Separator focusTraversable="false" prefHeight="347.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" onAction="#goManagement" text="Torna alla gestone" />
+                              <Separator focusTraversable="false" prefHeight="326.0" prefWidth="200.0" visible="false" />
+                              <Button mnemonicParsing="false" onAction="#goManagement" prefHeight="26.0" prefWidth="198.0" text="Torna alla gestone" />
                            </children>
                         </FlowPane>
                      </left>
                      <center>
-                        <TableView fx:id="supplierView1" />
+                        <TableView fx:id="proprietarioView" />
+                     </center>
+                  </BorderPane>
+               </content>
+            </Tab>
+            <Tab closable="false" text="Giocatore">
+               <content>
+                  <BorderPane prefHeight="500.0" prefWidth="785.0">
+                     <left>
+                        <FlowPane alignment="TOP_CENTER" orientation="VERTICAL" prefHeight="516.0" prefWidth="216.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Separator focusTraversable="false" prefHeight="20.0" prefWidth="200.0" visible="false" />
+                              <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="I campi con * sono obbligatori" wrappingWidth="193.68119748737445">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Text>
+                              <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Inserimento giocatore" wrappingWidth="193.68119748737445">
+                                 <font>
+                                    <Font name="System Bold Italic" size="12.0" />
+                                 </font>
+                              </Text>
+                              <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
+                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="ID Campionato*" />
+                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Anno campionato*" />
+                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Nome girone*" />
+                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Nome squadra*" />
+                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Sipendio*" />
+                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Tessera FIP*" />
+                              <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
+                              <CheckBox mnemonicParsing="false" text="Capitano" />
+                              <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
+                              <Button mnemonicParsing="false" onAction="#addGiocatore" prefHeight="25.0" prefWidth="200.0" text="Aggiungi giocatore" />
+                              <Separator focusTraversable="false" prefHeight="4.0" prefWidth="200.0" visible="false" />
+                              <Button mnemonicParsing="false" onAction="#viewGiocatori" prefHeight="25.0" prefWidth="200.0" text="Visualizza giocatori squadra" />
+                              <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rimozione giocatore" wrappingWidth="193.68119748737445">
+                                 <font>
+                                    <Font name="System Bold Italic" size="12.0" />
+                                 </font>
+                              </Text>
+                              <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
+                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Tessera FIP*" />
+                              <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
+                              <Button mnemonicParsing="false" onAction="#removeGiocatore" prefHeight="25.0" prefWidth="200.0" text="Rimuovi giocatore" />
+                              <Separator focusTraversable="false" prefHeight="102.0" prefWidth="200.0" visible="false" />
+                              <Button mnemonicParsing="false" onAction="#goManagement" prefHeight="26.0" prefWidth="198.0" text="Torna alla gestone" />
+                           </children>
+                        </FlowPane>
+                     </left>
+                     <center>
+                        <TableView fx:id="giocatoreView" />
                      </center>
                   </BorderPane>
                </content>
@@ -175,15 +255,17 @@
                                  </font>
                               </Text>
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <ChoiceBox prefWidth="150.0" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="ID Campionato" />
+                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="ID Campionato*" />
                               <TextField prefHeight="25.0" prefWidth="190.0" promptText="Anno campionato*" />
                               <TextField prefHeight="25.0" prefWidth="190.0" promptText="Nome girone*" />
                               <TextField prefHeight="25.0" prefWidth="190.0" promptText="Nome squadra*" />
                               <TextField prefHeight="25.0" prefWidth="190.0" promptText="Sipendio*" />
                               <TextField prefHeight="25.0" prefWidth="190.0" promptText="Tessera FIP*" />
+                              <ChoiceBox fx:id="membriStaff" prefWidth="150.0" />
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Aggiungi membro" />
+                              <Button mnemonicParsing="false" onAction="#addStaff" prefHeight="25.0" prefWidth="200.0" text="Aggiungi membro" />
+                              <Separator focusTraversable="false" prefHeight="3.0" prefWidth="200.0" visible="false" />
+                              <Button mnemonicParsing="false" onAction="#viewStaff" prefHeight="25.0" prefWidth="200.0" text="Visualizza staff squadra" />
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rimozione membro" wrappingWidth="193.68119748737445">
                                  <font>
@@ -193,14 +275,14 @@
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
                               <TextField prefHeight="25.0" prefWidth="190.0" promptText="Tessera FIP*" />
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Rimuovi membro" />
-                              <Separator focusTraversable="false" prefHeight="160.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" onAction="#goManagement" text="Torna alla gestone" />
+                              <Button mnemonicParsing="false" onAction="#removeStaff" prefHeight="25.0" prefWidth="200.0" text="Rimuovi membro" />
+                              <Separator focusTraversable="false" prefHeight="107.0" prefWidth="200.0" visible="false" />
+                              <Button mnemonicParsing="false" onAction="#goManagement" prefHeight="26.0" prefWidth="198.0" text="Torna alla gestone" />
                            </children>
                         </FlowPane>
                      </left>
                      <center>
-                        <TableView fx:id="supplierView11" />
+                        <TableView fx:id="staffView" />
                      </center>
                   </BorderPane>
                </content>

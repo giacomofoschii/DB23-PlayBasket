@@ -107,7 +107,8 @@ public class FeaturesTesserato{
     }
 
 
-    private void addTesseratoNotStaff(String nome, String cognome, String CF, String tesseraFip, int eta) {
+    private void addTesseratoNotStaff(String nome, String cognome, String CF, String tesseraFip, int eta) 
+                                    throws SQLException, SQLIntegrityConstraintViolationException{
         final String query = "INSERT INTO Tesserato " +
                             "(nome, cognome, CF, tesseraFip, eta, preparatore_fisico, medico, accompagnatore, allenatore, aiuto_allenatore, massaggiatore, addetto_arbitro, scorer) " +
                             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -133,7 +134,8 @@ public class FeaturesTesserato{
         }
     }
 
-    public void addGiocatore(String nome, String cognome, String cf, int eta, String tesseraFip, int peso, int altezza, String ruolo, int aperturaAlare) throws SQLException {
+    public void addGiocatore(String nome, String cognome, String cf, int eta, String tesseraFip, int peso, int altezza,
+                            String ruolo, int aperturaAlare) throws SQLIntegrityConstraintViolationException, SQLException {
         addTesseratoNotStaff(nome, cognome, cf, tesseraFip, eta);
         if(aperturaAlare==0) {
             final String query = "INSERT INTO Giocatore " +
@@ -173,7 +175,8 @@ public class FeaturesTesserato{
         }
     }
 
-    public void addArbitro(String nome, String cognome, String cf, int eta, String tesseraFip, String sezione, int grado) throws SQLException {
+    public void addArbitro(String nome, String cognome, String cf, int eta, String tesseraFip, String sezione, int grado)
+                            throws SQLIntegrityConstraintViolationException, SQLException {
         addTesseratoNotStaff(nome, cognome, cf, tesseraFip, eta);
         final String query = "INSERT INTO Arbitro " +
                             "(tesseraFip, sezione, grado, stipendio_totale) " +
@@ -193,7 +196,8 @@ public class FeaturesTesserato{
         }
     }
 
-    public void addUfficiale(String nome, String cognome, String cf, int eta, String tesseraFip, boolean refertista, boolean cronometrista, boolean segnapunti) throws SQLException {
+    public void addUfficiale(String nome, String cognome, String cf, int eta, String tesseraFip,
+                            boolean refertista, boolean cronometrista, boolean segnapunti) throws SQLIntegrityConstraintViolationException, SQLException {
         addTesseratoNotStaff(nome, cognome, cf, tesseraFip, eta);
         final String query = "INSERT INTO Ufficiale_di_campo " +
                             "(tesseraFip, refertista, cronometrista, segnapunti, stipendio_totale) " +
