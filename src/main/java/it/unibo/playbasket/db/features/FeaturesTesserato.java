@@ -91,8 +91,10 @@ public class FeaturesTesserato{
             statement.setString(4, ruolo);
             statement.executeUpdate();
             } catch (SQLIntegrityConstraintViolationException e) {
+                removeTesserato(tesseraFip);
                 throw new IllegalArgumentException("Giocatore già presente");
             } catch (SQLException e) {
+                removeTesserato(tesseraFip);
                 throw new IllegalStateException(e);
             }
         } else {
@@ -110,6 +112,7 @@ public class FeaturesTesserato{
                 removeTesserato(tesseraFip);
                 throw new IllegalArgumentException("Giocatore già presente");
             } catch (SQLException e) {
+                removeTesserato(tesseraFip);
                 throw new IllegalStateException(e);
             }
         }
@@ -130,6 +133,7 @@ public class FeaturesTesserato{
             removeTesserato(tesseraFip);
             throw new IllegalArgumentException("Arbitro già presente");
         } catch (SQLException e) {
+            removeTesserato(tesseraFip);
             throw new IllegalStateException(e);
         }
     }
@@ -150,6 +154,7 @@ public class FeaturesTesserato{
             removeTesserato(tesseraFip);
             throw new IllegalArgumentException("Ufficiale di campo già presente");
         } catch (SQLException e) {
+            removeTesserato(tesseraFip);
             throw new IllegalStateException(e);
         }
     }

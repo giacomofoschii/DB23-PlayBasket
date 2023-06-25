@@ -64,6 +64,11 @@ public class MainController {
     }
 
     @FXML
+    public void enterCalendarPage(){
+        this.view.setCalendarView();
+    }
+
+    @FXML
     public void viewAll(){
         viewBestAttack();
         viewBestDefense();
@@ -77,6 +82,9 @@ public class MainController {
         viewFalli();
         viewStoppate();
         viewMinuti();
+        this.nomeGirone.clear();
+        this.anno.clear();
+        this.idCampionato.clear();
     }
 
     private void viewBestAttack(){

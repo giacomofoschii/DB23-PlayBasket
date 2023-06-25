@@ -33,6 +33,11 @@ public interface View {
     void setMoreStatsView();
 
     /**
+     * Method that sets the calendar page.
+     */
+    void setCalendarView();
+
+    /**
      * Method that sets tesserati management page.
      */
     void setTesseratiView();

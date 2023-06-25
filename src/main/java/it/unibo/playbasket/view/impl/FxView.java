@@ -3,6 +3,7 @@ package it.unibo.playbasket.view.impl;
 import java.sql.Connection;
 
 import it.unibo.playbasket.controller.AdminController;
+import it.unibo.playbasket.controller.CalendarController;
 import it.unibo.playbasket.controller.CampionatiController;
 import it.unibo.playbasket.controller.LoginController;
 import it.unibo.playbasket.controller.MainController;
@@ -10,8 +11,8 @@ import it.unibo.playbasket.controller.MoreStatsController;
 import it.unibo.playbasket.controller.OpeningController;
 import it.unibo.playbasket.controller.PalestreController;
 import it.unibo.playbasket.controller.PartiteController;
-import it.unibo.playbasket.controller.SocietaController;
 import it.unibo.playbasket.controller.TesseratiController;
+import it.unibo.playbasket.db.features.FeaturesCalendar;
 import it.unibo.playbasket.db.features.FeaturesCampionato;
 import it.unibo.playbasket.db.features.FeaturesMainPage;
 import it.unibo.playbasket.db.features.FeaturesMoreStats;
@@ -19,8 +20,8 @@ import it.unibo.playbasket.db.features.FeaturesPalestra;
 import it.unibo.playbasket.db.features.FeaturesPartita;
 import it.unibo.playbasket.db.features.FeaturesSocieta;
 import it.unibo.playbasket.db.features.FeaturesTesserato;
+import it.unibo.playbasket.db.features.SocietaController;
 import it.unibo.playbasket.view.api.View;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -41,6 +42,7 @@ public class FxView implements View {
     private FeaturesCampionato featuresCampionato;
     private FeaturesPartita featuresPartita;
     private FeaturesMoreStats featuresMoreStats;
+    private FeaturesCalendar featuresCalendar;
 
     /**
      * Constructor for the view.
@@ -135,6 +137,19 @@ public class FxView implements View {
     }
 
     @Override
+    public void setCalendarView() {
+        try {
+            final var loader = new FXMLLoader(ClassLoader.getSystemResource("fxml/CalendarView.fxml"));
+            loader.setController(new CalendarController(this, featuresCalendar));
+            final Parent root = loader.load();
+            final Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+        } catch (Exception e) {
+            e.printStackTrace();
+        };
+    }
+
+    @Override
     public void setTesseratiView() {
         try{
             final var loader = new FXMLLoader(ClassLoader.getSystemResource("fxml/TesseratiView.fxml"));
@@ -208,5 +223,6 @@ public class FxView implements View {
         this.featuresCampionato = new FeaturesCampionato(connection);
         this.featuresPartita = new FeaturesPartita(connection);
         this.featuresMoreStats = new FeaturesMoreStats(connection);
+        this.featuresCalendar = new FeaturesCalendar(connection);
     }
 }
