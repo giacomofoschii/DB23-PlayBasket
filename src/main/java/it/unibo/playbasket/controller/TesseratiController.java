@@ -2,11 +2,14 @@ package it.unibo.playbasket.controller;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import it.unibo.playbasket.db.features.FeaturesTesserato;
 import it.unibo.playbasket.db.views.Arbitro;
 import it.unibo.playbasket.db.views.Giocatore;
+import it.unibo.playbasket.db.views.Staff;
+import it.unibo.playbasket.db.views.Ufficiale;
 import it.unibo.playbasket.view.impl.FxView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -61,10 +64,10 @@ public class TesseratiController implements Initializable{
     @FXML private TextField annoPatentino;
     @FXML private TextField specializzazione;
     @FXML private TextField tesseraRimozione;
-    @FXML private TableView arbitriView;
-    @FXML private TableView giocatoriView;
-    @FXML private TableView ufficialiView;
-    @FXML private TableView staffView;
+    @FXML private TableView<Arbitro> arbitriView;
+    @FXML private TableView<Giocatore> giocatoriView;
+    @FXML private TableView<Ufficiale> ufficialiView;
+    @FXML private TableView<Staff> staffView;
 
     private String[] ruoli = {"Playmaker", "Guardia", "Ala_p", "Ala_g", "Centro"};
 
@@ -235,7 +238,7 @@ public class TesseratiController implements Initializable{
         ruolo.setCellValueFactory(new PropertyValueFactory<>("ruolo"));
         TableColumn<Giocatore,Integer> aperturaAlare = new TableColumn<>("Apertura alare");
         aperturaAlare.setCellValueFactory(new PropertyValueFactory<>("apertura_Alare"));
-        giocatoriView.getColumns().addAll(nome, cognome, CF, tesseraFip, eta, peso, altezza, ruolo, aperturaAlare);
+        giocatoriView.getColumns().addAll(Arrays.asList(nome, cognome, CF, tesseraFip, eta, peso, altezza, ruolo, aperturaAlare));
         giocatoriView.setItems(features.viewPlayers());
     }
 
@@ -258,71 +261,71 @@ public class TesseratiController implements Initializable{
         grado.setCellValueFactory(new PropertyValueFactory<>("grado"));
         TableColumn<Arbitro,Integer> stipendioTotale = new TableColumn<>("Stipendio totale");
         stipendioTotale.setCellValueFactory(new PropertyValueFactory<>("stipendio_totale"));
-        arbitriView.getColumns().addAll(nome, cognome, CF, tesseraFip, eta, sezione, grado, stipendioTotale);
+        arbitriView.getColumns().addAll(Arrays.asList(nome, cognome, CF, tesseraFip, eta, sezione, grado, stipendioTotale));
         arbitriView.setItems(features.viewArbitri());
     }
 
     @FXML
     public void viewUfficiali() {
         ufficialiView.getColumns().clear();
-        TableColumn<Arbitro,String> nome = new TableColumn<>("Nome");
+        TableColumn<Ufficiale,String> nome = new TableColumn<>("Nome");
         nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        TableColumn<Arbitro,String> cognome = new TableColumn<>("Cognome");
+        TableColumn<Ufficiale,String> cognome = new TableColumn<>("Cognome");
         cognome.setCellValueFactory(new PropertyValueFactory<>("cognome"));
-        TableColumn<Arbitro,String> CF = new TableColumn<>("CF");
+        TableColumn<Ufficiale,String> CF = new TableColumn<>("CF");
         CF.setCellValueFactory(new PropertyValueFactory<>("CF"));
-        TableColumn<Arbitro,String> tesseraFip = new TableColumn<>("Tessera FIP");
+        TableColumn<Ufficiale,String> tesseraFip = new TableColumn<>("Tessera FIP");
         tesseraFip.setCellValueFactory(new PropertyValueFactory<>("tesseraFip"));
-        TableColumn<Arbitro,Integer> eta = new TableColumn<>("Eta");
+        TableColumn<Ufficiale,Integer> eta = new TableColumn<>("Eta");
         eta.setCellValueFactory(new PropertyValueFactory<>("eta"));
-        TableColumn<Arbitro,Boolean> refertista = new TableColumn<>("Refertista");
+        TableColumn<Ufficiale,Boolean> refertista = new TableColumn<>("Refertista");
         refertista.setCellValueFactory(new PropertyValueFactory<>("refertista"));
-        TableColumn<Arbitro,Boolean> cronometrista = new TableColumn<>("Cronometrista");
+        TableColumn<Ufficiale,Boolean> cronometrista = new TableColumn<>("Cronometrista");
         cronometrista.setCellValueFactory(new PropertyValueFactory<>("cronometrista"));
-        TableColumn<Arbitro,Boolean> segnapunti = new TableColumn<>("Segnapunti");
+        TableColumn<Ufficiale,Boolean> segnapunti = new TableColumn<>("Segnapunti");
         segnapunti.setCellValueFactory(new PropertyValueFactory<>("segnapunti"));
-        TableColumn<Arbitro,Integer> stipendioTotale = new TableColumn<>("Stipendio totale");
+        TableColumn<Ufficiale,Integer> stipendioTotale = new TableColumn<>("Stipendio totale");
         stipendioTotale.setCellValueFactory(new PropertyValueFactory<>("stipendio_totale"));
-        ufficialiView.getColumns().addAll(nome, cognome, CF, tesseraFip, eta, refertista, cronometrista, segnapunti, stipendioTotale);
+        ufficialiView.getColumns().addAll(Arrays.asList(nome, cognome, CF, tesseraFip, eta, refertista, cronometrista, segnapunti, stipendioTotale));
         ufficialiView.setItems(features.viewUfficiali());
     }
 
     @FXML
     public void viewStaff() {
         staffView.getColumns().clear();
-        TableColumn<Arbitro,String> nome = new TableColumn<>("Nome");
+        TableColumn<Staff,String> nome = new TableColumn<>("Nome");
         nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        TableColumn<Arbitro,String> cognome = new TableColumn<>("Cognome");
+        TableColumn<Staff,String> cognome = new TableColumn<>("Cognome");
         cognome.setCellValueFactory(new PropertyValueFactory<>("cognome"));
-        TableColumn<Arbitro,String> CF = new TableColumn<>("CF");
+        TableColumn<Staff,String> CF = new TableColumn<>("CF");
         CF.setCellValueFactory(new PropertyValueFactory<>("CF"));
-        TableColumn<Arbitro,String> tesseraFip = new TableColumn<>("Tessera FIP");
+        TableColumn<Staff,String> tesseraFip = new TableColumn<>("Tessera FIP");
         tesseraFip.setCellValueFactory(new PropertyValueFactory<>("tesseraFip"));
-        TableColumn<Arbitro,Integer> eta = new TableColumn<>("Eta");
+        TableColumn<Staff,Integer> eta = new TableColumn<>("Eta");
         eta.setCellValueFactory(new PropertyValueFactory<>("eta"));
-        TableColumn<Arbitro,Boolean> preparatoreFisico = new TableColumn<>("Preparatore fisico");
+        TableColumn<Staff,Boolean> preparatoreFisico = new TableColumn<>("Preparatore fisico");
         preparatoreFisico.setCellValueFactory(new PropertyValueFactory<>("preparatore_fisico"));
-        TableColumn<Arbitro,Boolean> allenatore = new TableColumn<>("Allenatore");
+        TableColumn<Staff,Boolean> allenatore = new TableColumn<>("Allenatore");
         allenatore.setCellValueFactory(new PropertyValueFactory<>("allenatore"));
-        TableColumn<Arbitro,Boolean> aiutoAllenatore = new TableColumn<>("Aiuto allenatore");
+        TableColumn<Staff,Boolean> aiutoAllenatore = new TableColumn<>("Aiuto allenatore");
         aiutoAllenatore.setCellValueFactory(new PropertyValueFactory<>("aiuto_allenatore"));
-        TableColumn<Arbitro,Boolean> medico = new TableColumn<>("Medico");
+        TableColumn<Staff,Boolean> medico = new TableColumn<>("Medico");
         medico.setCellValueFactory(new PropertyValueFactory<>("medico"));
-        TableColumn<Arbitro,Boolean> massaggiatore = new TableColumn<>("Massaggiatore");
+        TableColumn<Staff,Boolean> massaggiatore = new TableColumn<>("Massaggiatore");
         massaggiatore.setCellValueFactory(new PropertyValueFactory<>("massaggiatore"));
-        TableColumn<Arbitro,Boolean> accompagnatore = new TableColumn<>("Accompagnatore");
+        TableColumn<Staff,Boolean> accompagnatore = new TableColumn<>("Accompagnatore");
         accompagnatore.setCellValueFactory(new PropertyValueFactory<>("accompagnatore"));
-        TableColumn<Arbitro,Boolean> scorer = new TableColumn<>("Scorer");
+        TableColumn<Staff, Boolean> scorer = new TableColumn<>("Scorer");
         scorer.setCellValueFactory(new PropertyValueFactory<>("scorer"));
-        TableColumn<Arbitro,Boolean> addettoArbitri = new TableColumn<>("Addetto arbitri");
+        TableColumn<Staff,Boolean> addettoArbitri = new TableColumn<>("Addetto arbitri");
         addettoArbitri.setCellValueFactory(new PropertyValueFactory<>("addetto_arbitro"));
-        TableColumn<Arbitro,Integer> annoPatentino = new TableColumn<>("Anno patentino");
+        TableColumn<Staff,Integer> annoPatentino = new TableColumn<>("Anno patentino");
         annoPatentino.setCellValueFactory(new PropertyValueFactory<>("anno_patentino"));
-        TableColumn<Arbitro,String> specializzazione = new TableColumn<>("Specializzazione");
+        TableColumn<Staff,String> specializzazione = new TableColumn<>("Specializzazione");
         specializzazione.setCellValueFactory(new PropertyValueFactory<>("specializzazione"));
-        staffView.getColumns().addAll(nome, cognome, CF, tesseraFip, eta, preparatoreFisico, allenatore,
+        staffView.getColumns().addAll(Arrays.asList(nome, cognome, CF, tesseraFip, eta, preparatoreFisico, allenatore,
                                         aiutoAllenatore, medico, massaggiatore, accompagnatore, scorer,
-                                        addettoArbitri, annoPatentino, specializzazione);
+                                        addettoArbitri, annoPatentino, specializzazione));
         staffView.setItems(features.viewStaff());
     }
 }

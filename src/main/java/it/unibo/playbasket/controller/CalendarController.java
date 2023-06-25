@@ -1,5 +1,7 @@
 package it.unibo.playbasket.controller;
 
+import java.util.Arrays;
+
 import it.unibo.playbasket.db.features.FeaturesCalendar;
 import it.unibo.playbasket.db.views.CalendarioGirone;
 import it.unibo.playbasket.db.views.CalendarioPalestra;
@@ -27,10 +29,10 @@ public class CalendarController {
     @FXML private TextField idPalestra;
     @FXML private TextField annoSocieta;
     @FXML private TextField codiceMeccanografico;
-    @FXML private TableView societa;
-    @FXML private TableView palestra;
-    @FXML private TableView squadra;
-    @FXML private TableView girone;
+    @FXML private TableView<CalendarioSocieta> societa;
+    @FXML private TableView<CalendarioPalestra> palestra;
+    @FXML private TableView<CalendarioSquadra> squadra;
+    @FXML private TableView<CalendarioGirone> girone;
 
     public CalendarController(final FxView view, final FeaturesCalendar featuresCalendar) {
         this.view = view;
@@ -59,7 +61,7 @@ public class CalendarController {
         nomeCampionato.setCellValueFactory(new PropertyValueFactory<>("nome_campionato"));
         TableColumn<CalendarioSocieta, String> nomeGirone = new TableColumn<>("Nome girone");
         nomeGirone.setCellValueFactory(new PropertyValueFactory<>("nome_girone"));
-        this.societa.getColumns().addAll(nomeSquadra, nomeSquadra2, nomePalestra, indirizzo, dataOra, nomeCampionato, nomeGirone);
+        this.societa.getColumns().addAll(Arrays.asList(nomeSquadra, nomeSquadra2, nomePalestra, indirizzo, dataOra, nomeCampionato, nomeGirone));
         this.societa.setItems(this.featuresCalendar.viewCalendarSocieta(Integer.parseInt(this.annoSocieta.getText()),
                                                                           this.codiceMeccanografico.getText()));
         this.annoSocieta.clear();
@@ -79,7 +81,7 @@ public class CalendarController {
         indirizzo.setCellValueFactory(new PropertyValueFactory<>("indirizzo"));
         TableColumn<CalendarioSquadra, String> dataOra = new TableColumn<>("Data ora");
         dataOra.setCellValueFactory(new PropertyValueFactory<>("data_ora"));
-        this.squadra.getColumns().addAll(nomeSquadra, nomeSquadra2, nomePalestra, indirizzo, dataOra);
+        this.squadra.getColumns().addAll(Arrays.asList(nomeSquadra, nomeSquadra2, nomePalestra, indirizzo, dataOra));
         this.squadra.setItems(this.featuresCalendar.viewCalendarSquadra(this.idCampionatoSquadra.getText(),
                                                                           Integer.parseInt(this.annoSquadra.getText()),
                                                                           this.nomeGironeSquadra.getText(),
@@ -103,7 +105,7 @@ public class CalendarController {
         indirizzo.setCellValueFactory(new PropertyValueFactory<>("indirizzo"));
         TableColumn<CalendarioGirone, String> dataOra = new TableColumn<>("Data ora");
         dataOra.setCellValueFactory(new PropertyValueFactory<>("data_ora"));
-        this.girone.getColumns().addAll(nomeSquadra, nomeSquadra2, nomePalestra, indirizzo, dataOra);
+        this.girone.getColumns().addAll(Arrays.asList(nomeSquadra, nomeSquadra2, nomePalestra, indirizzo, dataOra));
         this.girone.setItems(this.featuresCalendar.viewCalendarGirone(this.idCampionato.getText(),
                                                                         Integer.parseInt(this.annoCampionato.getText()),
                                                                         this.nomeGirone.getText()));
@@ -125,7 +127,7 @@ public class CalendarController {
         indirizzo.setCellValueFactory(new PropertyValueFactory<>("indirizzo"));
         TableColumn<CalendarioPalestra, String> dataOra = new TableColumn<>("Data ora");
         dataOra.setCellValueFactory(new PropertyValueFactory<>("data_ora"));
-        this.palestra.getColumns().addAll(nomeSquadra, nomeSquadra2, nomePalestra, indirizzo, dataOra);
+        this.palestra.getColumns().addAll(Arrays.asList(nomeSquadra, nomeSquadra2, nomePalestra, indirizzo, dataOra));
         this.palestra.setItems(this.featuresCalendar.viewCalendarPalestra(this.idPalestra.getText(),
                                                                             Integer.parseInt(this.annoPalestra.getText())));
         this.idPalestra.clear();

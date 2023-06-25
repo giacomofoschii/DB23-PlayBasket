@@ -1,5 +1,6 @@
-package it.unibo.playbasket.db.features;
+package it.unibo.playbasket.controller;
 
+import it.unibo.playbasket.db.features.FeaturesSocieta;
 import it.unibo.playbasket.view.impl.FxView;
 import javafx.fxml.FXML;
 

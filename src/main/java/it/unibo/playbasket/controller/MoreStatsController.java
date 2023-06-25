@@ -1,6 +1,7 @@
 package it.unibo.playbasket.controller;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import it.unibo.playbasket.db.features.FeaturesMoreStats;
@@ -30,13 +31,13 @@ public class MoreStatsController implements Initializable{
     @FXML private TextField tesseraUfficiale;
     @FXML private TextField annoCampionato;
     @FXML private TextField idCampionato;
-    @FXML private TableView stipendioArbitro;
-    @FXML private TableView stipendioUfficiale;
-    @FXML private TableView top10Assist;
-    @FXML private TableView proprietarioGiovanili;
-    @FXML private TableView societaPiuVincente;
-    @FXML private TableView under21;
-    @FXML private TableView vittoriaOspite;
+    @FXML private TableView<StipendioArbitro> stipendioArbitro;
+    @FXML private TableView<StipendioUfficiale> stipendioUfficiale;
+    @FXML private TableView<Top10Assist> top10Assist;
+    @FXML private TableView<ProprietarioGiovanili> proprietarioGiovanili;
+    @FXML private TableView<SocietaPiuVincente> societaPiuVincente;
+    @FXML private TableView<Under21> under21;
+    @FXML private TableView<VittoriaOspite> vittoriaOspite;
 
     /**
      * Constructor for the controller.
@@ -80,7 +81,7 @@ public class MoreStatsController implements Initializable{
         partiteDirette.setCellValueFactory(new PropertyValueFactory<>("partite_dirette"));
         TableColumn<StipendioArbitro, Integer> guadagno = new TableColumn<>("Guadagno");
         guadagno.setCellValueFactory(new PropertyValueFactory<>("guadagno"));
-        this.stipendioArbitro.getColumns().addAll(nome, cognome, grado, sezione, partiteDirette, guadagno);
+        this.stipendioArbitro.getColumns().addAll(Arrays.asList(nome, cognome, grado, sezione, partiteDirette, guadagno));
         this.stipendioArbitro.setItems(this.featuresMoreStats.viewStipendioArbitro(this.tesseraArbitro.getText()));
         this.tesseraArbitro.clear();
     }
@@ -102,7 +103,7 @@ public class MoreStatsController implements Initializable{
         partiteCodirette.setCellValueFactory(new PropertyValueFactory<>("partite_codirette"));
         TableColumn<StipendioUfficiale, Integer> guadagno = new TableColumn<>("Guadagno");
         guadagno.setCellValueFactory(new PropertyValueFactory<>("guadagno"));
-        this.stipendioUfficiale.getColumns().addAll(nome, cognome, cronometrista, refertista, segnapunti, partiteCodirette, guadagno);
+        this.stipendioUfficiale.getColumns().addAll(Arrays.asList(nome, cognome, cronometrista, refertista, segnapunti, partiteCodirette, guadagno));
         this.stipendioUfficiale.setItems(this.featuresMoreStats.viewStipendioUfficiale(this.tesseraUfficiale.getText()));
         this.tesseraUfficiale.clear();
     }
@@ -113,7 +114,7 @@ public class MoreStatsController implements Initializable{
         nomeSquadra.setCellValueFactory(new PropertyValueFactory<>("nome_squadra"));
         TableColumn<VittoriaOspite, Integer> vittorieOspite = new TableColumn<>("Vittorie ospite");
         vittorieOspite.setCellValueFactory(new PropertyValueFactory<>("num_vittorie_ospiti"));
-        this.vittoriaOspite.getColumns().addAll(nomeSquadra, vittorieOspite);
+        this.vittoriaOspite.getColumns().addAll(Arrays.asList(nomeSquadra, vittorieOspite));
         this.vittoriaOspite.setItems(this.featuresMoreStats.viewVittoriaOspite(this.idCampionato.getText(),
                                                                                 Integer.parseInt(this.annoCampionato.getText())));
     }
@@ -128,7 +129,7 @@ public class MoreStatsController implements Initializable{
         assist.setCellValueFactory(new PropertyValueFactory<>("assist_tot"));
         TableColumn<Top10Assist, Float> apg = new TableColumn<>("APG");
         apg.setCellValueFactory(new PropertyValueFactory<>("apg"));
-        this.top10Assist.getColumns().addAll(nome, cognome, assist, apg);
+        this.top10Assist.getColumns().addAll(Arrays.asList(nome, cognome, assist, apg));
         this.top10Assist.setItems(this.featuresMoreStats.viewTop10Assist(this.idCampionato.getText(),
                                                                           Integer.parseInt(this.annoCampionato.getText())));
         this.idCampionato.clear();
@@ -149,7 +150,7 @@ public class MoreStatsController implements Initializable{
         nomeSquadra.setCellValueFactory(new PropertyValueFactory<>("nome_squadra"));
         TableColumn<Under21, Integer> punti = new TableColumn<>("Punti");
         punti.setCellValueFactory(new PropertyValueFactory<>("punti"));
-        this.under21.getColumns().addAll(nome, cognome, eta, ruolo, nomeSquadra, punti);
+        this.under21.getColumns().addAll(Arrays.asList(nome, cognome, eta, ruolo, nomeSquadra, punti));
         this.under21.setItems(this.featuresMoreStats.viewUnder21());
     }
 
@@ -159,7 +160,7 @@ public class MoreStatsController implements Initializable{
         nomeSquadra.setCellValueFactory(new PropertyValueFactory<>("nome"));
         TableColumn<SocietaPiuVincente, Integer> titoli = new TableColumn<>("Titoli");
         titoli.setCellValueFactory(new PropertyValueFactory<>("titoli"));
-        this.societaPiuVincente.getColumns().addAll(nomeSquadra, titoli);
+        this.societaPiuVincente.getColumns().addAll(Arrays.asList(nomeSquadra, titoli));
         this.societaPiuVincente.setItems(this.featuresMoreStats.viewSocietaPiuVincente());
     }
 
@@ -173,7 +174,7 @@ public class MoreStatsController implements Initializable{
         titoli.setCellValueFactory(new PropertyValueFactory<>("titoli"));
         TableColumn<ProprietarioGiovanili, String> nomeSocieta = new TableColumn<>("Nome societa");
         nomeSocieta.setCellValueFactory(new PropertyValueFactory<>("nome_societa"));
-        this.proprietarioGiovanili.getColumns().addAll(nome, cognome, titoli, nomeSocieta);
+        this.proprietarioGiovanili.getColumns().addAll(Arrays.asList(nome, cognome, titoli, nomeSocieta));
         this.proprietarioGiovanili.setItems(this.featuresMoreStats.viewProprietarioGiovanili());
     }
 }

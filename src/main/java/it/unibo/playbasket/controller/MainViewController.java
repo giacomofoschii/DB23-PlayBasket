@@ -1,5 +1,7 @@
 package it.unibo.playbasket.controller;
 
+import java.util.Arrays;
+
 import it.unibo.playbasket.db.features.FeaturesMainPage;
 import it.unibo.playbasket.db.views.Assist;
 import it.unibo.playbasket.db.views.Classifica;
@@ -31,18 +33,18 @@ public class MainViewController {
     @FXML private TextField anno;
     @FXML private TextField idCampionato;
     @FXML private TextField nomeGirone;
-    @FXML private TableView bestAttack;
-    @FXML private TableView bestDefense;
-    @FXML private TableView rank;
-    @FXML private TableView valutazione;
-    @FXML private TableView pallePerse;
-    @FXML private TableView palleRubate;
-    @FXML private TableView punti;
-    @FXML private TableView rimbalzi;
-    @FXML private TableView assist;
-    @FXML private TableView falli;
-    @FXML private TableView stoppate;
-    @FXML private TableView minuti;
+    @FXML private TableView<MigliorAttacco> bestAttack;
+    @FXML private TableView<MigliorDifesa> bestDefense;
+    @FXML private TableView<Classifica> rank;
+    @FXML private TableView<Valutazione> valutazione;
+    @FXML private TableView<PallePerse> pallePerse;
+    @FXML private TableView<PalleRubate> palleRubate;
+    @FXML private TableView<Punti> punti;
+    @FXML private TableView<Rimbalzi> rimbalzi;
+    @FXML private TableView<Assist> assist;
+    @FXML private TableView<Falli> falli;
+    @FXML private TableView<Stoppate> stoppate;
+    @FXML private TableView<Minuti> minuti;
 
     /**
      * Constructor for the controller.
@@ -99,7 +101,7 @@ public class MainViewController {
         numeroSconfitte.setCellValueFactory(new PropertyValueFactory<>("numero_sconfitte"));
         TableColumn<MigliorAttacco, Integer> partiteGiocate = new TableColumn<>("Partite giocate");
         partiteGiocate.setCellValueFactory(new PropertyValueFactory<>("partite_giocate"));
-        this.bestAttack.getColumns().addAll(nomeSquadra, puntiFatti, numeroVittorie, numeroSconfitte, partiteGiocate);
+        this.bestAttack.getColumns().addAll(Arrays.asList(nomeSquadra, puntiFatti, numeroVittorie, numeroSconfitte, partiteGiocate));
         this.bestAttack.setItems(this.featuresMainPage.viewBestAttack(this.idCampionato.getText(), Integer.parseInt(this.anno.getText()), this.nomeGirone.getText()));
     }
 
@@ -115,7 +117,7 @@ public class MainViewController {
         numeroSconfitte.setCellValueFactory(new PropertyValueFactory<>("numero_sconfitte"));
         TableColumn<MigliorDifesa, Integer> partiteGiocate = new TableColumn<>("Partite giocate");
         partiteGiocate.setCellValueFactory(new PropertyValueFactory<>("partite_giocate"));
-        this.bestDefense.getColumns().addAll(nomeSquadra, puntiFatti, numeroVittorie, numeroSconfitte, partiteGiocate);
+        this.bestDefense.getColumns().addAll(Arrays.asList(nomeSquadra, puntiFatti, numeroVittorie, numeroSconfitte, partiteGiocate));
         this.bestDefense.setItems(this.featuresMainPage.viewBestDefense(this.idCampionato.getText(), Integer.parseInt(this.anno.getText()), this.nomeGirone.getText()));
     }
 
@@ -133,7 +135,7 @@ public class MainViewController {
         percentualeVittoria.setCellValueFactory(new PropertyValueFactory<>("percentuale_vittoria"));
         TableColumn<Classifica, Integer> differenzaPunti = new TableColumn<>("Differenza punti");
         differenzaPunti.setCellValueFactory(new PropertyValueFactory<>("differenza_punti"));
-        this.rank.getColumns().addAll(nomeSquadra, punti, numeroVittorie, partiteGiocate, percentualeVittoria, differenzaPunti);
+        this.rank.getColumns().addAll(Arrays.asList(nomeSquadra, punti, numeroVittorie, partiteGiocate, percentualeVittoria, differenzaPunti));
         this.rank.setItems(this.featuresMainPage.viewRank(this.idCampionato.getText(), Integer.parseInt(this.anno.getText()), this.nomeGirone.getText()));
     }
 
@@ -151,7 +153,7 @@ public class MainViewController {
         nomeSquadra.setCellValueFactory(new PropertyValueFactory<>("nome_squadra"));
         TableColumn<Valutazione, Float> valutazioneMedia = new TableColumn<>("Valutazione media");
         valutazioneMedia.setCellValueFactory(new PropertyValueFactory<>("valutazione_media"));
-        this.valutazione.getColumns().addAll(nome, cognome, eta, ruolo, nomeSquadra, valutazioneMedia);
+        this.valutazione.getColumns().addAll(Arrays.asList(nome, cognome, eta, ruolo, nomeSquadra, valutazioneMedia));
         this.valutazione.setItems(this.featuresMainPage.viewValutazione(this.idCampionato.getText(), Integer.parseInt(this.anno.getText())));
     }
 
@@ -177,7 +179,7 @@ public class MainViewController {
         percentuale3.setCellValueFactory(new PropertyValueFactory<>("percentuale_3"));
         TableColumn<Punti, Float> percentualeFt = new TableColumn<>("%FT");
         percentualeFt.setCellValueFactory(new PropertyValueFactory<>("percentuale_ft"));
-        this.punti.getColumns().addAll(nome, cognome, eta, ruolo, nomeSquadra, puntiTot, ppg, percentuale2, percentuale3, percentualeFt);
+        this.punti.getColumns().addAll(Arrays.asList(nome, cognome, eta, ruolo, nomeSquadra, puntiTot, ppg, percentuale2, percentuale3, percentualeFt));
         this.punti.setItems(this.featuresMainPage.viewPunti(this.idCampionato.getText(), Integer.parseInt(this.anno.getText())));
     }
 
@@ -197,7 +199,7 @@ public class MainViewController {
         pallePerse.setCellValueFactory(new PropertyValueFactory<>("palle_perse"));
         TableColumn<PallePerse, Float> pallePersePg = new TableColumn<>("Palle perse PG");
         pallePersePg.setCellValueFactory(new PropertyValueFactory<>("palle_perse_pg"));
-        this.pallePerse.getColumns().addAll(nome, cognome, eta, ruolo, nomeSquadra, pallePerse, pallePersePg);
+        this.pallePerse.getColumns().addAll(Arrays.asList(nome, cognome, eta, ruolo, nomeSquadra, pallePerse, pallePersePg));
         this.pallePerse.setItems(this.featuresMainPage.viewPallePerse(this.idCampionato.getText(), Integer.parseInt(this.anno.getText())));
     }
 
@@ -217,7 +219,7 @@ public class MainViewController {
         palleRubate.setCellValueFactory(new PropertyValueFactory<>("palle_rubate"));
         TableColumn<PalleRubate, Float> palleRubatePg = new TableColumn<>("Palle rubate PG");
         palleRubatePg.setCellValueFactory(new PropertyValueFactory<>("palle_rubate_pg"));
-        this.palleRubate.getColumns().addAll(nome, cognome, eta, ruolo, nomeSquadra, palleRubate, palleRubatePg);
+        this.palleRubate.getColumns().addAll(Arrays.asList(nome, cognome, eta, ruolo, nomeSquadra, palleRubate, palleRubatePg));
         this.palleRubate.setItems(this.featuresMainPage.viewPalleRubate(this.idCampionato.getText(), Integer.parseInt(this.anno.getText())));
     }
 
@@ -237,7 +239,7 @@ public class MainViewController {
         rimbalzi.setCellValueFactory(new PropertyValueFactory<>("rimbalzi"));
         TableColumn<Rimbalzi, Float> rimbalziPg = new TableColumn<>("Rimbalzi PG");
         rimbalziPg.setCellValueFactory(new PropertyValueFactory<>("rimbalzi_pg"));
-        this.rimbalzi.getColumns().addAll(nome, cognome, eta, ruolo, nomeSquadra, rimbalzi, rimbalziPg);
+        this.rimbalzi.getColumns().addAll(Arrays.asList(nome, cognome, eta, ruolo, nomeSquadra, rimbalzi, rimbalziPg));
         this.rimbalzi.setItems(this.featuresMainPage.viewRimbalzi(this.idCampionato.getText(), Integer.parseInt(this.anno.getText())));
     }
 
@@ -257,7 +259,7 @@ public class MainViewController {
         assist.setCellValueFactory(new PropertyValueFactory<>("assist"));
         TableColumn<Assist, Float> assistPg = new TableColumn<>("Assist PG");
         assistPg.setCellValueFactory(new PropertyValueFactory<>("assist_pg"));
-        this.assist.getColumns().addAll(nome, cognome, eta, ruolo, nomeSquadra, assist, assistPg);
+        this.assist.getColumns().addAll(Arrays.asList(nome, cognome, eta, ruolo, nomeSquadra, assist, assistPg));
         this.assist.setItems(this.featuresMainPage.viewAssist(this.idCampionato.getText(), Integer.parseInt(this.anno.getText())));
     }
 
@@ -278,7 +280,7 @@ public class MainViewController {
         minuti.setCellValueFactory(new PropertyValueFactory<>("minuti"));
         TableColumn<Minuti, Float> minutiPg = new TableColumn<>("Minuti PG");
         minutiPg.setCellValueFactory(new PropertyValueFactory<>("minuti_pg"));
-        this.minuti.getColumns().addAll(nome, cognome, eta, ruolo, nomeSquadra, minuti, minutiPg);
+        this.minuti.getColumns().addAll(Arrays.asList(nome, cognome, eta, ruolo, nomeSquadra, minuti, minutiPg));
         this.minuti.setItems(this.featuresMainPage.viewMinuti(this.idCampionato.getText(), Integer.parseInt(this.anno.getText())));
     }
 
@@ -298,7 +300,7 @@ public class MainViewController {
         stoppate.setCellValueFactory(new PropertyValueFactory<>("stoppate"));
         TableColumn<Stoppate, Float> stoppatePg = new TableColumn<>("Stoppate PG");
         stoppatePg.setCellValueFactory(new PropertyValueFactory<>("stoppate_pg"));
-        this.stoppate.getColumns().addAll(nome, cognome, eta, ruolo, nomeSquadra, stoppate, stoppatePg);
+        this.stoppate.getColumns().addAll(Arrays.asList(nome, cognome, eta, ruolo, nomeSquadra, stoppate, stoppatePg));
         this.stoppate.setItems(this.featuresMainPage.viewStoppate(this.idCampionato.getText(), Integer.parseInt(this.anno.getText())));
     }
 
@@ -322,7 +324,7 @@ public class MainViewController {
         falliSubiti.setCellValueFactory(new PropertyValueFactory<>("falli_subiti"));
         TableColumn<Falli, Float> falliSubitiPg = new TableColumn<>("Falli subiti PG");
         falliSubitiPg.setCellValueFactory(new PropertyValueFactory<>("falli_subiti_pg"));
-        this.falli.getColumns().addAll(nome, cognome, eta, ruolo, nomeSquadra, falliFatti, falliFattiPg, falliSubiti, falliSubitiPg);
+        this.falli.getColumns().addAll(Arrays.asList(nome, cognome, eta, ruolo, nomeSquadra, falliFatti, falliFattiPg, falliSubiti, falliSubitiPg));
         this.falli.setItems(this.featuresMainPage.viewFalli(this.idCampionato.getText(), Integer.parseInt(this.anno.getText())));
     }
 }
