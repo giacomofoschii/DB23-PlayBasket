@@ -24,30 +24,85 @@ public class FeaturesTesserato{
     public void addTesseratoStaff(String nome, String cognome, String CF, String tesseraFip, int eta, boolean preparatoreFisico,
                                     boolean medico, boolean accompagnatore, boolean allenatore, boolean aiutoAllenatore,
                                     boolean massaggiatore, boolean addettoArbitro, boolean scorer, String specializzazione, int annoPatentino) throws SQLException{
-        final String query = "INSERT INTO Tesserato " +
-                                "(nome, cognome, CF, tesseraFip, eta, preparatore_fisico, medico, accompagnatore, allenatore, aiuto_allenatore, massaggiatore, addetto_arbitro, scorer, specializzazione, anno_patentino) " +
-                                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, nome);
-            statement.setString(2, cognome);
-            statement.setString(3, CF);
-            statement.setString(4, tesseraFip);
-            statement.setInt(5, eta);
-            statement.setBoolean(6, preparatoreFisico);
-            statement.setBoolean(7, medico);
-            statement.setBoolean(8, accompagnatore);
-            statement.setBoolean(9, allenatore);
-            statement.setBoolean(10, aiutoAllenatore);
-            statement.setBoolean(11, massaggiatore);
-            statement.setBoolean(12, addettoArbitro);
-            statement.setBoolean(13, scorer);
-            statement.setString(14, specializzazione);
-            statement.setInt(15, annoPatentino);
-            statement.executeUpdate();
-        } catch (SQLIntegrityConstraintViolationException e) {
-            throw new IllegalArgumentException("Tesserato già presente");
-        } catch (SQLException e) {
-            throw new IllegalStateException(e);
+        if(specializzazione.equals("")) {
+            if(aiutoAllenatore || allenatore) {
+                final String query = "INSERT INTO Tesserato "
+                                    + "(nome, cognome, CF, tesseraFip, eta, preparatore_fisico, medico, accompagnatore, "
+                                    + "allenatore, aiuto_allenatore, massaggiatore, addetto_arbitro, scorer, anno_patentino) "
+                                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                try (PreparedStatement statement = connection.prepareStatement(query)) {
+                    statement.setString(1, nome);
+                    statement.setString(2, cognome);
+                    statement.setString(3, CF);
+                    statement.setString(4, tesseraFip);
+                    statement.setInt(5, eta);
+                    statement.setBoolean(6, preparatoreFisico);
+                    statement.setBoolean(7, medico);
+                    statement.setBoolean(8, accompagnatore);
+                    statement.setBoolean(9, allenatore);
+                    statement.setBoolean(10, aiutoAllenatore);
+                    statement.setBoolean(11, massaggiatore);
+                    statement.setBoolean(12, addettoArbitro);
+                    statement.setBoolean(13, scorer);
+                    statement.setInt(14, annoPatentino);
+                    statement.executeUpdate();
+                } catch (SQLIntegrityConstraintViolationException e) {
+                    throw new IllegalArgumentException("Tesserato già presente");
+                } catch (SQLException e) {
+                    throw new IllegalStateException(e);
+                }
+            } else {
+                final String query = "INSERT INTO Tesserato "
+                                    + "(nome, cognome, CF, tesseraFip, eta, preparatore_fisico, medico, accompagnatore, "
+                                    + "allenatore, aiuto_allenatore, massaggiatore, addetto_arbitro, scorer) "
+                                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                try (PreparedStatement statement = connection.prepareStatement(query)) {
+                    statement.setString(1, nome);
+                    statement.setString(2, cognome);
+                    statement.setString(3, CF);
+                    statement.setString(4, tesseraFip);
+                    statement.setInt(5, eta);
+                    statement.setBoolean(6, preparatoreFisico);
+                    statement.setBoolean(7, medico);
+                    statement.setBoolean(8, accompagnatore);
+                    statement.setBoolean(9, allenatore);
+                    statement.setBoolean(10, aiutoAllenatore);
+                    statement.setBoolean(11, massaggiatore);
+                    statement.setBoolean(12, addettoArbitro);
+                    statement.setBoolean(13, scorer);
+                    statement.executeUpdate();
+                } catch (SQLIntegrityConstraintViolationException e) {
+                    throw new IllegalArgumentException("Tesserato già presente");
+                } catch (SQLException e) {
+                    throw new IllegalStateException(e);
+                }
+            }
+        } else {
+            final String query = "INSERT INTO Tesserato "
+                                + "(nome, cognome, CF, tesseraFip, eta, preparatore_fisico, medico, accompagnatore, "
+                                + "allenatore, aiuto_allenatore, massaggiatore, addetto_arbitro, scorer, specializzazione) "
+                                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setString(1, nome);
+                statement.setString(2, cognome);
+                statement.setString(3, CF);
+                statement.setString(4, tesseraFip);
+                statement.setInt(5, eta);
+                statement.setBoolean(6, preparatoreFisico);
+                statement.setBoolean(7, medico);
+                statement.setBoolean(8, accompagnatore);
+                statement.setBoolean(9, allenatore);
+                statement.setBoolean(10, aiutoAllenatore);
+                statement.setBoolean(11, massaggiatore);
+                statement.setBoolean(12, addettoArbitro);
+                statement.setBoolean(13, scorer);
+                statement.setString(14, specializzazione);
+                statement.executeUpdate();
+            } catch (SQLIntegrityConstraintViolationException e) {
+                throw new IllegalArgumentException("Tesserato già presente");
+            } catch (SQLException e) {
+                throw new IllegalStateException(e);
+            }
         }
     }
 

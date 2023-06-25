@@ -6,7 +6,7 @@ import it.unibo.playbasket.controller.AdminController;
 import it.unibo.playbasket.controller.CalendarController;
 import it.unibo.playbasket.controller.CampionatiController;
 import it.unibo.playbasket.controller.LoginController;
-import it.unibo.playbasket.controller.MainController;
+import it.unibo.playbasket.controller.MainViewController;
 import it.unibo.playbasket.controller.MoreStatsController;
 import it.unibo.playbasket.controller.OpeningController;
 import it.unibo.playbasket.controller.PalestreController;
@@ -82,7 +82,7 @@ public class FxView implements View {
     public void setMainView() {
         try{
             final var loader = new FXMLLoader(ClassLoader.getSystemResource("fxml/MainView.fxml"));
-            loader.setController(new MainController(this, featuresMain));
+            loader.setController(new MainViewController(this, featuresMain));
             final Parent root = loader.load();
             final Scene scene = new Scene(root);
             primaryStage.setScene(scene);

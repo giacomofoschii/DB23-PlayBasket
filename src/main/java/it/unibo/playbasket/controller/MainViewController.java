@@ -24,7 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 /**
  * Controller for the main page.
  */
-public class MainController {
+public class MainViewController {
 
     private FxView view;
     private FeaturesMainPage featuresMainPage;
@@ -48,7 +48,7 @@ public class MainController {
      * Constructor for the controller.
      * @param view the view.
      */
-    public MainController(FxView view, FeaturesMainPage featuresMainPageMainPage){
+    public MainViewController(FxView view, FeaturesMainPage featuresMainPageMainPage){
         this.view = view;
         this.featuresMainPage = featuresMainPageMainPage;
     }
