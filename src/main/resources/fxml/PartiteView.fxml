@@ -29,29 +29,29 @@
                                  </font>
                               </Text>
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Codice palestra*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="yyyy-mm-dd hh:mm:ss*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="ID campionato*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Anno campionato*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Nome girone*" />
+                              <TextField fx:id="codicePalestra" prefHeight="25.0" prefWidth="190.0" promptText="Codice palestra*" />
+                              <TextField fx:id="dataOra" prefHeight="25.0" prefWidth="190.0" promptText="yyyy-mm-dd hh:mm:ss*" />
+                              <TextField fx:id="idCampionato" prefHeight="25.0" prefWidth="190.0" promptText="ID campionato*" />
+                              <TextField fx:id="annoCampionato" prefHeight="25.0" prefWidth="190.0" promptText="Anno campionato*" />
+                              <TextField fx:id="nomeGirone" prefHeight="25.0" prefWidth="190.0" promptText="Nome girone*" />
                               <Separator focusTraversable="false" prefHeight="20.0" prefWidth="200.0" visible="false" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Squadra casa" wrappingWidth="193.68119748737445" />
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Nome squadra*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Punit fatti*" />
+                              <TextField fx:id="nomeCasa" prefHeight="25.0" prefWidth="190.0" promptText="Nome squadra*" />
+                              <TextField fx:id="puntiCasa" prefHeight="25.0" prefWidth="190.0" promptText="Punit fatti*" />
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Squadra ospite" wrappingWidth="193.68119748737445" />
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Nome squadra*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Punit fatti*" />
+                              <TextField fx:id="nomeOspiti" prefHeight="25.0" prefWidth="190.0" promptText="Nome squadra*" />
+                              <TextField fx:id="puntiOspiti" prefHeight="25.0" prefWidth="190.0" promptText="Punit fatti*" />
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Aggiungi partita">
+                              <Button mnemonicParsing="false" onAction="#addPartita" prefHeight="25.0" prefWidth="200.0" text="Aggiungi partita">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
                               </Button>
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Rimuovi partita">
+                              <Button mnemonicParsing="false" onAction="#removePartita" prefHeight="25.0" prefWidth="200.0" text="Rimuovi partita">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
@@ -62,7 +62,7 @@
                         </FlowPane>
                      </left>
                      <center>
-                        <TableView fx:id="plantView" prefHeight="612.0" prefWidth="645.0" />
+                        <TableView fx:id="partite" prefHeight="612.0" prefWidth="645.0" />
                      </center>
                   </BorderPane>
                </content>
@@ -80,32 +80,32 @@
                                  </font>
                               </Text>
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Codice palestra*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="yyyy-mm-dd hh:mm:ss*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Tessera FIP*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="RImbalzi*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Assist*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Falli fatti*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Falli subiti*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Minuti*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="TIri da 2 tentati*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Tiri da 3 tentati*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Tiri liberi tentati*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Tiri da 2 segnati*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Tiri da 3 segnati*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Tiri liberi segnati*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Palle rubate*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Palle perse*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Stoppate*" />
+                              <TextField fx:id="codicePalestraPerformance" prefHeight="25.0" prefWidth="190.0" promptText="Codice palestra*" />
+                              <TextField fx:id="dataOraPerformance" prefHeight="25.0" prefWidth="190.0" promptText="yyyy-mm-dd hh:mm:ss*" />
+                              <TextField fx:id="tesseraFIP" prefHeight="25.0" prefWidth="190.0" promptText="Tessera FIP*" />
+                              <TextField fx:id="rimbalzi" prefHeight="25.0" prefWidth="190.0" promptText="RImbalzi*" />
+                              <TextField fx:id="assist" prefHeight="25.0" prefWidth="190.0" promptText="Assist*" />
+                              <TextField fx:id="falliFatti" prefHeight="25.0" prefWidth="190.0" promptText="Falli fatti*" />
+                              <TextField fx:id="falliSubiti" prefHeight="25.0" prefWidth="190.0" promptText="Falli subiti*" />
+                              <TextField fx:id="minuti" prefHeight="25.0" prefWidth="190.0" promptText="Minuti*" />
+                              <TextField fx:id="tiri2" prefHeight="25.0" prefWidth="190.0" promptText="TIri da 2 tentati*" />
+                              <TextField fx:id="tiri3" prefHeight="25.0" prefWidth="190.0" promptText="Tiri da 3 tentati*" />
+                              <TextField fx:id="tiriLiberi" prefHeight="25.0" prefWidth="190.0" promptText="Tiri liberi tentati*" />
+                              <TextField fx:id="tiri2_segnati" prefHeight="25.0" prefWidth="190.0" promptText="Tiri da 2 segnati*" />
+                              <TextField fx:id="tiri3_segnati" prefHeight="25.0" prefWidth="190.0" promptText="Tiri da 3 segnati*" />
+                              <TextField fx:id="tiriLiberi_segnati" prefHeight="25.0" prefWidth="190.0" promptText="Tiri liberi segnati*" />
+                              <TextField fx:id="palleRubate" prefHeight="25.0" prefWidth="190.0" promptText="Palle rubate*" />
+                              <TextField fx:id="pallePerse" prefHeight="25.0" prefWidth="190.0" promptText="Palle perse*" />
+                              <TextField fx:id="stoppate" prefHeight="25.0" prefWidth="190.0" promptText="Stoppate*" />
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Aggiungi performance" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Rimuovi performance" />
+                              <Button mnemonicParsing="false" onAction="#addPerformance" prefHeight="25.0" prefWidth="200.0" text="Aggiungi performance" />
+                              <Button mnemonicParsing="false" onAction="#removePerformance" prefHeight="25.0" prefWidth="200.0" text="Rimuovi performance" />
                               <Button mnemonicParsing="false" onAction="#goManagement" prefHeight="25.0" prefWidth="200.0" text="Torna alla gestone" />
                            </children>
                         </FlowPane>
                      </left>
                      <center>
-                        <TableView fx:id="supplierView" />
+                        <TableView fx:id="performance" />
                      </center>
                   </BorderPane>
                </content>
