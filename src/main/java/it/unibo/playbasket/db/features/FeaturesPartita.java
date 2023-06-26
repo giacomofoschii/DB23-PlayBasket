@@ -366,12 +366,11 @@ public class FeaturesPartita{
         }
     }
     
-    public ObservableList<Direzione> viewDirezione(String tesseraFIP) {
+    public ObservableList<Direzione> viewDirezione() {
         final String query = "SELECT T.NOME, T.COGNOME, D.RIMBORSO, P.DATA_ORA, C.NOME_SQUADRA AS NOME_SQUADRA1, O.NOME_SQUADRA AS NOME_SQUADRA2, G.NOME_PALESTRA "
                             + "FROM TESSERATO T, ARBITRO A, DIREZIONE D, PARTITA P, PARTECIPAZIONE_CASA C, PARTECIPAZIONE_OSPITI O, PALESTRA G "
-                            + "WHERE 'A2D14LK23A'=T.TESSERAFIP "
-                            + "AND T.TESSERAFIP=A.TESSERAFIP "
-                            + "AND T.TESSERAFIP=D.TESSERAFIP "
+                            + "WHERE T.TESSERAFIP=A.TESSERAFIP "
+                            + "AND A.TESSERAFIP=D.TESSERAFIP "
                             + "AND D.CODICEPALESTRA=P.CODICEPALESTRA "
                             + "AND D.DATA_ORA=P.DATA_ORA "
                             + "AND C.CODICEPALESTRA=P.CODICEPALESTRA "
@@ -380,7 +379,6 @@ public class FeaturesPartita{
                             + "AND O.DATA_ORA=P.DATA_ORA "
                             + "AND G.CODICEPALESTRA=P.CODICEPALESTRA ";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            //statement.setString(1, tesseraFIP);
             ResultSet result = statement.executeQuery(query);
 
             final ObservableList<Direzione> data = FXCollections.observableArrayList();
@@ -396,12 +394,11 @@ public class FeaturesPartita{
         }
     }
     
-    public ObservableList<Direzione> viewCoDirezione(String tesseraFIP) {
+    public ObservableList<Direzione> viewCoDirezione() {
         final String query = "SELECT T.NOME, T.COGNOME, D.RIMBORSO, P.DATA_ORA, C.NOME_SQUADRA AS NOME_SQUADRA1, O.NOME_SQUADRA AS NOME_SQUADRA2, G.NOME_PALESTRA "
                             + "FROM TESSERATO T, UFFICIALE_DI_CAMPO A, CODIREZIONE D, PARTITA P, PARTECIPAZIONE_CASA C, PARTECIPAZIONE_OSPITI O, PALESTRA G "
-                            + "WHERE 'DA47QR56PO'=T.TESSERAFIP "
-                            + "AND T.TESSERAFIP=A.TESSERAFIP "
-                            + "AND T.TESSERAFIP=D.TESSERAFIP "
+                            + "WHERE T.TESSERAFIP=A.TESSERAFIP "
+                            + "AND A.TESSERAFIP=D.TESSERAFIP "
                             + "AND D.CODICEPALESTRA=P.CODICEPALESTRA "
                             + "AND D.DATA_ORA=P.DATA_ORA "
                             + "AND C.CODICEPALESTRA=P.CODICEPALESTRA "
@@ -410,7 +407,6 @@ public class FeaturesPartita{
                             + "AND O.DATA_ORA=P.DATA_ORA "
                             + "AND G.CODICEPALESTRA=P.CODICEPALESTRA";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            //statement.setString(1, tesseraFIP);
             ResultSet result = statement.executeQuery(query);
 
             final ObservableList<Direzione> data = FXCollections.observableArrayList();

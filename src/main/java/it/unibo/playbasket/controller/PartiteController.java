@@ -387,7 +387,7 @@ public class PartiteController implements Initializable{
         this.performance.setItems(this.featuresPartita.viewPerformance());
     }
 
-    public void viewDirezione() {
+    private void viewDirezione() {
         this.direzione.getColumns().clear();
         TableColumn<Direzione, String> nomeColum = new TableColumn<>("Nome");
         nomeColum.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -403,10 +403,10 @@ public class PartiteController implements Initializable{
         rimborso.setCellValueFactory(new PropertyValueFactory<>("rimborso"));
         this.direzione.getColumns().addAll(Arrays.asList(nomeColum, cognomeColum, nomaSquadra1, nomeSquadra2,
                 dataOraColumn, rimborso));
-        this.direzione.setItems(this.featuresPartita.viewDirezione(tesseraFIPDirezione.getText()));
+        this.direzione.setItems(this.featuresPartita.viewDirezione());
     }
 
-    public void viewCoDirezione() {
+    private void viewCoDirezione() {
         this.codirezione.getColumns().clear();
         TableColumn<Direzione, String> nomeColum = new TableColumn<>("Nome");
         nomeColum.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -422,13 +422,15 @@ public class PartiteController implements Initializable{
         rimborso.setCellValueFactory(new PropertyValueFactory<>("rimborso"));
         this.codirezione.getColumns().addAll(Arrays.asList(nomeColum, cognomeColum, nomaSquadra1, nomeSquadra2,
                 dataOraColumn, rimborso));
-        this.codirezione.setItems(this.featuresPartita.viewCoDirezione(tesseraFIPDirezione.getText()));
+        this.codirezione.setItems(this.featuresPartita.viewCoDirezione());
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.viewPartite();
         this.viewPerformance();
+        this.viewDirezione();
+        this.viewCoDirezione();
     }
 
     

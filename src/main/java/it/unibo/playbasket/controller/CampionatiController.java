@@ -48,7 +48,8 @@ public class CampionatiController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        viewCampionati();
+        this.viewCampionati();
+        this.viewGirone();
     }
 
     @FXML
@@ -172,7 +173,7 @@ public class CampionatiController implements Initializable{
     }
 
     @FXML
-    public void viewGirone() {
+    private void viewGirone() {
         this.gironeView.getColumns().clear();
         TableColumn<Girone, String> nomeGirone = new TableColumn<>("Nome Girone");
         nomeGirone.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -181,10 +182,11 @@ public class CampionatiController implements Initializable{
         TableColumn<Girone, String> provincia = new TableColumn<>("Provincia");
         provincia.setCellValueFactory(new PropertyValueFactory<>("provincia"));
         this.gironeView.getColumns().addAll(Arrays.asList(nomeGirone, nomeCampionato, provincia));
-        this.gironeView.setItems(this.featuresCampionato.viewGirone(idVisualizza.getText(), Integer.parseInt(annoVisualizza.getText())));
+        this.gironeView.setItems(this.featuresCampionato.viewGirone());
 
     }
 
+    @FXML
     private void viewCampionati() {
         this.campionatiView.getColumns().clear();
         TableColumn<Campionato, String> nomeCampionato = new TableColumn<>("Nome Campionato");

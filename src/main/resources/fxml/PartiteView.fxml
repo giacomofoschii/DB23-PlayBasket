@@ -152,9 +152,7 @@
                                  </font>
                               </Button>
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" onAction="#viewDirezione" prefWidth="200.0" text="Visualizza direzione" />
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" onAction="#viewCoDirezione" prefWidth="200.0" text="Visualizza co-direzione" />
                               <Separator focusTraversable="false" prefHeight="182.0" prefWidth="200.0" visible="false" />
                               <Button mnemonicParsing="false" onAction="#goManagement" prefWidth="200.0" text="Torna alla gestone" />
                            </children>
