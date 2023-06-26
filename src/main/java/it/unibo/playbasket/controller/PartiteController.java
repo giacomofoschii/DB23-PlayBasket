@@ -407,7 +407,7 @@ public class PartiteController implements Initializable{
     }
 
     public void viewCoDirezione() {
-        this.direzione.getColumns().clear();
+        this.codirezione.getColumns().clear();
         TableColumn<Direzione, String> nomeColum = new TableColumn<>("Nome");
         nomeColum.setCellValueFactory(new PropertyValueFactory<>("nome"));
         TableColumn<Direzione, String> cognomeColum = new TableColumn<>("Cognome");
@@ -420,7 +420,7 @@ public class PartiteController implements Initializable{
         dataOraColumn.setCellValueFactory(new PropertyValueFactory<>("dataOra"));
         TableColumn<Direzione, String> rimborso = new TableColumn<>("Rimborso");
         rimborso.setCellValueFactory(new PropertyValueFactory<>("rimborso"));
-        this.direzione.getColumns().addAll(Arrays.asList(nomeColum, cognomeColum, nomaSquadra1, nomeSquadra2,
+        this.codirezione.getColumns().addAll(Arrays.asList(nomeColum, cognomeColum, nomaSquadra1, nomeSquadra2,
                 dataOraColumn, rimborso));
         this.codirezione.setItems(this.featuresPartita.viewCoDirezione(tesseraFIPDirezione.getText()));
     }
