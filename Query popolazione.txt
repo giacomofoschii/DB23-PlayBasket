@@ -342,55 +342,77 @@ UPDATE UFFICIALE_DI_CAMPO
 SET stipendio_totale=240
 WHERE tesserafip='DA47QR56PO';
 
-UPDATE Squadra SET punti_segnati = punti_segnati + ( SELECT SUM(punti_fatti) FROM partecipazione_casa WHERE Squadra.idcampionato = partecipazione_casa.idcampionato AND Squadra.anno_campionato = partecipazione_casa.anno_campionato AND Squadra.nome_squadra = partecipazione_casa.nome_squadra AND Squadra.nome_girone = partecipazione_casa.nome_girone ) WHERE (idcampionato, anno_campionato, nome_squadra, nome_girone) IN ( SELECT idcampionato, anno_campionato, nome_squadra, nome_girone FROM partecipazione_casa );
+UPDATE Squadra SET punti_segnati = punti_segnati + ( SELECT SUM(punti_fatti) 
+FROM partecipazione_casa WHERE Squadra.idcampionato = partecipazione_casa.idcampionato 
+AND Squadra.anno_campionato = partecipazione_casa.anno_campionato AND Squadra.nome_squadra = partecipazione_casa.nome_squadra
+AND Squadra.nome_girone = partecipazione_casa.nome_girone ) WHERE (idcampionato, anno_campionato, nome_squadra, nome_girone) 
+IN ( SELECT idcampionato, anno_campionato, nome_squadra, nome_girone FROM partecipazione_casa );
 
 UPDATE Squadra
-SET punti_segnati = punti_segnati + (
-  SELECT SUM(punti_fatti)
-  FROM partecipazione_ospiti
-  WHERE Squadra.idcampionato = partecipazione_ospiti.idcampionato
-    AND Squadra.anno_campionato = partecipazione_ospiti.anno_campionato
-    AND Squadra.nome_squadra = partecipazione_ospiti.nome_squadra
-    AND Squadra.nome_girone = partecipazione_ospiti.nome_girone
-)
-WHERE (idcampionato, anno_campionato, nome_squadra, nome_girone) IN (
-  SELECT idcampionato, anno_campionato, nome_squadra, nome_girone
-  FROM partecipazione_ospiti
-);
+SET punti_segnati = punti_segnati + 
+(SELECT SUM(punti_fatti) FROM partecipazione_ospiti
+WHERE Squadra.idcampionato = partecipazione_ospiti.idcampionato AND Squadra.anno_campionato = partecipazione_ospiti.anno_campionato
+AND Squadra.nome_squadra = partecipazione_ospiti.nome_squadra AND Squadra.nome_girone = partecipazione_ospiti.nome_girone)
+WHERE (idcampionato, anno_campionato, nome_squadra, nome_girone) 
+IN ( SELECT idcampionato, anno_campionato, nome_squadra, nome_girone FROM partecipazione_ospiti );
 
 UPDATE Squadra
-SET PUNTI_SUBITI = PUNTI_SUBITI + (
-  SELECT SUM(partecipazione_casa.punti_fatti)
-  FROM partecipazione_ospiti, partecipazione_casa
-  WHERE Squadra.idcampionato = partecipazione_ospiti.idcampionato
-    AND Squadra.anno_campionato = partecipazione_ospiti.anno_campionato
-    AND Squadra.nome_squadra = partecipazione_ospiti.nome_squadra
-    AND Squadra.nome_girone = partecipazione_ospiti.nome_girone
-    AND partecipazione_casa.codicepalestra = partecipazione_ospiti.codicepalestra
-    AND partecipazione_casa.data_ora = partecipazione_ospiti.data_ora
-)
-WHERE (idcampionato, anno_campionato, nome_squadra, nome_girone) IN (
-  SELECT idcampionato, anno_campionato, nome_squadra, nome_girone
-  FROM partecipazione_ospiti
-);
+SET PUNTI_SUBITI = PUNTI_SUBITI + 
+(SELECT SUM(partecipazione_casa.punti_fatti) FROM partecipazione_ospiti, partecipazione_casa
+WHERE Squadra.idcampionato = partecipazione_ospiti.idcampionato AND Squadra.anno_campionato = partecipazione_ospiti.anno_campionato
+AND Squadra.nome_squadra = partecipazione_ospiti.nome_squadra AND Squadra.nome_girone = partecipazione_ospiti.nome_girone
+AND partecipazione_casa.codicepalestra = partecipazione_ospiti.codicepalestra AND partecipazione_casa.data_ora = partecipazione_ospiti.data_ora)
+WHERE (idcampionato, anno_campionato, nome_squadra, nome_girone) 
+IN (SELECT idcampionato, anno_campionato, nome_squadra, nome_girone FROM partecipazione_ospiti);
 
 UPDATE Squadra
-SET PUNTI_SUBITI = PUNTI_SUBITI + (
-  SELECT SUM(partecipazione_ospiti.punti_fatti)
-  FROM partecipazione_ospiti, partecipazione_casa
-  WHERE Squadra.idcampionato = partecipazione_casa.idcampionato
-    AND Squadra.anno_campionato = partecipazione_casa.anno_campionato
-    AND Squadra.nome_squadra = partecipazione_casa.nome_squadra
-    AND Squadra.nome_girone = partecipazione_casa.nome_girone
-    AND partecipazione_casa.codicepalestra = partecipazione_casa.codicepalestra
-    AND partecipazione_ospiti.data_ora = partecipazione_casa.data_ora
-)
-WHERE (idcampionato, anno_campionato, nome_squadra, nome_girone) IN (
-  SELECT idcampionato, anno_campionato, nome_squadra, nome_girone
-  FROM partecipazione_casa
-);
+SET PUNTI_SUBITI = PUNTI_SUBITI + 
+(SELECT SUM(partecipazione_ospiti.punti_fatti) FROM partecipazione_ospiti, partecipazione_casa
+WHERE Squadra.idcampionato = partecipazione_casa.idcampionato AND Squadra.anno_campionato = partecipazione_casa.anno_campionato
+AND Squadra.nome_squadra = partecipazione_casa.nome_squadra AND Squadra.nome_girone = partecipazione_casa.nome_girone
+AND partecipazione_casa.codicepalestra = partecipazione_casa.codicepalestra AND partecipazione_ospiti.data_ora = partecipazione_casa.data_ora)
+WHERE (idcampionato, anno_campionato, nome_squadra, nome_girone) 
+IN (SELECT idcampionato, anno_campionato, nome_squadra, nome_girone FROM partecipazione_casa);
 
+UPDATE Squadra AS S JOIN
+(SELECT PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra, COUNT(*) AS numero_sconfitte
+FROM partecipazione_ospiti AS PO INNER JOIN partecipazione_casa AS PC
+ON PC.codicePalestra = PO.codicePalestra AND PC.data_ora = PO.data_ora WHERE PO.punti_fatti < PC.punti_fatti
+GROUP BY PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra)
+AS Vittorie ON S.idcampionato = Vittorie.idcampionato AND S.anno_campionato = Vittorie.anno_campionato
+AND S.nome_girone = Vittorie.nome_girone AND S.nome_squadra = Vittorie.nome_squadra
+SET S.numero_sconfitte = S.numero_sconfitte + Vittorie.numero_sconfitte
+WHERE S.IDCAMPIONATO='AFJA789G23' AND S.NOME_SQUADRA='Orasi Ravenna' AND S.NOME_GIRONE='A' AND S.ANNO_CAMPIONATO=2023;
 
+UPDATE Squadra AS S JOIN
+(SELECT PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra, COUNT(*) AS numero_sconfitte
+FROM partecipazione_ospiti AS PO INNER JOIN partecipazione_casa AS PC
+ON PC.codicePalestra = PO.codicePalestra AND PC.data_ora = PO.data_ora WHERE PO.punti_fatti < PC.punti_fatti
+GROUP BY PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra)
+AS Vittorie ON S.idcampionato = Vittorie.idcampionato AND S.anno_campionato = Vittorie.anno_campionato
+AND S.nome_girone = Vittorie.nome_girone AND S.nome_squadra = Vittorie.nome_squadra
+SET S.numero_sconfitte = S.numero_sconfitte + Vittorie.numero_sconfitte
+WHERE S.IDCAMPIONATO='AFJA789G23' AND S.NOME_SQUADRA='VirtusBologna A' AND S.NOME_GIRONE='A' AND S.ANNO_CAMPIONATO=2023;
+
+UPDATE Squadra AS S JOIN
+(SELECT PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra, COUNT(*) AS numero_sconfitte
+FROM partecipazione_ospiti AS PO INNER JOIN partecipazione_casa AS PC
+ON PC.codicePalestra = PO.codicePalestra AND PC.data_ora = PO.data_ora WHERE PO.punti_fatti < PC.punti_fatti
+GROUP BY PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra) AS Vittorie
+ON S.idcampionato = Vittorie.idcampionato AND S.anno_campionato = Vittorie.anno_campionato
+AND S.nome_girone = Vittorie.nome_girone AND S.nome_squadra = Vittorie.nome_squadra
+SET S.numero_sconfitte = S.numero_sconfitte + Vittorie.numero_sconfitte
+WHERE S.IDCAMPIONATO='AFJA789G23' AND S.NOME_SQUADRA='VirtusBologna A' AND S.NOME_GIRONE='A' AND S.ANNO_CAMPIONATO=2023;
+
+UPDATE Squadra AS S JOIN
+(SELECT PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra, COUNT(*) AS numero_sconfitte
+FROM partecipazione_ospiti AS PO INNER JOIN partecipazione_casa AS PC
+ON PC.codicePalestra = PO.codicePalestra AND PC.data_ora = PO.data_ora WHERE PO.punti_fatti < PC.punti_fatti
+GROUP BY PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra) AS Vittorie
+ON S.idcampionato = Vittorie.idcampionato AND S.anno_campionato = Vittorie.anno_campionato
+AND S.nome_girone = Vittorie.nome_girone AND S.nome_squadra = Vittorie.nome_squadra
+SET S.numero_sconfitte = S.numero_sconfitte + Vittorie.numero_sconfitte
+WHERE S.IDCAMPIONATO='AFJA789G23' AND S.NOME_SQUADRA='Orasi Ravenna' AND S.NOME_GIRONE='A' AND S.ANNO_CAMPIONATO=2023;
 
 UPDATE `db23_playbasket`.`campionato` SET `CodiceMeccanografico` = 'ABC1234567' WHERE (`IDCampionato` = 'AFJA789G23') and (`Anno_campionato` = '2021');
 UPDATE `db23_playbasket`.`campionato` SET `CodiceMeccanografico` = 'DEF4567890' WHERE (`IDCampionato` = 'C1G23J9K8L') and (`Anno_campionato` = '2022');

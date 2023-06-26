@@ -213,25 +213,15 @@ public class FeaturesPartita{
     private void updateVittorieTrasferta(String idCampionato, int annoCampionato,
             String nomeGirone, String nomeOspiti) {
         this.setUpdateZero();
-        final String query = "UPDATE Squadra AS S "
-                            + "JOIN ( "
-                            + "SELECT PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra, COUNT(*) AS numero_vittorie "
-                            + "FROM partecipazione_ospiti AS PO "
-                            + "INNER JOIN partecipazione_casa AS PC "
-                            + "    ON PC.codicePalestra = PO.codicePalestra "
-                            + "    AND PC.data_ora = PO.data_ora "
-                            + "WHERE PO.punti_fatti > PC.punti_fatti "
-                            + "GROUP BY PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra "
-                            + ") AS Vittorie "
-                            + "ON S.idcampionato = Vittorie.idcampionato "
-                            + "AND S.anno_campionato = Vittorie.anno_campionato "
-                            + "AND S.nome_girone = Vittorie.nome_girone "
-                            + "AND S.nome_squadra = Vittorie.nome_squadra "
+        final String query = "UPDATE Squadra AS S JOIN "
+                            + "(SELECT PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra, COUNT(*) AS numero_vittorie "
+                            + "FROM partecipazione_ospiti AS PO INNER JOIN partecipazione_casa AS PC "
+                            + "ON PC.codicePalestra = PO.codicePalestra AND PC.data_ora = PO.data_ora WHERE PO.punti_fatti > PC.punti_fatti "
+                            + "GROUP BY PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra) "
+                            + "AS Vittorie ON S.idcampionato = Vittorie.idcampionato AND S.anno_campionato = Vittorie.anno_campionato " 
+                            + "AND S.nome_girone = Vittorie.nome_girone AND S.nome_squadra = Vittorie.nome_squadra "
                             + "SET S.numero_vittorie = S.numero_vittorie + Vittorie.numero_vittorie "
-                            + "WHERE S.IDCAMPIONATO=? "
-                            + "AND S.NOME_SQUADRA=? "
-                            + "AND S.NOME_GIRONE=? "
-                            + "AND S.ANNO_CAMPIONATO=?";
+                            + "WHERE S.IDCAMPIONATO=? AND S.NOME_SQUADRA=? AND S.NOME_GIRONE=? AND S.ANNO_CAMPIONATO=?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, idCampionato);
             statement.setString(2, nomeOspiti);
@@ -249,25 +239,15 @@ public class FeaturesPartita{
     private void updateNumeroVittorieOspiti(String idCampionato, int annoCampionato,
             String nomeGirone, String nomeOspiti) {
         this.setUpdateZero();
-        final String query = "UPDATE Squadra AS S "
-                            + "JOIN ( "
-                            + "SELECT PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra, COUNT(*) AS numero_vittorie "
-                            + "FROM partecipazione_ospiti AS PO "
-                            + "INNER JOIN partecipazione_casa AS PC "
-                            + "    ON PC.codicePalestra = PO.codicePalestra "
-                            + "    AND PC.data_ora = PO.data_ora "
-                            + "WHERE PO.punti_fatti > PC.punti_fatti "
-                            + "GROUP BY PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra "
-                            + ") AS Vittorie "
-                            + "ON S.idcampionato = Vittorie.idcampionato "
-                            + "AND S.anno_campionato = Vittorie.anno_campionato "
-                            + "AND S.nome_girone = Vittorie.nome_girone "
-                            + "AND S.nome_squadra = Vittorie.nome_squadra "
+        final String query = "UPDATE Squadra AS S JOIN "
+                            + "(SELECT PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra, COUNT(*) AS numero_vittorie "
+                            + "FROM partecipazione_ospiti AS PO INNER JOIN partecipazione_casa AS PC "
+                            + "ON PC.codicePalestra = PO.codicePalestra AND PC.data_ora = PO.data_ora WHERE PO.punti_fatti > PC.punti_fatti "
+                            + "GROUP BY PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra) "
+                            + "AS Vittorie ON S.idcampionato = Vittorie.idcampionato AND S.anno_campionato = Vittorie.anno_campionato "
+                            + "AND S.nome_girone = Vittorie.nome_girone AND S.nome_squadra = Vittorie.nome_squadra "
                             + "SET S.num_vittorie_ospiti = S.num_vittorie_ospiti + Vittorie.numero_vittorie "
-                            + "WHERE S.IDCAMPIONATO=? "
-                            + "AND S.NOME_SQUADRA=? "
-                            + "AND S.NOME_GIRONE=? "
-                            + "AND S.ANNO_CAMPIONATO=?";
+                            + "WHERE S.IDCAMPIONATO=? AND S.NOME_SQUADRA=? AND S.NOME_GIRONE=? AND S.ANNO_CAMPIONATO=?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, idCampionato);
             statement.setString(2, nomeOspiti);
@@ -285,24 +265,15 @@ public class FeaturesPartita{
     private void updateVittorieCasa(String idCampionato, int annoCampionato,
             String nomeGirone, String nomeOspiti) {
         this.setUpdateZero();
-        final String query = "UPDATE Squadra AS S "
-                + "JOIN ( "
-                + "SELECT PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra, COUNT(*) AS numero_sconfitte "
-                + "FROM partecipazione_ospiti AS PO "
-                + "INNER JOIN partecipazione_casa AS PC "
-                + "ON PC.codicePalestra = PO.codicePalestra "
-                + "AND PC.data_ora = PO.data_ora "
-                + "WHERE PO.punti_fatti < PC.punti_fatti "
-                + "GROUP BY PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra) AS Vittorie "
-                + "ON S.idcampionato = Vittorie.idcampionato "
-                + "AND S.anno_campionato = Vittorie.anno_campionato "
-                + "AND S.nome_girone = Vittorie.nome_girone "
-                + "AND S.nome_squadra = Vittorie.nome_squadra "
-                + "SET S.numero_sconfitte = S.numero_sconfitte + Vittorie.numero_sconfitte "
-                + "WHERE S.IDCAMPIONATO=? "
-                + "AND S.NOME_SQUADRA=? "
-                + "AND S.NOME_GIRONE=? "
-                + "AND S.ANNO_CAMPIONATO=?";
+        final String query = "UPDATE Squadra AS S JOIN "
+                            + "(SELECT PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra, COUNT(*) AS numero_sconfitte "
+                            + "FROM partecipazione_ospiti AS PO INNER JOIN partecipazione_casa AS PC "
+                            + "ON PC.codicePalestra = PO.codicePalestra AND PC.data_ora = PO.data_ora WHERE PO.punti_fatti < PC.punti_fatti "
+                            + "GROUP BY PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra) AS Vittorie "
+                            + "ON S.idcampionato = Vittorie.idcampionato AND S.anno_campionato = Vittorie.anno_campionato "
+                            + "AND S.nome_girone = Vittorie.nome_girone AND S.nome_squadra = Vittorie.nome_squadra "
+                            + "SET S.numero_sconfitte = S.numero_sconfitte + Vittorie.numero_sconfitte "
+                            + "WHERE S.IDCAMPIONATO=? AND S.NOME_SQUADRA=? AND S.NOME_GIRONE=? AND S.ANNO_CAMPIONATO=?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, idCampionato);
             statement.setString(2, nomeOspiti);
@@ -320,25 +291,15 @@ public class FeaturesPartita{
     private void updateSconfitteTrasferta(String idCampionato, int annoCampionato,
             String nomeGirone, String nomeCasa) {
         this.setUpdateZero();
-        final String query = "UPDATE Squadra AS S "
-                            + "JOIN ( "
-                            + "SELECT PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra, COUNT(*) AS numero_sconfitte "
-                            + "FROM partecipazione_ospiti AS PO "
-                            + "INNER JOIN partecipazione_casa AS PC "
-                            + "    ON PC.codicePalestra = PO.codicePalestra "
-                            + "    AND PC.data_ora = PO.data_ora "
-                            + "WHERE PO.punti_fatti < PC.punti_fatti "
-                            + "GROUP BY PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra "
-                            + ") AS Vittorie "
-                            + "ON S.idcampionato = Vittorie.idcampionato "
-                            + "AND S.anno_campionato = Vittorie.anno_campionato "
-                            + "AND S.nome_girone = Vittorie.nome_girone "
-                            + "AND S.nome_squadra = Vittorie.nome_squadra "
-                            + "SET S.numero_sconfitte = S.numero_sconfitte + Vittorie.numero_sconfitte 2 "
-                            + "WHERE S.IDCAMPIONATO=? "
-                            + "AND S.NOME_SQUADRA=? "
-                            + "AND S.NOME_GIRONE=? "
-                            + "AND S.ANNO_CAMPIONATO=?";
+        final String query = "UPDATE Squadra AS S JOIN "
+                            + "(SELECT PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra, COUNT(*) AS numero_sconfitte "
+                            + "FROM partecipazione_ospiti AS PO INNER JOIN partecipazione_casa AS PC "
+                            + "ON PC.codicePalestra = PO.codicePalestra AND PC.data_ora = PO.data_ora WHERE PO.punti_fatti < PC.punti_fatti "
+                            + "GROUP BY PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra) "
+                            + "AS Vittorie ON S.idcampionato = Vittorie.idcampionato AND S.anno_campionato = Vittorie.anno_campionato "
+                            + "AND S.nome_girone = Vittorie.nome_girone AND S.nome_squadra = Vittorie.nome_squadra "
+                            + "SET S.numero_sconfitte = S.numero_sconfitte + Vittorie.numero_sconfitte "
+                            + "WHERE S.IDCAMPIONATO=? AND S.NOME_SQUADRA=? AND S.NOME_GIRONE=? AND S.ANNO_CAMPIONATO=?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, idCampionato);
             statement.setString(2, nomeCasa);
@@ -356,25 +317,15 @@ public class FeaturesPartita{
     private void updateSconfitteCasa(String idCampionato, int annoCampionato,
             String nomeGirone, String nomeCasa) {
         this.setUpdateZero();
-        final String query = "UPDATE Squadra AS S "
-                            + "JOIN ( "
-                            + "SELECT PC.idcampionato, PC.anno_campionato, PC.nome_girone, PC.nome_squadra, COUNT(*) AS numero_sconfitte "
-                            + "FROM partecipazione_casa AS PC "
-                            + "INNER JOIN partecipazione_ospiti AS PO "
-                            + "    ON PC.codicePalestra = PO.codicePalestra "
-                            + "    AND PC.data_ora = PO.data_ora "
-                            + "WHERE PC.punti_fatti < PO.punti_fatti "
-                            + "GROUP BY PC.idcampionato, PC.anno_campionato, PC.nome_girone, PC.nome_squadra "
-                            + ") AS Vittorie "
-                            + "ON S.idcampionato = Vittorie.idcampionato "
-                            + "AND S.anno_campionato = Vittorie.anno_campionato "
-                            + "AND S.nome_girone = Vittorie.nome_girone "
-                            + "AND S.nome_squadra = Vittorie.nome_squadra "
+        final String query = "UPDATE Squadra AS S JOIN "
+                            + "(SELECT PC.idcampionato, PC.anno_campionato, PC.nome_girone, PC.nome_squadra, COUNT(*) AS numero_sconfitte "
+                            + "FROM partecipazione_casa AS PC INNER JOIN partecipazione_ospiti AS PO "
+                            + "ON PC.codicePalestra = PO.codicePalestra AND PC.data_ora = PO.data_ora WHERE PC.punti_fatti < PO.punti_fatti "
+                            + "GROUP BY PC.idcampionato, PC.anno_campionato, PC.nome_girone, PC.nome_squadra) "
+                            + "AS Vittorie ON S.idcampionato = Vittorie.idcampionato AND S.anno_campionato = Vittorie.anno_campionato "
+                            + "AND S.nome_girone = Vittorie.nome_girone AND S.nome_squadra = Vittorie.nome_squadra "
                             + "SET S.numero_sconfitte = S.numero_sconfitte + Vittorie.numero_sconfitte "
-                            + "WHERE S.IDCAMPIONATO=? "
-                            + "AND S.NOME_SQUADRA=? "
-                            + "AND S.NOME_GIRONE=? "
-                            + "AND S.ANNO_CAMPIONATO=?";
+                            + "WHERE S.IDCAMPIONATO=? AND S.NOME_SQUADRA=? AND S.NOME_GIRONE=? AND S.ANNO_CAMPIONATO=?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, idCampionato);
             statement.setString(2, nomeCasa);
