@@ -128,19 +128,19 @@
                               <TextField fx:id="tesseraFIPDirezione" prefHeight="25.0" prefWidth="190.0" promptText="Tessera FIP*" />
                               <TextField fx:id="rimborso" prefHeight="25.0" prefWidth="190.0" promptText="Rimborso*" />
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button fx:id="addDirezione" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Aggiungi come direzione">
+                              <Button mnemonicParsing="false" onAction="#addDirezione" prefHeight="25.0" prefWidth="200.0" text="Aggiungi come direzione">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
                               </Button>
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button fx:id="addCoDirezione" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Aggiungi come co-direzione">
+                              <Button mnemonicParsing="false" onAction="#addCoDirezione" prefHeight="25.0" prefWidth="200.0" text="Aggiungi come co-direzione">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
                               </Button>
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button fx:id="removeDirezione" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Rimuovi direzione">
+                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Rimuovi direzione">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
