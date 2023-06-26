@@ -144,11 +144,12 @@ public class FeaturesCampionato{
         }
     }
 
-    public ObservableList<Girone> viewGirone(String id, int anno) {
-        final String query = "SELECT G.nome_girone, C.nome_campionato, G.provincia FROM GIRONE G, Campionato C WHERE G.idcampionato=? AND G.anno_campionato=? and G.idcampionato=C.idcampionato and C.anno_campionato=G.anno_campionato";
+    public ObservableList<Girone> viewGirone(String idCampionato, int annoCampionato) {
+        final String query = "SELECT G.nome_girone, C.nome_campionato, G.provincia FROM GIRONE G, Campionato C WHERE G.idcampionato=? "
+                            + "AND G.anno_campionato=? and G.idcampionato=C.idcampionato and C.anno_campionato=G.anno_campionato";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setString(1, id);
-            stmt.setInt(2, anno);
+            stmt.setString(1, idCampionato);
+            stmt.setInt(2, annoCampionato);
             ResultSet rs = stmt.executeQuery(query);
 
             final ObservableList<Girone> girone = FXCollections.observableArrayList();
