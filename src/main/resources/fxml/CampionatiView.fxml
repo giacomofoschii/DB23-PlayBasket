@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TabPane prefHeight="600.0" prefWidth="800.0">
          <tabs>
@@ -29,29 +29,39 @@
                                  </font>
                               </Text>
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="ID campionato*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Anno*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Nome*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Provincia" />
+                              <TextField fx:id="idGirone" prefHeight="25.0" prefWidth="190.0" promptText="ID campionato*" />
+                              <TextField fx:id="annoGirone" prefHeight="25.0" prefWidth="190.0" promptText="Anno*" />
+                              <TextField fx:id="nomeGirone" prefHeight="25.0" prefWidth="190.0" promptText="Nome*" />
+                              <TextField fx:id="provincia" prefHeight="25.0" prefWidth="190.0" promptText="Provincia" />
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Aggiungi girone">
+                              <Button mnemonicParsing="false" onAction="#addGirone" prefHeight="25.0" prefWidth="200.0" text="Aggiungi girone">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
                               </Button>
-                              <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Rimuovi girone">
+                              <Separator focusTraversable="false" prefHeight="5.0" prefWidth="200.0" visible="false" />
+                              <Button mnemonicParsing="false" onAction="#removeGirone" prefHeight="25.0" prefWidth="200.0" text="Rimuovi girone">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
                               </Button>
-                              <Separator focusTraversable="false" prefHeight="323.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" onAction="#goManagement" text="Torna alla gestone" />
+                              <Separator focusTraversable="false" prefHeight="26.0" prefWidth="200.0" visible="false" />
+                              <TextField fx:id="idVisualizza" promptText="ID campionato*" />
+                              <Separator focusTraversable="false" prefHeight="5.0" prefWidth="200.0" visible="false" />
+                              <TextField fx:id="annoVisualizza" promptText="Anno*" />
+                              <Separator focusTraversable="false" prefHeight="5.0" prefWidth="200.0" visible="false" />
+                              <Button mnemonicParsing="false" onAction="#viewGirone" prefHeight="25.0" prefWidth="200.0" text="Visualizza gironi">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Button>
+                              <Separator focusTraversable="false" prefHeight="185.0" prefWidth="200.0" visible="false" />
+                              <Button mnemonicParsing="false" onAction="#goManagement" prefHeight="26.0" prefWidth="198.0" text="Torna alla gestone" />
                            </children>
                         </FlowPane>
                      </left>
                      <center>
-                        <TableView fx:id="plantView" prefHeight="612.0" prefWidth="645.0" />
+                        <TableView fx:id="gironeView" prefHeight="612.0" prefWidth="645.0" />
                      </center>
                   </BorderPane>
                </content>
@@ -69,30 +79,45 @@
                                  </font>
                               </Text>
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="ID campionato*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Anno*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Nome*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Regione" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Codice meccanografico" />
+                              <TextField fx:id="idCampionato" prefHeight="25.0" prefWidth="190.0" promptText="ID campionato*" />
+                              <TextField fx:id="annoCampionato" prefHeight="25.0" prefWidth="190.0" promptText="Anno*" />
+                              <TextField fx:id="nomeCampionato" prefHeight="25.0" prefWidth="190.0" promptText="Nome*" />
+                              <TextField fx:id="regione" prefHeight="25.0" prefWidth="190.0" promptText="Regione" />
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Aggiungi campionato">
+                              <Button mnemonicParsing="false" onAction="#addCampionato" prefHeight="25.0" prefWidth="200.0" text="Aggiungi campionato">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
                               </Button>
-                              <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Rimuovi campionato">
+                              <Separator focusTraversable="false" prefHeight="5.0" prefWidth="200.0" visible="false" />
+                              <Button mnemonicParsing="false" onAction="#removeCampionato" prefHeight="25.0" prefWidth="200.0" text="Rimuovi campionato">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
                               </Button>
-                              <Separator focusTraversable="false" prefHeight="296.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" onAction="#goManagement" text="Torna alla gestone" />
+                              <Separator focusTraversable="false" prefHeight="22.0" prefWidth="200.0" visible="false" />
+                              <TextField fx:id="codiceMeccanografico" prefHeight="25.0" prefWidth="190.0" promptText="Codice meccanografico*" />
+                              <TextField fx:id="idVincitore" prefHeight="25.0" prefWidth="190.0" promptText="ID campionato*" />
+                              <TextField fx:id="annoVincitore" prefHeight="25.0" prefWidth="190.0" promptText="Anno*" />
+                              <Separator focusTraversable="false" prefHeight="8.0" prefWidth="200.0" visible="false" />
+                              <Button mnemonicParsing="false" onAction="#addWinner" prefHeight="25.0" prefWidth="200.0" text="Aggiungi societa vincitrice">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Button>
+                              <Separator focusTraversable="false" prefHeight="6.0" prefWidth="200.0" visible="false" />
+                              <Button mnemonicParsing="false" onAction="#removeWinner" prefHeight="25.0" prefWidth="200.0" text="Rimuovi societa vincitrice">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Button>
+                              <Separator focusTraversable="false" prefHeight="140.0" prefWidth="200.0" visible="false" />
+                              <Button mnemonicParsing="false" onAction="#goManagement" prefHeight="26.0" prefWidth="200.0" text="Torna alla gestone" />
                            </children>
                         </FlowPane>
                      </left>
                      <center>
-                        <TableView fx:id="supplierView" />
+                        <TableView fx:id="campionatiView" />
                      </center>
                   </BorderPane>
                </content>

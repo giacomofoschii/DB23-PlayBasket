@@ -214,21 +214,9 @@
                               <Button mnemonicParsing="false" onAction="#addGiocatore" prefHeight="25.0" prefWidth="200.0" text="Aggiungi giocatore" />
                               <Separator focusTraversable="false" prefHeight="4.0" prefWidth="200.0" visible="false" />
                               <Button mnemonicParsing="false" onAction="#viewGiocatori" prefHeight="25.0" prefWidth="200.0" text="Visualizza giocatori squadra" />
-                              <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rimozione giocatore" wrappingWidth="193.68119748737445">
-                                 <font>
-                                    <Font name="System Bold Italic" size="12.0" />
-                                 </font>
-                              </Text>
-                              <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <TextField fx:id="tesseraRimozioneGiocatore" prefHeight="25.0" prefWidth="190.0" promptText="Tessera FIP*" />
-                              <TextField fx:id="idRimozioneGiocatore" prefHeight="25.0" prefWidth="190.0" promptText="ID Campionato*" />
-                              <TextField fx:id="annoRimozioneGiocatore" prefHeight="25.0" prefWidth="190.0" promptText="Anno campionato*" />
-                              <TextField fx:id="gironeRimozioneGiocatore" prefHeight="25.0" prefWidth="190.0" promptText="Nome girone*" />
-                              <TextField fx:id="squadraRimozioneGiocatore" prefHeight="25.0" prefWidth="190.0" promptText="Nome squadra*" />
-                              <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
+                              <Separator focusTraversable="false" prefHeight="5.0" prefWidth="200.0" visible="false" />
                               <Button mnemonicParsing="false" onAction="#removeGiocatore" prefHeight="25.0" prefWidth="200.0" text="Rimuovi giocatore" />
-                              <Separator focusTraversable="false" prefHeight="13.0" prefWidth="200.0" visible="false" />
+                              <Separator focusTraversable="false" prefHeight="165.0" prefWidth="200.0" visible="false" />
                               <Button mnemonicParsing="false" onAction="#goManagement" prefHeight="26.0" prefWidth="198.0" text="Torna alla gestone" />
                            </children>
                         </FlowPane>

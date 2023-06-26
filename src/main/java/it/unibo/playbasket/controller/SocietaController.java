@@ -8,11 +8,11 @@ import java.util.ResourceBundle;
 
 import it.unibo.playbasket.db.features.FeaturesSocieta;
 import it.unibo.playbasket.db.views.MembroGiocatore;
+import it.unibo.playbasket.db.views.MembroStaff;
 import it.unibo.playbasket.db.views.Proprietario;
 import it.unibo.playbasket.db.views.Schema;
 import it.unibo.playbasket.db.views.Societa;
 import it.unibo.playbasket.db.views.Squadra;
-import it.unibo.playbasket.db.views.Staff;
 import it.unibo.playbasket.view.impl.FxView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,7 +22,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.text.Text;
 
 public class SocietaController implements Initializable{
 
@@ -74,7 +73,7 @@ public class SocietaController implements Initializable{
     @FXML private TableView<MembroGiocatore> giocatoreView;
     @FXML private TableView<Schema> schemaView;
     @FXML private TableView<Proprietario> proprietarioView;
-    @FXML private TableView<Staff> staffView;
+    @FXML private TableView<MembroStaff> staffView;
     @FXML private TableView<Societa> societaView;
 
     private String[] ruoliStaff = {"medico", "allenatore", "preparatore fisico", "scorer",
@@ -301,9 +300,9 @@ public class SocietaController implements Initializable{
     @FXML
     public void removeGiocatore() {
         try {
-            this.featuresSocieta.removeGiocatore(tesseraRimozioneGiocatore.getText(), idRimozioneGiocatore.getText(),
-                                                    Integer.parseInt(annoRimozioneGiocatore.getText()),
-                                                    gironeRimozioneGiocatore.getText(), squadraRimozioneGiocatore.getText());
+            this.featuresSocieta.removeGiocatore(tesseraGiocatore.getText(), idGiocatore.getText(),
+                                                    Integer.parseInt(annoGiocatore.getText()),
+                                                    gironeGiocatore.getText(), squadraGiocatore.getText());
             this.viewGiocatori();
             this.idGiocatore.clear();
             this.squadraGiocatore.clear();
@@ -322,9 +321,8 @@ public class SocietaController implements Initializable{
 
     @FXML
     public void addStaff() {
-        final String ruolo = assignRole();
         try {
-            this.featuresSocieta.addStaff(ruolo, tesseraStaff.getText(), Integer.parseInt(stipendioStaff.getText()),
+            this.featuresSocieta.addStaff(assignRole(membriStaff.getValue()), tesseraStaff.getText(), Integer.parseInt(stipendioStaff.getText()),
                                             Integer.parseInt(annoCampionatoStaff.getText()), idCampionatoStaff.getText(),
                                             gironeStaff.getText(), squadraStaff.getText());
             this.viewSquadre();
@@ -350,9 +348,8 @@ public class SocietaController implements Initializable{
 
     @FXML
     public void removeStaff() {
-        final String ruolo = assignRole();
         try {
-            this.featuresSocieta.removeStaff(ruolo, tesseraStaff.getText(), Integer.parseInt(annoCampionatoStaff.getText()),
+            this.featuresSocieta.removeStaff(assignRole(membriStaff.getValue()), tesseraStaff.getText(), Integer.parseInt(annoCampionatoStaff.getText()),
                                             idCampionatoStaff.getText(), gironeStaff.getText(), squadraStaff.getText());
             this.viewStaff();
             this.idCampionatoStaff.clear();
@@ -415,15 +412,28 @@ public class SocietaController implements Initializable{
         this.giocatoreView.setItems(this.featuresSocieta.viewGiocatori(squadraGiocatore.getText(), idGiocatore.getText(),
                                                                         Integer.parseInt(annoGiocatore.getText()),
                                                                         gironeGiocatore.getText()));
-        this.squadraGiocatore.clear();
-        this.idGiocatore.clear();
-        this.annoGiocatore.clear();
-        this.gironeGiocatore.clear();
     }
 
     @FXML
     public void viewStaff() {
-
+        this.staffView.getColumns().clear();
+        TableColumn<MembroStaff, String> nomeStaff = new TableColumn<>("Nome");
+        nomeStaff.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        TableColumn<MembroStaff, String> cognomeStaff = new TableColumn<>("Cognome");
+        cognomeStaff.setCellValueFactory(new PropertyValueFactory<>("cognome"));
+        TableColumn<MembroStaff, String> ruoloStaff = new TableColumn<>("Ruolo");
+        ruoloStaff.setCellValueFactory(new PropertyValueFactory<>("ruolo"));
+        TableColumn<MembroStaff, Integer> etaStaff = new TableColumn<>("Eta");
+        etaStaff.setCellValueFactory(new PropertyValueFactory<>("eta"));
+        TableColumn<MembroStaff, Integer> stipendioStaff = new TableColumn<>("Stipendio");
+        stipendioStaff.setCellValueFactory(new PropertyValueFactory<>("stipendio"));
+        TableColumn<MembroStaff, String> specializzazioneStaff = new TableColumn<>("Specializzazione");
+        specializzazioneStaff.setCellValueFactory(new PropertyValueFactory<>("specializzazione"));
+        TableColumn<MembroStaff, Integer> annoPatentinoStaff = new TableColumn<>("Anno Patentino");
+        annoPatentinoStaff.setCellValueFactory(new PropertyValueFactory<>("annoPatentino"));
+        this.staffView.getColumns().addAll(Arrays.asList(nomeStaff, cognomeStaff, ruoloStaff, etaStaff, stipendioStaff,
+                                                        specializzazioneStaff, annoPatentinoStaff));
+        this.setStaffRole();
     }
 
     private void viewSocieta() {
@@ -478,9 +488,9 @@ public class SocietaController implements Initializable{
         this.proprietarioView.setItems(this.featuresSocieta.viewProprietari());
     }
 
-    private String assignRole() {
+    private String assignRole(String valore) {
         String ruolo = null;
-        switch (membriStaff.getValue()) {
+        switch (valore.toString()) {
             case "medico":
                 ruolo = "membro_med";
                 break;
@@ -507,5 +517,13 @@ public class SocietaController implements Initializable{
                 break;
         }
         return ruolo;
+    }
+
+    private void setStaffRole() {
+        for (final String role : ruoliStaff) {
+            this.staffView.getItems().addAll(this.featuresSocieta.viewStaff(assignRole(role), squadraStaff.getText(), 
+                                                                idCampionatoStaff.getText(), Integer.parseInt(annoCampionatoStaff.getText()),
+                                                                gironeStaff.getText()));
+        }
     }
 }

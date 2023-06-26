@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
-import it.unibo.playbasket.db.views.Giocatore;
 import it.unibo.playbasket.db.views.MembroGiocatore;
+import it.unibo.playbasket.db.views.MembroStaff;
 import it.unibo.playbasket.db.views.Proprietario;
 import it.unibo.playbasket.db.views.Schema;
 import it.unibo.playbasket.db.views.Societa;
@@ -235,7 +235,7 @@ public class FeaturesSocieta{
                             int annoCampionato, String nomeGirone, String nomeSquadra) throws SQLException, SQLIntegrityConstraintViolationException {
         final String query = "INSERT INTO membro_giocatore (TESSERAFIP, STIPENDIO, CAPITANO, IDCAMPIONATO, "
                             + "ANNO_CAMPIONATO, NOME_GIRONE, NOME_SQUADRA) "
-                            + "VALUES (?, ?, ?, ?, ?, ?)";
+                            + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (final PreparedStatement stmt = this.connection.prepareStatement(query)) {
             stmt.setString(1, tesseraFIP);
             stmt.setInt(2, stipendio);
@@ -297,16 +297,15 @@ public class FeaturesSocieta{
 
     public void addStaff(String ruolo, String tesseraFip, int stipendio, int annoCampionato, String idCampionato,
                         String nomeGirone, String nomeSquadra) throws SQLException, SQLIntegrityConstraintViolationException {
-        final String query = "INSERT INTO ?  (STIPENDIO, TESSERAFIP, ANNO_CAMPIONATO, IDCAMPIONATO, NOME_GIRONE, NOME_SQUADRA) "
+        final String query = "INSERT INTO " + ruolo + " (STIPENDIO, TESSERAFIP, ANNO_CAMPIONATO, IDCAMPIONATO, NOME_GIRONE, NOME_SQUADRA) "
                             + "VALUES (?, ?, ?, ?, ?, ?)";
         try (final PreparedStatement stmt = this.connection.prepareStatement(query)) {
-            stmt.setString(1, ruolo);
-            stmt.setInt(2, stipendio);
-            stmt.setString(3, tesseraFip);
-            stmt.setInt(4, annoCampionato);
-            stmt.setString(5, idCampionato);
-            stmt.setString(6, nomeGirone);
-            stmt.setString(7, nomeSquadra);
+            stmt.setInt(1, stipendio);
+            stmt.setString(2, tesseraFip);
+            stmt.setInt(3, annoCampionato);
+            stmt.setString(4, idCampionato);
+            stmt.setString(5, nomeGirone);
+            stmt.setString(6, nomeSquadra);
             stmt.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException e) {
             throw new IllegalArgumentException("Staff già presente");
@@ -320,13 +319,40 @@ public class FeaturesSocieta{
         final String query = "DELETE FROM ? WHERE tesseraFIP = ? AND idcampionato = ? "
                             + "AND anno_campionato = ? AND nome_girone = ? AND nome_squadra = ?";
         try (final PreparedStatement stmt = this.connection.prepareStatement(query)) {
-            stmt.setString(1, ruolo);
+            stmt.setObject(1, ruolo);
             stmt.setString(2, tesseraFip);
             stmt.setString(3, idCampionato);
             stmt.setInt(4, annoCampionato);
             stmt.setString(5, nomeGirone);
             stmt.setString(6, nomeSquadra);
             stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    public ObservableList<MembroStaff> viewStaff(String ruolo, String nomeSquadra, String idCampionato,
+                            int annoCampionato, String nomeGirone) {
+        final String query = "SELECT t.nome, t.cognome, t.eta, m.stipendio, t.specializzazione, t.anno_patentino "
+                            + "FROM " + ruolo + " M, tesserato T "
+                            + "where m.tesserafip=t.tesserafip and m.anno_campionato=? "
+                            + "and m.nome_girone=? and m.idcampionato=? "
+                            + "and m.nome_squadra=?";
+        try (final PreparedStatement stmt = this.connection.prepareStatement(query)) {
+            stmt.setInt(1, annoCampionato);
+            stmt.setString(2, nomeGirone);
+            stmt.setString(3, idCampionato);
+            stmt.setString(4, nomeSquadra);
+            final ResultSet rs = stmt.executeQuery();
+
+            final ObservableList<MembroStaff> membrostaff = FXCollections.observableArrayList();
+            while (rs.next()) {
+                membrostaff.add(new MembroStaff(rs.getString("nome"), rs.getString("cognome"),
+                                                rs.getInt("eta"), rs.getInt("stipendio"),
+                                                ruolo, rs.getString("specializzazione"),
+                                                rs.getInt("anno_patentino")));
+            }
+            return membrostaff;
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
