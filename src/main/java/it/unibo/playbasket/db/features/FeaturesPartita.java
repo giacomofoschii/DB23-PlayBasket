@@ -143,6 +143,21 @@ public class FeaturesPartita{
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
+        final String query2 = "SET SQL_SAFE_UPDATES = 0; "
+                            + "UPDATE Arbitro AS A "
+                            + "JOIN ( "
+                            + "SELECT tesserafip, SUM(rimborso) AS totale_rimborsi "
+                            + "FROM Direzione "
+                            + "GROUP BY tesserafip "
+                            + ") AS T "
+                            + "ON A.tesserafip = T.tesserafip "
+                            + "SET A.stipendio_totale = T.totale_rimborsi;"
+                            + "SET SQL_SAFE_UPDATES = 1";
+        try (PreparedStatement statement = connection.prepareStatement(query2)) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
     }
 
     public void addCoDirezione(int rimborso, String tesseraFIP, String codicePalestra, Timestamp dataOra) throws SQLException {
@@ -157,6 +172,21 @@ public class FeaturesPartita{
             statement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException e) {
             throw new IllegalArgumentException("Codirezione già presente");
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
+        final String query2 = "SET SQL_SAFE_UPDATES = 0; "
+                            + "UPDATE Ufficiale_di_campo AS U "
+                            + "JOIN ( "
+                            + "SELECT tesserafip, SUM(rimborso) AS totale_rimborsi "
+                            + "FROM codirezione "
+                            + "GROUP BY tesserafip "
+                            + ") AS T "
+                            + "ON U.tesserafip = T.tesserafip "
+                            + "SET U.stipendio_totale = T.totale_rimborsi; "
+                            + "SET SQL_SAFE_UPDATES = 1";
+        try (PreparedStatement statement = connection.prepareStatement(query2)) {
+            statement.executeUpdate();
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
