@@ -1,0 +1,510 @@
+INSERT INTO Campionato(IDcampionato, nome_campionato, anno_campionato, regione) values
+('C1G23J9K8L', 'Serie C Silver', 2023, 'Lombardia'),
+('AFJA789G23', 'Serie C Gold', 2023, 'Emilia-Romagna'),
+('D2H45I7J8K', 'Under 15', 2023, 'Veneto'),
+('F3G56H7I8J', 'Serie D', 2023, 'Toscana'),
+('G4I67J8K9L', 'Prima Divisione', 2023, 'Piemonte'),
+('H5J78K9L0M', 'Under 19 Elite', 2023, 'Emilia-Romagna'),
+('I6K89L0M12', 'Under 17 Eccellenza', 2023, 'Lazio'),
+('J7L90M1234', 'Serie A', 2023, 'Nazionale'),
+('K8M0123456', 'Serie B', 2022, 'Nazionale'),
+('C1G23J9K8L', 'Serie C Silver', 2022, 'Lombardia'),
+('AFJA789G23', 'Serie C Gold', 2021, 'Emilia-Romagna'),
+('D2H45I7J8K', 'Under 15', 2020, 'Veneto'),
+('F3G56H7I8J', 'Serie D', 2019, 'Toscana'),
+('G4I67J8K9L', 'Prima Divisione', 2018, 'Piemonte'),
+('H5J78K9L0M', 'Under 19 Elite', 2017, 'Emilia-Romagna'),
+('I6K89L0M12', 'Under 17 Eccellenza', 2016, 'Lazio'),
+('J7L90M1234', 'Serie A', 2015, 'Nazionale'),
+('K8M0123456', 'Serie B', 2015, 'Nazionale');
+
+INSERT INTO Girone(Idcampionato, anno_campionato, nome_girone) values
+('AFJA789G23', 2023, 'A'),
+('AFJA789G23', 2023, 'B');
+
+INSERT INTO Proprietario (CF, Nome, Cognome) VALUES
+('RSSMRA80A01F205I', 'Mario', 'Rossi'),
+('BNCLCA84E02F132M', 'Luca', 'Bianchi'),
+('VRDGUL83H01Z201O', 'Giulia', 'Verdi'),
+('RSSSMN82A01Z206B', 'Simone', 'Russo'),
+('FRRFNC85C07D153F', 'Francesca', 'Ferrari'),
+('GLLGNN80A41Z601A', 'Giovanni', 'Gallo'),
+('LMBLUR81E13B432L', 'Laura', 'Lombardi'),
+('RCCMRC86M25F205R', 'Marco', 'Ricci'),
+('FRRMRA80A01F205M', 'Maria', 'Ferrari'),
+('BNCLCA84E02F132L', 'Luca', 'Bianchi'),
+('CSDSFA83H01Z201I', 'Sofia', 'Casadei'),
+('RSSALS82A01Z206R', 'Alessandro', 'Risso');
+
+INSERT INTO Societa (Codicemeccanografico, Sponsor, Titoli, nome, telefono, email, via, civico, cf_proprietario) VALUES
+('ABC1234567', 'Nike', 0, 'Pallacanestro Virtus Bologna', '0123456789', 'info@virtus.it', 'Via Roma', 1, 'RSSMRA80A01F205I'),
+('DEF4567890', 'Adidas', 0, 'Fortitudo Pallacanestro Bologna', '0987654321', 'info@fortitudo.it', 'Via Milano', 2, 'BNCLCA84E02F132M'),
+('GHI7890123', 'Puma', 0, 'Basket Trapani', '0123456789', 'info@baskettrapani.it', 'Via Garibaldi', 3, 'VRDGUL83H01Z201O'),
+('JKL0123456', 'Under Armour', 0, 'GSA Udine Basketball', '0987654321', 'info@gsaudine.it', 'Via Mazzini', 4, 'RSSSMN82A01Z206B'),
+('MNO3456789', 'New Balance', 0, 'Basket Ravenna', '0123456789', 'info@basketravenna.it', 'Via Veneto', 5, 'FRRFNC85C07D153F'),
+('PQR6789012', 'Lotto', 0, 'Orasi Ravenna Basket', '0987654321', 'info@orasiravenna.it', 'Corso Italia', 6, 'GLLGNN80A41Z601A'),
+('STU9012345', 'Fila', 0, 'S.S. Felice Scandone Avellino', '0123456789', 'info@felicescandone.it', 'Via Dante', 7, 'LMBLUR81E13B432L'),
+('VWX2345678', 'Reebok', 0, 'Basket Tortona', '0987654321', 'info@basketortona.it', 'Via dei Mille', 8, 'RCCMRC86M25F205R'),
+('YZA5678901', 'Mizuno', 0, 'Bertram Tortona', '0123456789', 'info@bertramtortona.it', 'Corso Vittorio Emanuele', 9, 'FRRMRA80A01F205M'),
+('BCD8901234', 'Jordan', 0, 'Pallacanestro Biella', '0987654321', 'info@pallacanestrobottegone.it', 'Via XX Settembre', 10, 'BNCLCA84E02F132L'),
+('EFG1234567', 'Umbro', 0, 'Aurora Basket Jesi', '0123456789', 'info@aurorabasketjesi.it', 'Via Garibaldi', 11, 'CSDSFA83H01Z201I'),
+('HIJ4567890', 'Kappa', 0, 'Paffoni Omegna', '0987654321', 'info@paffoniomegna.it', 'Via Roma', 12, 'RSSALS82A01Z206R');
+
+INSERT INTO Palestra (CodicePalestra, Nome_palestra, via, civico, superficie, capienza)
+VALUES
+    ('P01AB7C2D9', 'PalaSport Bologna', 'Via dei Mille', 10, 'Parquet', 5000),
+    ('P0EF1G3HIJ', 'Minipalazzetto Bologna', 'Via Rizzoli', 25, 'Parquet', 3000),
+    ('P4KL5MN6OP', 'PalaSport Trapani', 'Via Palermo', 5, 'Parquet', 4000),
+    ('PQ7R8ST9UV', 'PalaBasket Udine', 'Via Cavour', 15, 'Parquet', 2500),
+    ('PW2XY3Z4A5', 'PalaSport Ravenna', 'Via Maggiore', 8, 'Parquet', 3500),
+    ('P6BC7DE8FG', 'PalaOrasi Ravenna', 'Via Verdi', 12, 'Parquet', 3000),
+    ('P3HIJ4KL5M', 'PalaSport Scandone', 'Via Manzoni', 20, 'Parquet', 4500),
+    ('P7OP8QR9ST', 'Palazzetto di Tortona', 'Via Garibaldi', 30, 'Parquet', 2800),
+    ('PUVW1XY2Z3', 'PalaBertram Tortona', 'Via Dante', 18, 'Parquet', 3200),
+    ('P4A5BC6DE7', 'PalaSport Biella', 'Via Roma', 7, 'Parquet', 4000),
+    ('PF8GH9IJ01', 'PalaBasket Jesi', 'Via Carducci', 14, 'Parquet', 2700),
+    ('PKL1MN2OP3', 'PalaBasket Omegna', 'Via Milano', 9, 'Parquet', 3500);
+
+INSERT INTO Squadra (Nome_squadra, codicepalestra, punti_segnati, punti_subiti, numero_vittorie, numero_sconfitte, num_vittorie_ospiti, codicemeccanografico, idcampionato, anno_campionato, nome_girone)
+VALUES
+    ('VirtusBologna A', 'P01AB7C2D9', 0, 0, 0, 0, 0, 'ABC1234567', 'AFJA789G23', 2023, 'A'),
+    ('FortitudoBologna A', 'P0EF1G3HIJ', 0, 0, 0, 0, 0, 'DEF4567890', 'AFJA789G23', 2023, 'A'),
+    ('BasketTrapani A', 'P4KL5MN6OP', 0, 0, 0, 0, 0, 'GHI7890123', 'AFJA789G23', 2023, 'A'),
+    ('UdineBasketball A', 'PQ7R8ST9UV', 0, 0, 0, 0, 0, 'JKL0123456', 'AFJA789G23', 2023, 'A'),
+    ('Basket Ravenna', 'PW2XY3Z4A5', 0, 0, 0, 0, 0, 'MNO3456789', 'AFJA789G23', 2023, 'A'),
+    ('Orasi Ravenna', 'P6BC7DE8FG', 0, 0, 0, 0, 0, 'PQR6789012', 'AFJA789G23', 2023, 'A'),
+    ('Felice Scandone', 'P3HIJ4KL5M', 0, 0, 0, 0, 0, 'STU9012345', 'AFJA789G23', 2023, 'A'),
+    ('Basket Tortona', 'P7OP8QR9ST', 0, 0, 0, 0, 0, 'VWX2345678', 'AFJA789G23', 2023, 'A'),
+    ('Bertram Tortona', 'PUVW1XY2Z3', 0, 0, 0, 0, 0, 'YZA5678901', 'AFJA789G23', 2023,'A'),
+    ('Pallacanestro Biella', 'P4A5BC6DE7', 0, 0, 0, 0, 0, 'BCD8901234', 'AFJA789G23', 2023, 'A'),
+    ('Basket Jesi', 'PF8GH9IJ01', 0, 0, 0, 0, 0, 'EFG1234567', 'AFJA789G23', 2023, 'A'),
+    ('Paffoni Omegna', 'PKL1MN2OP3', 0, 0, 0, 0, 0, 'HIJ4567890', 'AFJA789G23', 2023, 'A');
+
+INSERT INTO Schemi (Nome, Tipo, Nome_squadra, Anno_campionato, idcampionato, nome_girone)
+VALUES
+    ('Pick and Roll', 'attacco', 'VirtusBologna A', 2023, 'AFJA789G23', 'A'),
+    ('Offensiva Mov.', 'attacco', 'VirtusBologna A', 2023, 'AFJA789G23', 'A'),
+    ('Difesa Zona 2-3', 'difesa', 'VirtusBologna A', 2023, 'AFJA789G23', 'A'),
+    ('Uomo-Uomo', 'difesa', 'VirtusBologna A', 2023, 'AFJA789G23', 'A'),
+    ('Triangolo Off.', 'attacco', 'FortitudoBologna A', 2023, 'AFJA789G23', 'A'),
+    ('Pressione Dif.', 'difesa', 'FortitudoBologna A', 2023, 'AFJA789G23', 'A'),
+    ('Pick and Roll', 'attacco', 'BasketTrapani A', 2023, 'AFJA789G23', 'A'),
+    ('Difesa Pack Line', 'difesa', 'BasketTrapani A', 2023, 'AFJA789G23', 'A'),
+    ('Flex Offensivo', 'attacco', 'UdineBasketball A', 2023, 'AFJA789G23', 'A'),
+    ('Pressione a Zona', 'difesa', 'UdineBasketball A', 2023, 'AFJA789G23', 'A'),
+    ('Horns Offensivo', 'attacco', 'Basket Ravenna', 2023, 'AFJA789G23', 'A'),
+    ('Difesa Zona 3-2', 'difesa', 'Basket Ravenna', 2023, 'AFJA789G23', 'A'),
+    ('Screen and Roll', 'attacco', 'Orasi Ravenna', 2023, 'AFJA789G23', 'A'),
+    ('Box and One', 'difesa', 'Orasi Ravenna', 2023, 'AFJA789G23', 'A'),
+    ('Gioco interno', 'attacco', 'Felice Scandone', 2023, 'AFJA789G23', 'A'),
+    ('Difesa Matchup', 'difesa', 'Felice Scandone', 2023, 'AFJA789G23', 'A'),
+    ('Isolamento Off.', 'attacco', 'Basket Tortona', 2023, 'AFJA789G23', 'A'),
+    ('Difesa Zona 2-1-2', 'difesa', 'Basket Tortona', 2023, 'AFJA789G23', 'A'),
+    ('Pick and Roll', 'attacco', 'Pallacanestro Biella', 2023, 'AFJA789G23', 'A'),
+    ('Switching Defense', 'difesa', 'Pallacanestro Biella', 2023, 'AFJA789G23', 'A'),
+    ('Pace Offense', 'attacco', 'Basket Jesi', 2023, 'AFJA789G23', 'A'),
+    ('Difesa Zona 1-3-1', 'difesa', 'Basket Jesi', 2023, 'AFJA789G23', 'A'),
+    ('Offensive Rebound', 'attacco', 'Paffoni Omegna', 2023, 'AFJA789G23', 'A'),
+    ('2-2-1 Press', 'difesa', 'Paffoni Omegna', 2023, 'AFJA789G23', 'A');
+
+insert into Tesserato(Nome,Cognome,CF, TesseraFIP, eta, preparatore_fisico,medico,accompagnatore,addetto_arbitro,massaggiatore,aiuto_allenatore,allenatore,scorer,anno_patentino) values
+('Luca', 'Ginobili', 'GNBLCA45D25H68U4', 'A46K5L4G5H', 49, false, false, false, false, false, false, true, false, 2006),
+('Matteo', 'Verdi', 'VRDMTT36F54V2P7E', 'PL45D978WS', 34, false, false, false, false, false, true, false, false, 2015),
+('Mario', 'Falcone', 'FNCMRI01A01H123B', '1234567890', 30, false, false, false, false, false, true, false, false, 2018),
+('Luca', 'Drago', 'DRGLCU02B02H456C', '2345678901', 25, false, false, false, false, false, false, true, false, 2020);
+
+insert into Tesserato(Nome,Cognome,CF, TesseraFIP, eta, preparatore_fisico,medico,accompagnatore,addetto_arbitro,massaggiatore,aiuto_allenatore,allenatore,scorer,specializzazione) values
+('Samuele', 'Valli', 'VLLSML457A4A056A', 'A45F6EI2B2', 35, false, true, false, false, false, false, false, false, 'Medicina Sportiva'),
+('Giuseppe', 'Verdi', 'VRDGPP01A01H123B', 'AL24DF87QW', 30, false, true, false, false, false, false, false, false, 'Chirurgia');
+
+insert into Tesserato(Nome,Cognome,CF, TesseraFIP, eta, preparatore_fisico,medico,accompagnatore,addetto_arbitro,massaggiatore,aiuto_allenatore,allenatore,scorer) values
+('Giovanni', 'Sereno', 'SRNGVN45L69A457T', 'LK123D56AW', 40, false, false, true, false, false, false, false, false),
+('Domenico', 'Martini', 'MRTDMN45A02F455A', 'AC456A52FG', 45, true, false, false, false, false, false, false, false),
+('Francesco', 'Rossi', 'RSSFNC02B02H456C', 'AD45ER78PO', 25, false, false, false, false, true, false, false, false),
+('Eugenia', 'Santi', 'SNTGNE66A21V238P', 'LK78PO23AD', 34, false, false, false, false, true, false, false, false),
+('Luca', 'Zampilli', 'ZMPLCA45L26P887E', 'SD45F98G25', 42, false, false, false, true, false, false, false, false),
+('Virgilio', 'Amaducci', 'MDCVRG98PO23AS0A', 'SD45GF21CV', 22, false, false, false, false, false, false, false, true),
+('Riccardo', 'Frascio', 'FRSRCC43A20H457P', 'GF68PE2C1M', 21, false, false, false, false, false, false, false, false),
+('Giovanni', 'Pisoni', 'PSNGVN45A98R236H', 'T78P523AWE', 22, false, false, false, false, false, false, false, false),
+('Giacomo', 'Foschi', 'FSCGCM02C02C573X', 'ALGP4578ER', 45, false, false, false, false, false, false, false, false),
+('Mirco', 'Terenzi', 'TRNMRC65A63V125X', 'AK59PE42XX', 29, false, false, false, false, false, false, false, false),
+('Alessandro', 'Pioli', 'PLILSS22A78P123X', 'AD4578R45C', 27, false, false, false, false, false, false, false, false),
+('Tomas', 'Ventrucci', 'VNTTMS78W45A124P', 'GH45PL26AS', 41, false, false, false, false, false, false, false, false),
+('Mirko', 'Viroli', 'MRKVRL65A23X598P', 'ALKG7898P4', 34, false, false, false, false, false, false, false, false),
+('Danilo', 'Pianini', 'PNNDNL56A21C666O', 'ACC456PO12', 19, false, false, false, false, false, false, false, false),
+('Federico', 'Diotallevi', 'DTLFDR87P00M304X', 'ALDF6E8POI', 36, false, false, false, false, false, false, false, false),
+('Astro', 'Baleno', 'BLNSTR66A02S457C', 'MAGICO0002', 39, false, false, false, false, false, false, false, false),
+('Riccardo', 'Ceccaroni', 'CCCRCC66A21A035P', 'RT78PO000A', 26, false, false, false, false, false, false, false, false),
+('Tommaso', 'Lucchi', 'LCCTMM66A24G017R', 'AK45SD78PO', 35, false, false, false, false, false, false, false, false),
+('Leonardo', 'Mazza', 'MZZLNR58A74R156K', 'AA78PO02R5', 29, false, false, false, false, false, false, false, false),
+('Giacomo', 'Bianchi', 'BNCGCM78A45W987J', 'A2D14LK23A', 38, false, false, false, false, false, false, false, false),
+('Nicola', 'Ceraso', 'CRSNCL78Q22R162C', 'DA47QR56PO', 40, false, false, false, false, false, false, false, false),
+('Gioele', 'Santi', 'GOLSNT02B15E876F', '987JGJ876R', 20, False, False, False, False, False, False, False, False),
+('Claudio', 'Vincente','VNCCLD45A98E789Y', 'AF45RT78AD', 21, True, False, False, False, False, False, False, false),
+('Gino', 'Rinchiuso','SSNPLI02T23G564B', '09248RUIRE', 21, False, False, False, False, False, False, False, False),
+('Alessia', 'Russo', 'RSSLSA06F06H678G', '6789012345', 31, false, false, true, false, false, false, false, false),
+('Davide', 'Marroni', 'MRRDVD07G07H901H', '7890123456', 29, false, false, false, false, false, false, false, false),
+('Chiara', 'Galli', 'GLLCHR08H08I234I', '8901234567', 26, false, false, false, true, false, false, false, false),
+('Simone', 'Ricci', 'RCCSMN09I09I567J', '9012345678', 33, false, false, false, false, false, false, false, false),
+('Francesca', 'Ferrari', 'FRRFNC10J10I890K', '0123456789', 24, false, false, false, false, false, false, false, true),
+('Lorenzo', 'Pellegrini', 'PLGLNZ11K11L123L', '0987654321', 23, false, false, false, false, false, false, false, false),
+('Andrea', 'Moretti', 'MRTNDR13M13M789N', '8765432109', 28, false, false, false, false, false, false, false, false),
+('Giovanni', 'Marchesi', 'MRCHGVN15O15345P', '6543210987', 29, false, false, false, false, false, false, false, false),
+('Luca', 'Ricci', 'RCCMCA01A01H123B', 'AD45AF78ER', 30, false, false, false, false, false, false, false, false),
+('Andrea', 'Rossi', 'RSSNDR02B02H456C', 'AP78ER57TY', 25, false, false, false, false, false, false, false, false),
+('Marco', 'De Luca', 'DLCMRC03C03H789D', '3456789012', 28, false, false, false, false, false, false, false, false),
+('Alessandro', 'Marini', 'MRNLSS04D04H012E', '4567890123', 32, false, false, false, false, false, false, false, false),
+('Gabriele', 'Conti', 'CNTGBL05E05H345F', '5678901234', 27, false, false, false, false, false, false, false, false),
+('Matteo', 'Bianco', 'BNCMTT06F06H678G', 'AF57TY4CV2', 31, false, false, false, false, false, false, false, false);
+
+insert into giocatore(ruolo, altezza, peso, tesserafip) values
+('Guardia', 199, 94, 'GF68PE2C1M'),
+('Ala_p', 184, 82, 'T78P523AWE'),
+('Playmaker', 175, 68, 'ALGP4578ER'),
+('Playmaker', 182, 74, 'AK59PE42XX'),
+('Ala_g', 194, 92, 'AD4578R45C'),
+('Centro', 212, 102, 'GH45PL26AS'),
+('Guardia', 186, 86, 'ALKG7898P4'),
+('Ala_p', 180, 78, 'ACC456PO12'),
+('Guardia', 190, 83, 'ALDF6E8POI'),
+('Centro', 204, 106, 'MAGICO0002'),
+('Ala_g', 193, 91, 'RT78PO000A'),
+('Guardia', 195, 90, 'AK45SD78PO'),
+('Guardia', 182, 114, '987JGJ876R'),
+('Ala_g', 206, 167, '09248RUIRE'),
+('Centro', 218, 100, '7890123456'),
+('Playmaker', 180, 80, '9012345678'),
+('Ala_p', 198, 80, '0987654321'),
+('Playmaker', 173, 54, '8765432109'),
+('Centro', 206, 98, '6543210987'),
+('Ala_g', 200, 103, 'AD45AF78ER'),
+('Guardia', 197, 89, 'AP78ER57TY'),
+('Playmaker', 189, 59, '3456789012'),
+('Ala_p', 190, 80, '4567890123'),
+('Centro', 213, 112, '5678901234'),
+('Ala_p', 198, 100, 'AF57TY4CV2');
+
+insert into arbitro(stipendio_totale,sezione,grado, tesserafip) values
+(0, 'Cesena', 1, 'AA78PO02R5'),
+(0, 'Milano', 3, 'A2D14LK23A');
+
+insert into ufficiale_di_campo(stipendio_totale,Cronometrista, refertista, segnapunti, tesserafip) values
+(0, true, true, true, 'DA47QR56PO');
+
+insert into membro_med(idcampionato,anno_campionato,nome_girone,nome_squadra,stipendio,tesseraFIP) values
+('AFJA789G23', 2023, 'A', 'VirtusBologna A', 14.400, 'A45F6EI2B2'),
+('AFJA789G23', 2023, 'A', 'Orasi Ravenna', 3000, 'AL24DF87QW');
+
+insert into membro_acc(idcampionato,anno_campionato,nome_girone,nome_squadra,stipendio,tesseraFIP) values
+('AFJA789G23', 2023, 'A', 'VirtusBologna A', 5000, 'LK123D56AW'),
+('AFJA789G23', 2023, 'A', 'Orasi Ravenna', 2000, '6789012345');
+
+insert into membro_addarb(idcampionato,anno_campionato,nome_girone,nome_squadra,stipendio,tesseraFIP) values
+('AFJA789G23', 2023, 'A', 'VirtusBologna A', 10800, 'SD45F98G25'),
+('AFJA789G23', 2023, 'A', 'Orasi Ravenna', 17000, '8901234567');
+
+insert into membro_aiutoall(idcampionato,anno_campionato,nome_girone,nome_squadra,stipendio,tesseraFIP) values
+('AFJA789G23', 2023, 'A', 'VirtusBologna A', 14000, 'PL45D978WS'),
+('AFJA789G23', 2023, 'A', 'Orasi Ravenna', 6000, '1234567890');
+
+insert into membro_all(idcampionato,anno_campionato,nome_girone,nome_squadra,stipendio,tesseraFIP) values
+('AFJA789G23', 2023, 'A', 'VirtusBologna A', 19000, 'A46K5L4G5H'),
+('AFJA789G23', 2023, 'A', 'Orasi Ravenna', 10000, '2345678901');
+
+insert into membro_mass(idcampionato,anno_campionato,nome_girone,nome_squadra,stipendio,tesseraFIP) values
+('AFJA789G23', 2023, 'A', 'VirtusBologna A', 69000, 'LK78PO23AD'),
+('AFJA789G23', 2023, 'A', 'Orasi Ravenna', 4000, 'AD45ER78PO');
+
+insert into membro_pf(idcampionato,anno_campionato,nome_girone,nome_squadra,stipendio,tesseraFIP) values
+('AFJA789G23', 2023, 'A', 'VirtusBologna A', 9000, 'AC456A52FG'),
+('AFJA789G23', 2023, 'A', 'Orasi Ravenna', 8000, 'AF45RT78AD');
+
+insert into membro_scorer(idcampionato,anno_campionato,nome_girone,nome_squadra,stipendio,tesseraFIP) values
+('AFJA789G23', 2023, 'A', 'VirtusBologna A', 6400, 'SD45GF21CV'),
+('AFJA789G23', 2023, 'A', 'Orasi Ravenna', 1500, '0123456789');
+
+insert into membro_giocatore(idcampionato,anno_campionato,nome_girone,nome_squadra,stipendio,tesseraFIP, capitano) values
+('AFJA789G23', 2023, 'A', 'VirtusBologna A', 14000, 'GF68PE2C1M', false),
+('AFJA789G23', 2023, 'A', 'VirtusBologna A', 49000, 'T78P523AWE', false),
+('AFJA789G23', 2023, 'A', 'VirtusBologna A', 53000, 'ALGP4578ER', true),
+('AFJA789G23', 2023, 'A', 'VirtusBologna A', 9500, 'AK59PE42XX', false),
+('AFJA789G23', 2023, 'A', 'VirtusBologna A', 23000, 'AD4578R45C', false),
+('AFJA789G23', 2023, 'A', 'VirtusBologna A', 16000, 'GH45PL26AS', false),
+('AFJA789G23', 2023, 'A', 'VirtusBologna A', 18300, 'ALKG7898P4', false),
+('AFJA789G23', 2023, 'A', 'VirtusBologna A', 20000, 'ACC456PO12', false),
+('AFJA789G23', 2023, 'A', 'VirtusBologna A', 26000, 'ALDF6E8POI', false),
+('AFJA789G23', 2023, 'A', 'VirtusBologna A', 27000, 'MAGICO0002', false),
+('AFJA789G23', 2023, 'A', 'VirtusBologna A', 21000, 'RT78PO000A', false),
+('AFJA789G23', 2023, 'A', 'VirtusBologna A', 42000, 'AK45SD78PO', false);
+
+INSERT INTO Membro_giocatore (TesseraFIP, anno_campionato, nome_girone, nome_squadra, Stipendio, Capitano, Idcampionato) values
+('987JGJ876R', 2023, 'A', 'Orasi Ravenna', 49999, False, 'AFJA789G23'),
+('09248RUIRE', 2023, 'A', 'Orasi Ravenna', 80000,True, 'AFJA789G23'),
+('7890123456', 2023, 'A', 'Orasi Ravenna', 17000,False, 'AFJA789G23'),
+('9012345678', 2023, 'A', 'Orasi Ravenna', 17000,False, 'AFJA789G23'),
+('0987654321', 2023, 'A', 'Orasi Ravenna', 17000,False, 'AFJA789G23'),
+('8765432109', 2023, 'A', 'Orasi Ravenna', 17000,False, 'AFJA789G23'),
+('6543210987', 2023, 'A', 'Orasi Ravenna', 17000,False, 'AFJA789G23'),
+('AD45AF78ER', 2023, 'A', 'Orasi Ravenna', 17000,False, 'AFJA789G23'),
+('AP78ER57TY', 2023, 'A', 'Orasi Ravenna', 17000,False, 'AFJA789G23'),
+('3456789012', 2023, 'A', 'Orasi Ravenna', 17000,False, 'AFJA789G23'),
+('5678901234', 2023, 'A', 'Orasi Ravenna', 17000,False, 'AFJA789G23'),
+('4567890123', 2023, 'A', 'Orasi Ravenna', 17000,False, 'AFJA789G23'),
+('AF57TY4CV2', 2023, 'A', 'Orasi Ravenna', 17000,False, 'AFJA789G23');
+
+INSERT INTO PARTITA (codicepalestra,idcampionato, anno_campionato, nome_girone, Data_Ora) values
+('P01AB7C2D9', 'AFJA789G23', 2023, 'A', '2023-03-12 19:30:00'),
+('P6BC7DE8FG', 'AFJA789G23', 2023, 'A', '2023-07-22 21:00:00');
+
+
+INSERT INTO performance (tesserafip, rimbalzi, assist, falli_fatti, falli_subiti, minuti, tiri_2, tiri_3, tiri_liberi, tiri_2_segnati, tiri_3_segnati, tiri_liberi_segnati, palle_rubate, palle_perse, stoppate, codicepalestra, data_ora)
+VALUES
+  ('GF68PE2C1M', 1, 7, 3, 4, 25, 2, 11, 8, 0, 8, 5, 1, 7, 3, 'P6BC7DE8FG', '2023-07-22 21:00:00'),
+  ('T78P523AWE', 3, 8, 7, 2, 21, 7, 16, 4, 6, 8, 2, 7, 4, 3, 'P6BC7DE8FG', '2023-07-22 21:00:00'),
+  ('ALGP4578ER', 6, 2, 0, 7, 26, 14, 7, 7, 8, 3, 7, 0, 6, 2, 'P6BC7DE8FG', '2023-07-22 21:00:00'),
+  ('AK59PE42XX', 1, 4, 2, 0, 28, 6, 7, 13, 5, 0, 0, 7, 0, 6, 'P6BC7DE8FG', '2023-07-22 21:00:00'),
+  ('AD4578R45C', 8, 3, 6, 2, 15, 7, 10, 4, 0, 0, 0, 6, 2, 5, 'P6BC7DE8FG', '2023-07-22 21:00:00'),
+  ('GH45PL26AS', 3, 2, 1, 1, 12, 4, 1, 0, 2, 0, 0, 1, 1, 2, 'P6BC7DE8FG', '2023-07-22 21:00:00'),
+  ('ALKG7898P4', 5, 3, 1, 2, 16, 5, 0, 0, 1, 0, 0, 0, 0, 0, 'P6BC7DE8FG', '2023-07-22 21:00:00'),
+  ('ACC456PO12', 4, 1, 3, 1, 18, 6, 1, 5, 1, 0, 2, 0, 1, 1, 'P6BC7DE8FG', '2023-07-22 21:00:00'),
+  ('ALDF6E8POI', 3, 2, 2, 2, 14, 5, 2, 1, 1, 0, 0, 1, 0, 0, 'P6BC7DE8FG', '2023-07-22 21:00:00'),
+  ('MAGICO0002', 2, 0, 2, 1, 10, 3, 0, 2, 0, 0, 1, 0, 1, 0, 'P6BC7DE8FG', '2023-07-22 21:00:00'),
+  ('RT78PO000A', 1, 1, 0, 0, 5, 1, 1, 0, 0, 0, 0, 0, 0, 0, 'P6BC7DE8FG', '2023-07-22 21:00:00'),
+  ('AK45SD78PO', 0, 0, 1, 1, 4, 1, 0, 0, 1, 0, 0, 0, 0, 0, 'P6BC7DE8FG', '2023-07-22 21:00:00'),
+  ('987JGJ876R', 4, 5, 3, 2, 20, 18, 12, 10, 9, 6, 7, 2, 1, 0, 'P6BC7DE8FG', '2023-07-22 21:00:00'),
+  ('09248RUIRE', 2, 3, 2, 1, 40, 15, 14, 12, 12, 10, 11, 1, 6, 5, 'P6BC7DE8FG', '2023-07-22 21:00:00'),
+  ('7890123456', 3, 2, 1, 2, 18, 6, 2, 2, 0, 0, 0, 0, 1, 0, 'P6BC7DE8FG', '2023-07-22 21:00:00'),
+  ('9012345678', 3, 5, 1, 2, 20, 7, 5, 0, 0, 0, 0, 1, 0, 0, 'P6BC7DE8FG', '2023-07-22 21:00:00'),
+  ('0987654321', 6, 3, 2, 3, 22, 8, 1, 2, 2, 0, 0, 2, 1, 0, 'P6BC7DE8FG', '2023-07-22 21:00:00'),
+  ('8765432109', 5, 2, 4, 1, 18, 6, 2, 0, 0, 0, 0, 0, 0, 1, 'P6BC7DE8FG', '2023-07-22 21:00:00'),
+  ('6543210987', 4, 4, 2, 2, 16, 1, 2, 2, 0, 1, 0, 1, 1, 0, 'P6BC7DE8FG', '2023-07-22 21:00:00'),
+  ('AD45AF78ER', 2, 1, 3, 2, 12, 4, 1, 0, 2, 1, 0, 0, 1, 0, 'P6BC7DE8FG', '2023-07-22 21:00:00'),
+  ('AP78ER57TY', 3, 2, 1, 2, 15, 5, 2, 2, 2, 0, 0, 1, 2, 0, 'P6BC7DE8FG', '2023-07-22 21:00:00'),
+  ('3456789012', 4, 1, 2, 1, 14, 5, 1, 2, 0, 0, 0, 1, 0, 0, 'P6BC7DE8FG', '2023-07-22 21:00:00'),
+  ('5678901234', 1, 0, 1, 0, 6, 2, 0, 1, 1, 0, 1, 0, 9, 0, 'P6BC7DE8FG', '2023-07-22 21:00:00'),
+  ('4567890123', 0, 0, 2, 1, 4, 0, 0, 1, 0, 0, 0, 0, 1, 3, 'P6BC7DE8FG', '2023-07-22 21:00:00');
+
+
+INSERT INTO performance (tesserafip, rimbalzi, assist, falli_fatti, falli_subiti, minuti, tiri_2, tiri_3, tiri_liberi, tiri_2_segnati, tiri_3_segnati, tiri_liberi_segnati, palle_rubate, palle_perse, stoppate, codicepalestra, data_ora)
+VALUES
+  ('GF68PE2C1M', 2, 4, 3, 2, 23, 4, 4, 6, 2, 2, 6, 1, 2, 1, 'P01AB7C2D9', '2023-03-12 19:30:00'),
+  ('T78P523AWE', 5, 2, 4, 3, 18, 7, 2, 5, 2, 2, 3, 0, 0, 0, 'P01AB7C2D9', '2023-03-12 19:30:00'),
+  ('ALGP4578ER', 6, 1, 2, 4, 30, 7, 1, 5, 3, 1, 4, 1, 1, 0, 'P01AB7C2D9', '2023-03-12 19:30:00'),
+  ('AK59PE42XX', 3, 5, 1, 2, 15, 5, 5, 1, 2, 1, 1, 0, 1, 0, 'P01AB7C2D9', '2023-03-12 19:30:00'),
+  ('AD4578R45C', 2, 3, 2, 3, 14, 5, 3, 2, 0, 1, 2, 1, 0, 1, 'P01AB7C2D9', '2023-03-12 19:30:00'),
+  ('GH45PL26AS', 3, 2, 1, 1, 12, 4, 1, 0, 2, 0, 0, 1, 1, 2, 'P01AB7C2D9', '2023-03-12 19:30:00'),
+  ('ALKG7898P4', 5, 3, 1, 2, 16, 5, 0, 0, 3, 0, 0, 0, 0, 0, 'P01AB7C2D9', '2023-03-12 19:30:00'),
+  ('ACC456PO12', 4, 1, 3, 1, 18, 6, 1, 2, 1, 1, 2, 0, 1, 1, 'P01AB7C2D9', '2023-03-12 19:30:00'),
+  ('ALDF6E8POI', 3, 2, 2, 2, 14, 5, 2, 0, 3, 0, 0, 1, 0, 0, 'P01AB7C2D9', '2023-03-12 19:30:00'),
+  ('MAGICO0002', 2, 0, 2, 1, 10, 3, 0, 2, 1, 0, 1, 0, 1, 0, 'P01AB7C2D9', '2023-03-12 19:30:00'),
+  ('RT78PO000A', 1, 1, 0, 0, 5, 1, 1, 0, 0, 0, 0, 0, 0, 0, 'P01AB7C2D9', '2023-03-12 19:30:00'),
+  ('AK45SD78PO', 0, 0, 1, 1, 4, 1, 0, 0, 1, 0, 0, 0, 0, 0, 'P01AB7C2D9', '2023-03-12 19:30:00'),
+  ('987JGJ876R', 4, 5, 3, 2, 20, 7, 3, 3, 7, 1, 2, 2, 1, 0, 'P01AB7C2D9', '2023-03-12 19:30:00'),
+  ('09248RUIRE', 2, 3, 2, 1, 15, 5, 1, 1, 2, 0, 1, 1, 0, 0, 'P01AB7C2D9', '2023-03-12 19:30:00'),
+  ('7890123456', 3, 2, 1, 2, 18, 6, 2, 2, 2, 0, 2, 0, 1, 0, 'P01AB7C2D9', '2023-03-12 19:30:00'),
+  ('9012345678', 3, 5, 1, 2, 20, 7, 5, 0, 4, 2, 0, 1, 0, 0, 'P01AB7C2D9', '2023-03-12 19:30:00'),
+  ('0987654321', 6, 3, 2, 3, 22, 8, 1, 2, 2, 1, 0, 2, 1, 0, 'P01AB7C2D9', '2023-03-12 19:30:00'),
+  ('8765432109', 5, 2, 4, 1, 18, 6, 2, 0, 5, 0, 0, 0, 0, 1, 'P01AB7C2D9', '2023-03-12 19:30:00'),
+  ('6543210987', 4, 4, 2, 2, 16, 1, 2, 2, 0, 1, 2, 1, 1, 0, 'P01AB7C2D9', '2023-03-12 19:30:00'),
+  ('AD45AF78ER', 2, 1, 3, 2, 12, 4, 1, 0, 2, 1, 0, 0, 1, 0, 'P01AB7C2D9', '2023-03-12 19:30:00'),
+  ('AP78ER57TY', 3, 2, 1, 2, 15, 5, 2, 2, 2, 0, 2, 1, 0, 0, 'P01AB7C2D9', '2023-03-12 19:30:00'),
+  ('3456789012', 4, 1, 2, 1, 14, 5, 1, 2, 0, 0, 0, 1, 0, 0, 'P01AB7C2D9', '2023-03-12 19:30:00'),
+  ('5678901234', 1, 0, 1, 0, 6, 2, 0, 1, 1, 0, 0, 0, 1, 0, 'P01AB7C2D9', '2023-03-12 19:30:00'),
+  ('4567890123', 0, 0, 2, 1, 4, 0, 0, 1, 0, 0, 0, 0, 1, 0, 'P01AB7C2D9', '2023-03-12 19:30:00');
+
+INSERT INTO partecipazione_casa (codicepalestra, data_ora, idcampionato, anno_campionato, nome_girone, nome_squadra, Punti_fatti) values
+('P01AB7C2D9', '2023-03-12 19:30:00', 'AFJA789G23', 2023, 'A', 'VirtusBologna A', 83), 
+('P6BC7DE8FG', '2023-07-22 21:00:00','AFJA789G23', 2023, 'A', 'Orasi Ravenna', 127);
+
+INSERT INTO partecipazione_ospiti (codicepalestra, data_ora, idcampionato, anno_campionato, nome_girone, nome_squadra, Punti_fatti) values
+('P01AB7C2D9', '2023-03-12 19:30:00', 'AFJA789G23', 2023, 'A', 'Orasi Ravenna', 81),
+('P6BC7DE8FG', '2023-07-22 21:00:00','AFJA789G23', 2023, 'A', 'VirtusBologna A', 124);
+
+insert into direzione(codicepalestra,data_ora,tesserafip, rimborso) values
+('P01AB7C2D9', '2023-03-12 19:30:00', 'AA78PO02R5', 240),
+('P01AB7C2D9', '2023-03-12 19:30:00', 'A2D14LK23A', 50),
+('P6BC7DE8FG', '2023-07-22 21:00:00', 'AA78PO02R5', 170),
+('P6BC7DE8FG', '2023-07-22 21:00:00', 'A2D14LK23A', 90);
+
+insert into codirezione(codicepalestra,data_ora,tesserafip,rimborso) values
+('P01AB7C2D9', '2023-03-12 19:30:00', 'DA47QR56PO', 120),
+('P6BC7DE8FG', '2023-07-22 21:00:00', 'DA47QR56PO', 120);
+
+UPDATE ARBITRO
+SET stipendio_totale=140
+WHERE tesserafip='A2D14LK23A';
+
+UPDATE ARBITRO
+SET stipendio_totale=410
+WHERE tesserafip='AA78PO02R5';
+
+UPDATE UFFICIALE_DI_CAMPO
+SET stipendio_totale=240
+WHERE tesserafip='DA47QR56PO';
+
+UPDATE Squadra SET punti_segnati = punti_segnati + ( SELECT SUM(punti_fatti) FROM partecipazione_casa WHERE Squadra.idcampionato = partecipazione_casa.idcampionato AND Squadra.anno_campionato = partecipazione_casa.anno_campionato AND Squadra.nome_squadra = partecipazione_casa.nome_squadra AND Squadra.nome_girone = partecipazione_casa.nome_girone ) WHERE (idcampionato, anno_campionato, nome_squadra, nome_girone) IN ( SELECT idcampionato, anno_campionato, nome_squadra, nome_girone FROM partecipazione_casa );
+
+UPDATE Squadra
+SET punti_segnati = punti_segnati + (
+  SELECT SUM(punti_fatti)
+  FROM partecipazione_ospiti
+  WHERE Squadra.idcampionato = partecipazione_ospiti.idcampionato
+    AND Squadra.anno_campionato = partecipazione_ospiti.anno_campionato
+    AND Squadra.nome_squadra = partecipazione_ospiti.nome_squadra
+    AND Squadra.nome_girone = partecipazione_ospiti.nome_girone
+)
+WHERE (idcampionato, anno_campionato, nome_squadra, nome_girone) IN (
+  SELECT idcampionato, anno_campionato, nome_squadra, nome_girone
+  FROM partecipazione_ospiti
+);
+
+UPDATE Squadra
+SET PUNTI_SUBITI = PUNTI_SUBITI + (
+  SELECT SUM(partecipazione_casa.punti_fatti)
+  FROM partecipazione_ospiti, partecipazione_casa
+  WHERE Squadra.idcampionato = partecipazione_ospiti.idcampionato
+    AND Squadra.anno_campionato = partecipazione_ospiti.anno_campionato
+    AND Squadra.nome_squadra = partecipazione_ospiti.nome_squadra
+    AND Squadra.nome_girone = partecipazione_ospiti.nome_girone
+    AND partecipazione_casa.codicepalestra = partecipazione_ospiti.codicepalestra
+    AND partecipazione_casa.data_ora = partecipazione_ospiti.data_ora
+)
+WHERE (idcampionato, anno_campionato, nome_squadra, nome_girone) IN (
+  SELECT idcampionato, anno_campionato, nome_squadra, nome_girone
+  FROM partecipazione_ospiti
+);
+
+UPDATE Squadra
+SET PUNTI_SUBITI = PUNTI_SUBITI + (
+  SELECT SUM(partecipazione_ospiti.punti_fatti)
+  FROM partecipazione_ospiti, partecipazione_casa
+  WHERE Squadra.idcampionato = partecipazione_casa.idcampionato
+    AND Squadra.anno_campionato = partecipazione_casa.anno_campionato
+    AND Squadra.nome_squadra = partecipazione_casa.nome_squadra
+    AND Squadra.nome_girone = partecipazione_casa.nome_girone
+    AND partecipazione_casa.codicepalestra = partecipazione_casa.codicepalestra
+    AND partecipazione_ospiti.data_ora = partecipazione_casa.data_ora
+)
+WHERE (idcampionato, anno_campionato, nome_squadra, nome_girone) IN (
+  SELECT idcampionato, anno_campionato, nome_squadra, nome_girone
+  FROM partecipazione_casa
+);
+
+
+
+UPDATE `db23_playbasket`.`campionato` SET `CodiceMeccanografico` = 'ABC1234567' WHERE (`IDCampionato` = 'AFJA789G23') and (`Anno_campionato` = '2021');
+UPDATE `db23_playbasket`.`campionato` SET `CodiceMeccanografico` = 'DEF4567890' WHERE (`IDCampionato` = 'C1G23J9K8L') and (`Anno_campionato` = '2022');
+UPDATE `db23_playbasket`.`campionato` SET `CodiceMeccanografico` = 'GHI7890123' WHERE (`IDCampionato` = 'J7L90M1234') and (`Anno_campionato` = '2015');
+UPDATE `db23_playbasket`.`campionato` SET `CodiceMeccanografico` = 'ABC1234567' WHERE (`IDCampionato` = 'K8M0123456') and (`Anno_campionato` = '2015');
+UPDATE `db23_playbasket`.`campionato` SET `CodiceMeccanografico` = 'MNO3456789' WHERE (`IDCampionato` = 'I6K89L0M12') and (`Anno_campionato` = '2016');
+UPDATE `db23_playbasket`.`campionato` SET `CodiceMeccanografico` = 'PQR6789012' WHERE (`IDCampionato` = 'H5J78K9L0M') and (`Anno_campionato` = '2017');
+UPDATE `db23_playbasket`.`campionato` SET `CodiceMeccanografico` = 'EFG1234567' WHERE (`IDCampionato` = 'G4I67J8K9L') and (`Anno_campionato` = '2018');
+UPDATE `db23_playbasket`.`campionato` SET `CodiceMeccanografico` = 'MNO3456789' WHERE (`IDCampionato` = 'F3G56H7I8J') and (`Anno_campionato` = '2019');
+UPDATE `db23_playbasket`.`campionato` SET `CodiceMeccanografico` = 'ABC1234567' WHERE (`IDCampionato` = 'D2H45I7J8K') and (`Anno_campionato` = '2020');
+UPDATE `db23_playbasket`.`campionato` SET `CodiceMeccanografico` = 'PQR6789012' WHERE (`IDCampionato` = 'AFJA789G23') and (`Anno_campionato` = '2023');
+UPDATE `db23_playbasket`.`campionato` SET `CodiceMeccanografico` = 'PQR6789012' WHERE (`IDCampionato` = 'C1G23J9K8L') and (`Anno_campionato` = '2023');
+UPDATE `db23_playbasket`.`campionato` SET `CodiceMeccanografico` = 'ABC1234567' WHERE (`IDCampionato` = 'D2H45I7J8K') and (`Anno_campionato` = '2023');
+UPDATE `db23_playbasket`.`campionato` SET `CodiceMeccanografico` = 'HIJ4567890' WHERE (`IDCampionato` = 'K8M0123456') and (`Anno_campionato` = '2023');
+UPDATE `db23_playbasket`.`campionato` SET `CodiceMeccanografico` = 'ABC1234567' WHERE (`IDCampionato` = 'J7L90M1234') and (`Anno_campionato` = '2023');
+UPDATE `db23_playbasket`.`campionato` SET `CodiceMeccanografico` = 'EFG1234567' WHERE (`IDCampionato` = 'I6K89L0M12') and (`Anno_campionato` = '2023');
+UPDATE `db23_playbasket`.`campionato` SET `CodiceMeccanografico` = 'YZA5678901' WHERE (`IDCampionato` = 'H5J78K9L0M') and (`Anno_campionato` = '2023');
+UPDATE `db23_playbasket`.`campionato` SET `CodiceMeccanografico` = 'STU9012345' WHERE (`IDCampionato` = 'G4I67J8K9L') and (`Anno_campionato` = '2023');
+UPDATE `db23_playbasket`.`campionato` SET `CodiceMeccanografico` = 'MNO3456789' WHERE (`IDCampionato` = 'F3G56H7I8J') and (`Anno_campionato` = '2023');
+
+
+UPDATE SOCIETA
+SET Titoli = (
+    SELECT COUNT(IDcampionato)
+    FROM CAMPIONATO
+    WHERE CODICEMECCANOGRAFICO = 'ABC1234567'
+)
+WHERE SOCIETA.CODICEMECCANOGRAFICO = 'ABC1234567';
+
+UPDATE SOCIETA
+SET Titoli = (
+    SELECT COUNT(IDcampionato)
+    FROM CAMPIONATO
+    WHERE CODICEMECCANOGRAFICO = 'DEF4567890'
+)
+WHERE SOCIETA.CODICEMECCANOGRAFICO = 'DEF4567890';
+
+UPDATE SOCIETA
+SET Titoli = (
+    SELECT COUNT(IDcampionato)
+    FROM CAMPIONATO
+    WHERE CODICEMECCANOGRAFICO = 'GHI7890123'
+)
+WHERE SOCIETA.CODICEMECCANOGRAFICO = 'GHI7890123';
+
+UPDATE SOCIETA
+SET Titoli = (
+    SELECT COUNT(IDcampionato)
+    FROM CAMPIONATO
+    WHERE CODICEMECCANOGRAFICO = 'JKL0123456'
+)
+WHERE SOCIETA.CODICEMECCANOGRAFICO = 'JKL0123456';
+
+UPDATE SOCIETA
+SET Titoli = (
+    SELECT COUNT(IDcampionato)
+    FROM CAMPIONATO
+    WHERE CODICEMECCANOGRAFICO = 'MNO3456789'
+)
+WHERE SOCIETA.CODICEMECCANOGRAFICO = 'MNO3456789';
+
+UPDATE SOCIETA
+SET Titoli = (
+    SELECT COUNT(IDcampionato)
+    FROM CAMPIONATO
+    WHERE CODICEMECCANOGRAFICO = 'PQR6789012'
+)
+WHERE SOCIETA.CODICEMECCANOGRAFICO = 'PQR6789012';
+
+UPDATE SOCIETA
+SET Titoli = (
+    SELECT COUNT(IDcampionato)
+    FROM CAMPIONATO
+    WHERE CODICEMECCANOGRAFICO = 'STU9012345'
+)
+WHERE SOCIETA.CODICEMECCANOGRAFICO = 'STU9012345';
+
+UPDATE SOCIETA
+SET Titoli = (
+    SELECT COUNT(IDcampionato)
+    FROM CAMPIONATO
+    WHERE CODICEMECCANOGRAFICO = 'VWX2345678'
+)
+WHERE SOCIETA.CODICEMECCANOGRAFICO = 'VWX2345678';
+
+UPDATE SOCIETA
+SET Titoli = (
+    SELECT COUNT(IDcampionato)
+    FROM CAMPIONATO
+    WHERE CODICEMECCANOGRAFICO = 'YZA5678901'
+)
+WHERE SOCIETA.CODICEMECCANOGRAFICO = 'YZA5678901';
+
+UPDATE SOCIETA
+SET Titoli = (
+    SELECT COUNT(IDcampionato)
+    FROM CAMPIONATO
+    WHERE CODICEMECCANOGRAFICO = 'BCD8901234'
+)
+WHERE SOCIETA.CODICEMECCANOGRAFICO = 'BCD8901234';
+
+UPDATE SOCIETA
+SET Titoli = (
+    SELECT COUNT(IDcampionato)
+    FROM CAMPIONATO
+    WHERE CODICEMECCANOGRAFICO = 'EFG1234567'
+)
+WHERE SOCIETA.CODICEMECCANOGRAFICO = 'EFG1234567';
+
+UPDATE SOCIETA
+SET Titoli = (
+    SELECT COUNT(IDcampionato)
+    FROM CAMPIONATO
+    WHERE CODICEMECCANOGRAFICO = 'HIJ4567890'
+)
+WHERE SOCIETA.CODICEMECCANOGRAFICO = 'HIJ4567890';
+

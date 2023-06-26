@@ -95,11 +95,11 @@ public class FeaturesPartita{
         this.azzeraPuntiSubiti();
         this.updatePuntiSubitiCasa();
         this.updatePuntiSubitiOspiti();
-        /*this.updateNumeroVittorieOspiti(idCampionato, annoCampionato, nomeGirone, nomeOspiti);
+        this.updateNumeroVittorieOspiti(idCampionato, annoCampionato, nomeGirone, nomeOspiti);
         this.updateVittorieTrasferta(idCampionato, annoCampionato, nomeGirone, nomeOspiti);
         this.updateSconfitteTrasferta(idCampionato, annoCampionato, nomeGirone, nomeOspiti);
         this.updateVittorieCasa(idCampionato, annoCampionato, nomeGirone, nomeCasa);
-        this.updateSconfitteCasa(idCampionato, annoCampionato, nomeGirone, nomeCasa);*/
+        this.updateSconfitteCasa(idCampionato, annoCampionato, nomeGirone, nomeCasa);
     }
 
     private void azzeraPuntiSegnati() {
