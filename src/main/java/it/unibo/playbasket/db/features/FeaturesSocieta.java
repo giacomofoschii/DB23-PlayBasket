@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.sql.Types;
 
 import it.unibo.playbasket.db.views.MembroGiocatore;
 import it.unibo.playbasket.db.views.MembroStaff;
