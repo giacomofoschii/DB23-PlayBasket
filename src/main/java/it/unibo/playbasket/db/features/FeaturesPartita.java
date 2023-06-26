@@ -398,6 +398,7 @@ public class FeaturesPartita{
         try (PreparedStatement statement = connection.prepareStatement(query2)) {
             statement.executeUpdate();
         } catch (SQLException e) {
+            removeDirezione(tesseraFIP, codicePalestra, dataOra);
             throw new IllegalStateException(e);
         }
     }
@@ -430,6 +431,7 @@ public class FeaturesPartita{
         try (PreparedStatement statement = connection.prepareStatement(query2)) {
             statement.executeUpdate();
         } catch (SQLException e) {
+            removeCoDirezione(tesseraFIP, codicePalestra, dataOra);
             throw new IllegalStateException(e);
         }
     }
