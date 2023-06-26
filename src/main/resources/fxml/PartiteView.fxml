@@ -140,7 +140,7 @@
                                  </font>
                               </Button>
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Rimuovi direzione">
+                              <Button mnemonicParsing="false" onAction="#removeDirezione" prefHeight="25.0" prefWidth="200.0" text="Rimuovi direzione">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
