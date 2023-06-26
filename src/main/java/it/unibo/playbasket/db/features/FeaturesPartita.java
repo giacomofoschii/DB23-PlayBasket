@@ -37,7 +37,7 @@ public class FeaturesPartita{
             statement.setString(7, nomeSquadra);
             statement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException e) {
-            throw new IllegalArgumentException("Squadra Casa già presente");
+            throw new IllegalArgumentException(e);
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
@@ -58,7 +58,7 @@ public class FeaturesPartita{
             statement.setString(7, nomeSquadra);
             statement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException e) {
-            throw new IllegalArgumentException("Squadra Ospite già presente");
+            throw new IllegalArgumentException(e);
         }  catch (SQLException e) {
             throw new IllegalStateException(e);
         }
@@ -77,7 +77,7 @@ public class FeaturesPartita{
             statement.setString(5, nomeGirone);
             statement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException e) {
-            throw new IllegalArgumentException("Partita già presente");
+            throw new IllegalArgumentException(e);
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
@@ -89,113 +89,149 @@ public class FeaturesPartita{
             removePartita(codicePalestra, dataOra);
             throw new IllegalStateException(e);
         }
-        this.updatePuntiSegnati();
-        this.updatePuntiSubiti();
-        this.updateSquadraTrasferta(idCampionato, annoCampionato, nomeGirone, nomeOspiti);
-        this.updateSquadraCasa(idCampionato, annoCampionato, nomeGirone, nomeCasa);     
+        this.azzeraPuntiSegnati();
+        this.updatePuntiSegnatiCasa();
+        this.updatePuntiSegnatiOspiti();
+        this.azzeraPuntiSubiti();
+        this.updatePuntiSubitiCasa();
+        this.updatePuntiSubitiOspiti();
+        /*this.updateNumeroVittorieOspiti(idCampionato, annoCampionato, nomeGirone, nomeOspiti);
+        this.updateVittorieTrasferta(idCampionato, annoCampionato, nomeGirone, nomeOspiti);
+        this.updateSconfitteTrasferta(idCampionato, annoCampionato, nomeGirone, nomeOspiti);
+        this.updateVittorieCasa(idCampionato, annoCampionato, nomeGirone, nomeCasa);
+        this.updateSconfitteCasa(idCampionato, annoCampionato, nomeGirone, nomeCasa);*/
     }
-    
-    private void updatePuntiSegnati() {
+
+    private void azzeraPuntiSegnati() {
+        final String query = "UPDATE Squadra SET punti_segnati = 0";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    private void azzeraPuntiSubiti() {
+        final String query = "UPDATE Squadra SET punti_subiti = 0";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    private void updatePuntiSubitiOspiti() {
         final String query = "UPDATE Squadra "
-                + "SET punti_segnati = punti_segnati + "
-                + "(SELECT punti_fatti "
-                + "FROM partecipazione_casa "
-                + "WHERE Squadra.idcampionato = partecipazione_casa.idcampionato "
-                + "AND Squadra.anno_campionato = partecipazione_casa.anno_campionato "
-                + "AND Squadra.nome_squadra = partecipazione_casa.nome_squadra "
-                + "AND Squadra.nome_girone = partecipazione_casa.nome_girone) "
-                + "WHERE (idcampionato, anno_campionato, nome_squadra, nome_girone) IN ( "
-                + "SELECT idcampionato, anno_campionato, nome_squadra, nome_girone "
-                + "FROM partecipazione_casa)";
+                            + "SET PUNTI_SUBITI = PUNTI_SUBITI + ( "
+                            + "SELECT SUM(partecipazione_casa.punti_fatti) "
+                            + "FROM partecipazione_ospiti, partecipazione_casa "
+                            + "WHERE Squadra.idcampionato = partecipazione_ospiti.idcampionato "
+                            + "    AND Squadra.anno_campionato = partecipazione_ospiti.anno_campionato "
+                            + "    AND Squadra.nome_squadra = partecipazione_ospiti.nome_squadra "
+                            + "    AND Squadra.nome_girone = partecipazione_ospiti.nome_girone "
+                            + "    AND partecipazione_casa.codicepalestra = partecipazione_ospiti.codicepalestra "
+                            + "    AND partecipazione_casa.data_ora = partecipazione_ospiti.data_ora "
+                            + ") "
+                            + "WHERE (idcampionato, anno_campionato, nome_squadra, nome_girone) IN ( "
+                            + "SELECT idcampionato, anno_campionato, nome_squadra, nome_girone "
+                            + "FROM partecipazione_ospiti "
+                            + ")";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException e) {
-            throw new IllegalArgumentException("Update2 partite fallito");
-        } catch (SQLException e) {
-            throw new IllegalStateException(e);
-        }
-        final String query2 = "UPDATE Squadra"
-                + "SET punti_segnati = punti_segnati + ( "
-                + "SELECT punti_fatti "
-                + "FROM partecipazione_ospiti "
-                + "WHERE Squadra.idcampionato = partecipazione_ospiti.idcampionato "
-                + "AND Squadra.anno_campionato = partecipazione_ospiti.anno_campionato "
-                + "AND Squadra.nome_squadra = partecipazione_ospiti.nome_squadra "
-                + "AND Squadra.nome_girone = partecipazione_ospiti.nome_girone) "
-                + "WHERE (idcampionato, anno_campionato, nome_squadra, nome_girone) "
-                + "IN (SELECT idcampionato, anno_campionato, nome_squadra, nome_girone "
-                + "FROM partecipazione_ospiti) ";
-        try (PreparedStatement statement = connection.prepareStatement(query2)) {
-            statement.executeUpdate();
-        } catch (SQLIntegrityConstraintViolationException e) {
-            throw new IllegalArgumentException("Update4 partite fallito");
+            throw new IllegalArgumentException(e);
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
     }
 
-    private void updatePuntiSubiti() {
-        final String query = "UPDATE SQUADRA "
-                + "SET PUNTI_SUBITI=PUNTI_SUBITI+(SELECT partecipazione_casa.punti_fatti "
-                + "FROM partecipazione_ospiti, partecipazione_casa "
-                + "WHERE Squadra.idcampionato = partecipazione_ospiti.idcampionato "
-                + "AND Squadra.anno_campionato = partecipazione_ospiti.anno_campionato "
-                + "AND Squadra.nome_squadra = partecipazione_ospiti.nome_squadra "
-                + "AND Squadra.nome_girone = partecipazione_ospiti.nome_girone "
-                + "AND partecipazione_casa.codicepalestra = partecipazione_ospiti.codicepalestra "
-                + "AND partecipazione_casa.data_ora = partecipazione_ospiti.data_ora) "
-                + "WHERE (idcampionato, anno_campionato, nome_squadra, nome_girone) "
-                + "IN (SELECT idcampionato, anno_campionato, nome_squadra, nome_girone "
-                + "FROM partecipazione_ospiti) ";
+    private void updatePuntiSegnatiOspiti() {
+        final String query = "UPDATE Squadra "
+                            + "SET punti_segnati = punti_segnati + ( "
+                            + "SELECT SUM(punti_fatti) "
+                            + "FROM partecipazione_ospiti "
+                            + "WHERE Squadra.idcampionato = partecipazione_ospiti.idcampionato "
+                            + "    AND Squadra.anno_campionato = partecipazione_ospiti.anno_campionato "
+                            + "    AND Squadra.nome_squadra = partecipazione_ospiti.nome_squadra "
+                            + "    AND Squadra.nome_girone = partecipazione_ospiti.nome_girone "
+                            + ") "
+                            + "WHERE (idcampionato, anno_campionato, nome_squadra, nome_girone) IN ( "
+                            + "SELECT idcampionato, anno_campionato, nome_squadra, nome_girone "
+                            + "FROM partecipazione_ospiti "
+                            + ")";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException e) {
-            throw new IllegalArgumentException("Update3 partite fallito");
-        } catch (SQLException e) {
-            throw new IllegalStateException(e);
-        }
-        final String query2 = "UPDATE SQUADRA "
-                + "SET PUNTI_SUBITI=PUNTI_SUBITI+(SELECT partecipazione_ospiti.punti_fatti "
-                + "FROM partecipazione_ospiti, partecipazione_casa "
-                + "WHERE Squadra.idcampionato = partecipazione_casa.idcampionato "
-                + "AND Squadra.anno_campionato = partecipazione_casa.anno_campionato "
-                + "AND Squadra.nome_squadra = partecipazione_casa.nome_squadra "
-                + "AND Squadra.nome_girone = partecipazione_casa.nome_girone "
-                + "AND partecipazione_casa.codicepalestra = partecipazione_ospiti.codicepalestra "
-                + "AND partecipazione_casa.data_ora = partecipazione_ospiti.data_ora) "
-                + "WHERE (idcampionato, anno_campionato, nome_squadra, nome_girone) "
-                + "IN (SELECT idcampionato, anno_campionato, nome_squadra, nome_girone "
-                + "FROM partecipazione_casa)";
-        try (PreparedStatement statement = connection.prepareStatement(query2)) {
-            statement.executeUpdate();
-        } catch (SQLIntegrityConstraintViolationException e) {
-            throw new IllegalArgumentException("Update5 partite fallito");
+            throw new IllegalArgumentException(e);
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
     }
 
-    private void updateSquadraTrasferta(String idCampionato, int annoCampionato,
+    private void updatePuntiSegnatiCasa() {
+        final String query = "UPDATE Squadra SET punti_segnati = punti_segnati + "
+                            + "( SELECT SUM(punti_fatti) FROM partecipazione_casa WHERE Squadra.idcampionato "
+                            + "= partecipazione_casa.idcampionato AND Squadra.anno_campionato = "
+                            + "partecipazione_casa.anno_campionato AND Squadra.nome_squadra = partecipazione_casa.nome_squadra "
+                            + "AND Squadra.nome_girone = partecipazione_casa.nome_girone ) WHERE (idcampionato, "
+                            + "anno_campionato, nome_squadra, nome_girone) IN ( SELECT idcampionato, anno_campionato, "
+                            + "nome_squadra, nome_girone FROM partecipazione_casa )";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.executeUpdate();
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw new IllegalArgumentException(e);
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    private void updatePuntiSubitiCasa() {
+        final String query2 = "UPDATE Squadra "
+                            + "SET PUNTI_SUBITI = PUNTI_SUBITI + ( "
+                            + "SELECT SUM(partecipazione_ospiti.punti_fatti) "
+                            + "FROM partecipazione_ospiti, partecipazione_casa "
+                            + "WHERE Squadra.idcampionato = partecipazione_casa.idcampionato "
+                            + "    AND Squadra.anno_campionato = partecipazione_casa.anno_campionato "
+                            + "    AND Squadra.nome_squadra = partecipazione_casa.nome_squadra "
+                            + "    AND Squadra.nome_girone = partecipazione_casa.nome_girone "
+                            + "    AND partecipazione_casa.codicepalestra = partecipazione_casa.codicepalestra "
+                            + "    AND partecipazione_ospiti.data_ora = partecipazione_casa.data_ora "
+                            + ") "
+                            + "WHERE (idcampionato, anno_campionato, nome_squadra, nome_girone) IN ( "
+                            + "SELECT idcampionato, anno_campionato, nome_squadra, nome_girone "
+                            + "FROM partecipazione_casa "
+                            + ")";
+        try (PreparedStatement statement = connection.prepareStatement(query2)) {
+            statement.executeUpdate();
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw new IllegalArgumentException(e);
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    private void updateVittorieTrasferta(String idCampionato, int annoCampionato,
             String nomeGirone, String nomeOspiti) {
+        this.setUpdateZero();
         final String query = "UPDATE Squadra AS S "
-                + "JOIN ( "
-                + "SELECT PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra, COUNT() AS numero_vittorie "
-                + "FROM partecipazione_ospiti AS PO "
-                + "INNER JOIN partecipazione_casa AS PC "
-                + "ON PC.codicePalestra = PO.codicePalestra "
-                + "AND PC.data_ora = PO.data_ora "
-                + "WHERE PO.punti_fatti > PC.punti_fatti "
-                + "GROUP BY PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra "
-                + ") AS Vittorie "
-                + "ON S.idcampionato = Vittorie.idcampionato "
-                + "AND S.anno_campionato = Vittorie.anno_campionato "
-                + "AND S.nome_girone = Vittorie.nome_girone "
-                + "AND S.nome_squadra = Vittorie.nome_squadra "
-                + "SET S.numero_vittorie = S.numero_vittori+ Vittorie.numero_vittorie "
-                + "WHERE S.IDCAMPIONATO=? "
-                + "AND S.NOME_SQUADRA=? "
-                + "AND S.NOME_GIRONE=? "
-                + "AND S.ANNO_CAMPIONATO=?";
+                            + "JOIN ( "
+                            + "SELECT PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra, COUNT(*) AS numero_vittorie "
+                            + "FROM partecipazione_ospiti AS PO "
+                            + "INNER JOIN partecipazione_casa AS PC "
+                            + "    ON PC.codicePalestra = PO.codicePalestra "
+                            + "    AND PC.data_ora = PO.data_ora "
+                            + "WHERE PO.punti_fatti > PC.punti_fatti "
+                            + "GROUP BY PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra "
+                            + ") AS Vittorie "
+                            + "ON S.idcampionato = Vittorie.idcampionato "
+                            + "AND S.anno_campionato = Vittorie.anno_campionato "
+                            + "AND S.nome_girone = Vittorie.nome_girone "
+                            + "AND S.nome_squadra = Vittorie.nome_squadra "
+                            + "SET S.numero_vittorie = S.numero_vittorie + Vittorie.numero_vittorie "
+                            + "WHERE S.IDCAMPIONATO=? "
+                            + "AND S.NOME_SQUADRA=? "
+                            + "AND S.NOME_GIRONE=? "
+                            + "AND S.ANNO_CAMPIONATO=?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, idCampionato);
             statement.setString(2, nomeOspiti);
@@ -203,42 +239,53 @@ public class FeaturesPartita{
             statement.setInt(4, annoCampionato);
             statement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException e) {
-            throw new IllegalArgumentException("Update partiteTrasferta fallito");
+            throw new IllegalArgumentException(e);
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
+        this.setUpdateUno();
+    }
 
-        final String query2 = "UPDATE Squadra AS S"
-                + "JOIN ( "
-                + "SELECT PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra, COUNT() AS numero_vittorie "
-                + "FROM partecipazione_ospiti AS PO "
-                + "INNER JOIN partecipazione_casa AS PC "
-                + "ON PC.codicePalestra = PO.codicePalestra "
-                + "AND PC.data_ora = PO.data_ora "
-                + "WHERE PO.punti_fatti > PC.punti_fatti "
-                + "GROUP BY PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra) AS Vittorie "
-                + "ON S.idcampionato = Vittorie.idcampionato "
-                + "AND S.anno_campionato = Vittorie.anno_campionato "
-                + "AND S.nome_girone = Vittorie.nome_girone "
-                + "AND S.nome_squadra = Vittorie.nome_squadra "
-                + "SET S.num_vittorie_ospiti = S.num_vittorie_ospiti + Vittorie.numero_vittorie "
-                + "WHERE S.IDCAMPIONATO=? "
-                + "AND S.NOME_SQUADRA=?"
-                + "AND S.NOME_GIRONE=?"
-                + "AND S.ANNO_CAMPIONATO=?";
-        try (PreparedStatement statement = connection.prepareStatement(query2)) {
+    private void updateNumeroVittorieOspiti(String idCampionato, int annoCampionato,
+            String nomeGirone, String nomeOspiti) {
+        this.setUpdateZero();
+        final String query = "UPDATE Squadra AS S "
+                            + "JOIN ( "
+                            + "SELECT PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra, COUNT(*) AS numero_vittorie "
+                            + "FROM partecipazione_ospiti AS PO "
+                            + "INNER JOIN partecipazione_casa AS PC "
+                            + "    ON PC.codicePalestra = PO.codicePalestra "
+                            + "    AND PC.data_ora = PO.data_ora "
+                            + "WHERE PO.punti_fatti > PC.punti_fatti "
+                            + "GROUP BY PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra "
+                            + ") AS Vittorie "
+                            + "ON S.idcampionato = Vittorie.idcampionato "
+                            + "AND S.anno_campionato = Vittorie.anno_campionato "
+                            + "AND S.nome_girone = Vittorie.nome_girone "
+                            + "AND S.nome_squadra = Vittorie.nome_squadra "
+                            + "SET S.num_vittorie_ospiti = S.num_vittorie_ospiti + Vittorie.numero_vittorie "
+                            + "WHERE S.IDCAMPIONATO=? "
+                            + "AND S.NOME_SQUADRA=? "
+                            + "AND S.NOME_GIRONE=? "
+                            + "AND S.ANNO_CAMPIONATO=?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, idCampionato);
             statement.setString(2, nomeOspiti);
             statement.setString(3, nomeGirone);
             statement.setInt(4, annoCampionato);
             statement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException e) {
-            throw new IllegalArgumentException("Update2 partiteTrasferta fallito");
+            throw new IllegalArgumentException(e);
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
+        this.setUpdateUno();
+    }
 
-        final String query3 = "UPDATE Squadra AS S "
+    private void updateVittorieCasa(String idCampionato, int annoCampionato,
+            String nomeGirone, String nomeOspiti) {
+        this.setUpdateZero();
+        final String query = "UPDATE Squadra AS S "
                 + "JOIN ( "
                 + "SELECT PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra, COUNT(*) AS numero_sconfitte "
                 + "FROM partecipazione_ospiti AS PO "
@@ -256,39 +303,42 @@ public class FeaturesPartita{
                 + "AND S.NOME_SQUADRA=? "
                 + "AND S.NOME_GIRONE=? "
                 + "AND S.ANNO_CAMPIONATO=?";
-        try (PreparedStatement statement = connection.prepareStatement(query3)) {
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, idCampionato);
             statement.setString(2, nomeOspiti);
             statement.setString(3, nomeGirone);
             statement.setInt(4, annoCampionato);
             statement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException e) {
-            throw new IllegalArgumentException("Update3 partiteTrasferta fallito");
+            throw new IllegalArgumentException(e);
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
+        this.setUpdateUno();
     }
-    
-    private void updateSquadraCasa(String idCampionato, int annoCampionato,
+
+    private void updateSconfitteTrasferta(String idCampionato, int annoCampionato,
             String nomeGirone, String nomeCasa) {
-        final String query = "UPDATE Squadra AS S"
-                + "JOIN ( "
-                + "SELECT PC.idcampionato, PC.anno_campionato, PC.nome_girone, PC.nome_squadra, COUNT(*) AS numero_sconfitte "
-                + "FROM partecipazione_casa AS PC "
-                + "INNER JOIN partecipazione_ospiti AS PO "
-                + "ON PC.codicePalestra = PO.codicePalestra "
-                + "AND PC.data_ora = PO.data_ora "
-                + "WHERE PC.punti_fatti < PO.punti_fatti "
-                + "GROUP BY PC.idcampionato, PC.anno_campionato, PC.nome_girone, PC.nome_squadra) AS Vittorie "
-                + "ON S.idcampionato = Vittorie.idcampionato "
-                + "AND S.anno_campionato = Vittorie.anno_campionato "
-                + "AND S.nome_girone = Vittorie.nome_girone "
-                + "AND S.nome_squadra = Vittorie.nome_squadra "
-                + "SET S.numero_sconfitte = S.numero_sconfitte + Vittorie.numero_sconfitte "
-                + "WHERE S.IDCAMPIONATO=? "
-                + "AND S.NOME_SQUADRA=?" 
-                + "AND S.NOME_GIRONE=? "
-                + "AND S.ANNO_CAMPIONATO=? ";
+        this.setUpdateZero();
+        final String query = "UPDATE Squadra AS S "
+                            + "JOIN ( "
+                            + "SELECT PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra, COUNT(*) AS numero_sconfitte "
+                            + "FROM partecipazione_ospiti AS PO "
+                            + "INNER JOIN partecipazione_casa AS PC "
+                            + "    ON PC.codicePalestra = PO.codicePalestra "
+                            + "    AND PC.data_ora = PO.data_ora "
+                            + "WHERE PO.punti_fatti < PC.punti_fatti "
+                            + "GROUP BY PO.idcampionato, PO.anno_campionato, PO.nome_girone, PO.nome_squadra "
+                            + ") AS Vittorie "
+                            + "ON S.idcampionato = Vittorie.idcampionato "
+                            + "AND S.anno_campionato = Vittorie.anno_campionato "
+                            + "AND S.nome_girone = Vittorie.nome_girone "
+                            + "AND S.nome_squadra = Vittorie.nome_squadra "
+                            + "SET S.numero_sconfitte = S.numero_sconfitte + Vittorie.numero_sconfitte 2 "
+                            + "WHERE S.IDCAMPIONATO=? "
+                            + "AND S.NOME_SQUADRA=? "
+                            + "AND S.NOME_GIRONE=? "
+                            + "AND S.ANNO_CAMPIONATO=?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, idCampionato);
             statement.setString(2, nomeCasa);
@@ -296,42 +346,49 @@ public class FeaturesPartita{
             statement.setInt(4, annoCampionato);
             statement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException e) {
-            throw new IllegalArgumentException("Update partiteCasa fallito");
+            throw new IllegalArgumentException(e);
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
+        this.setUpdateUno();
+    }
 
-        final String query2 = "UPDATE Squadra AS S " 
-                +"JOIN ( " 
-                + "SELECT PC.idcampionato, PC.anno_campionato, PC.nome_girone, PC.nome_squadra, COUNT(*) AS numero_vittorie " 
-                + "FROM partecipazione_casa AS PC " 
-                + "INNER JOIN partecipazione_ospiti AS PO " 
-                + "ON PC.codicePalestra = PO.codicePalestra " 
-                + "AND PC.data_ora = PO.data_ora " 
-                + "WHERE PC.punti_fatti > PO.punti_fatti " 
-                + "GROUP BY PC.idcampionato, PC.anno_campionato, PC.nome_girone, PC.nome_squadra) AS Vittorie " 
-                + "ON S.idcampionato = Vittorie.idcampionato " 
-                + "AND S.anno_campionato = Vittorie.anno_campionato " 
-                + "AND S.nome_girone = Vittorie.nome_girone " 
-                + "AND S.nome_squadra = Vittorie.nome_squadra " 
-                + "SET S.numero_vittorie = S.numero_vittorie + Vittorie.numero_vittorie " 
-                + "WHERE S.IDCAMPIONATO=? " 
-                + "AND S.NOME_SQUADRA=? " 
-                + "AND S.NOME_GIRONE=? " 
-                + "AND S.ANNO_CAMPIONATO=? ";
-        try (PreparedStatement statement = connection.prepareStatement(query2)) {
+    private void updateSconfitteCasa(String idCampionato, int annoCampionato,
+            String nomeGirone, String nomeCasa) {
+        this.setUpdateZero();
+        final String query = "UPDATE Squadra AS S "
+                            + "JOIN ( "
+                            + "SELECT PC.idcampionato, PC.anno_campionato, PC.nome_girone, PC.nome_squadra, COUNT(*) AS numero_sconfitte "
+                            + "FROM partecipazione_casa AS PC "
+                            + "INNER JOIN partecipazione_ospiti AS PO "
+                            + "    ON PC.codicePalestra = PO.codicePalestra "
+                            + "    AND PC.data_ora = PO.data_ora "
+                            + "WHERE PC.punti_fatti < PO.punti_fatti "
+                            + "GROUP BY PC.idcampionato, PC.anno_campionato, PC.nome_girone, PC.nome_squadra "
+                            + ") AS Vittorie "
+                            + "ON S.idcampionato = Vittorie.idcampionato "
+                            + "AND S.anno_campionato = Vittorie.anno_campionato "
+                            + "AND S.nome_girone = Vittorie.nome_girone "
+                            + "AND S.nome_squadra = Vittorie.nome_squadra "
+                            + "SET S.numero_sconfitte = S.numero_sconfitte + Vittorie.numero_sconfitte "
+                            + "WHERE S.IDCAMPIONATO=? "
+                            + "AND S.NOME_SQUADRA=? "
+                            + "AND S.NOME_GIRONE=? "
+                            + "AND S.ANNO_CAMPIONATO=?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, idCampionato);
             statement.setString(2, nomeCasa);
             statement.setString(3, nomeGirone);
             statement.setInt(4, annoCampionato);
             statement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException e) {
-            throw new IllegalArgumentException("Update2 partiteCasa fallito");
+            throw new IllegalArgumentException(e);
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
+        this.setUpdateUno();
     }
-    
+
     public void addPerformance(String codicePalestra, Timestamp dataOra, String tesseraFIP, int rimb, int assist,
             int falliFatti, int falliSubiti, int min, int tiri2, int tiri3, int tiriLiberi, int tiri2_segnati,
             int tiri3_segnati, int tiriLiberi_segnati, int palleRubate, int pallePerse, int stoppate)
@@ -372,7 +429,7 @@ public class FeaturesPartita{
     
     public void addDirezione(int rimborso, String tesseraFIP, String codicePalestra, Timestamp dataOra) throws SQLException {
         final String query = "INSERT INTO DIREZIONE "
-                            + "(TESSERAFIP, CODICEPALESTRA, DATA_ORA, RIMBORSO)) "
+                            + "(TESSERAFIP, CODICEPALESTRA, DATA_ORA, RIMBORSO) "
                             + "VALUES (?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, tesseraFIP);
@@ -381,59 +438,83 @@ public class FeaturesPartita{
             statement.setInt(4, rimborso);
             statement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException e) {
-            throw new IllegalArgumentException("Direzione già presente");
+            throw new IllegalArgumentException(e);
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
-        final String query2 = "SET SQL_SAFE_UPDATES = 0; "
-                            + "UPDATE Arbitro AS A "
-                            + "JOIN ( "
-                            + "SELECT tesserafip, SUM(rimborso) AS totale_rimborsi "
-                            + "FROM Direzione "
-                            + "GROUP BY tesserafip "
-                            + ") AS T "
-                            + "ON A.tesserafip = T.tesserafip "
-                            + "SET A.stipendio_totale = T.totale_rimborsi;"
-                            + "SET SQL_SAFE_UPDATES = 1";
-        try (PreparedStatement statement = connection.prepareStatement(query2)) {
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            removeDirezione(tesseraFIP, codicePalestra, dataOra);
-            throw new IllegalStateException(e);
-        }
+        this.updateArbitri();
     }
 
     public void addCoDirezione(int rimborso, String tesseraFIP, String codicePalestra, Timestamp dataOra) throws SQLException {
         final String query = "INSERT INTO CODIREZIONE "
-                            + "(TESSERAFIP, CODICEPALESTRA, DATA_ORA, RIMBORSO)) "
+                            + "(TESSERAFIP, CODICEPALESTRA, DATA_ORA, RIMBORSO) "
                             + "VALUES (?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, rimborso);
-            statement.setString(2, tesseraFIP);
-            statement.setString(3, codicePalestra);
-            statement.setTimestamp(4, dataOra);
+            statement.setString(1, tesseraFIP);
+            statement.setString(2, codicePalestra);
+            statement.setTimestamp(3, dataOra);
+            statement.setInt(4, rimborso);
             statement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException e) {
-            throw new IllegalArgumentException("Codirezione già presente");
+            throw new IllegalArgumentException(e);
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
-        final String query2 = "SET SQL_SAFE_UPDATES = 0; "
-                            + "UPDATE Ufficiale_di_campo AS U "
-                            + "JOIN ( "
-                            + "SELECT tesserafip, SUM(rimborso) AS totale_rimborsi "
-                            + "FROM codirezione "
-                            + "GROUP BY tesserafip "
-                            + ") AS T "
-                            + "ON U.tesserafip = T.tesserafip "
-                            + "SET U.stipendio_totale = T.totale_rimborsi; "
-                            + "SET SQL_SAFE_UPDATES = 1";
+        this.updateUfficiali();
+    }
+
+    private void setUpdateZero() {
+        final String query = "SET SQL_SAFE_UPDATES = 0";
+        try(PreparedStatement statement = connection.prepareStatement(query)){
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    private void setUpdateUno() {
+        final String query = "SET SQL_SAFE_UPDATES = 1";
+        try(PreparedStatement statement = connection.prepareStatement(query)){
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    private void updateArbitri() {
+        this.setUpdateZero();
+        final String query2 = " UPDATE Arbitro AS A "
+                            + " JOIN ( "
+                            + " SELECT tesserafip, SUM(rimborso) AS totale_rimborsi "
+                            + " FROM Direzione "
+                            + " GROUP BY tesserafip "
+                            + " ) AS T "
+                            + " ON A.tesserafip = T.tesserafip "
+                            + " SET A.stipendio_totale = T.totale_rimborsi";
         try (PreparedStatement statement = connection.prepareStatement(query2)) {
             statement.executeUpdate();
         } catch (SQLException e) {
-            removeCoDirezione(tesseraFIP, codicePalestra, dataOra);
             throw new IllegalStateException(e);
         }
+        this.setUpdateUno();
+    }
+
+    public void updateUfficiali() {
+        this.setUpdateZero();
+        final String query2 = " UPDATE Ufficiale_di_campo AS U "
+                            + " JOIN ( "
+                            + " SELECT tesserafip, SUM(rimborso) AS totale_rimborsi "
+                            + " FROM codirezione "
+                            + " GROUP BY tesserafip "
+                            + " ) AS T "
+                            + " ON U.tesserafip = T.tesserafip "
+                            + " SET U.stipendio_totale = T.totale_rimborsi ";
+        try (PreparedStatement statement = connection.prepareStatement(query2)) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
+        this.setUpdateUno();
     }
 
     public void removePartita(String codicePalestra, Timestamp dataOra) throws SQLException {
@@ -448,7 +529,7 @@ public class FeaturesPartita{
     }
 
     public void removePerformance(String codicePalestra, Timestamp dataOra, String tesseraFIP) throws SQLException {
-        final String query = "DELETE FROM PERFORMANCE WHERE  CODICEPALESTRA=? AND TESSERAFIP=? AND DATA_ORA=?;";
+        final String query = "DELETE FROM PERFORMANCE WHERE CODICEPALESTRA=? AND TESSERAFIP=? AND DATA_ORA=?;";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, codicePalestra);
             statement.setString(2, tesseraFIP);
@@ -460,7 +541,7 @@ public class FeaturesPartita{
     }
 
     public void removeDirezione(String tesseraFIP, String codicePalestra, Timestamp dataOra) throws SQLException {
-        final String query = "DELETE FROM DIREZIONE WHERE TESSERAFIP=? AND CODICEPALESTRA=? AND DATA_ORA=?";
+        final String query = "DELETE FROM DIREZIONE D WHERE d.TESSERAFIP=? AND d.CODICEPALESTRA=? AND d.DATA_ORA=?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, tesseraFIP);
             statement.setString(2, codicePalestra);
@@ -469,10 +550,11 @@ public class FeaturesPartita{
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
+        this.updateArbitri();
     }
 
     public void removeCoDirezione(String tesseraFIP, String codicePalestra, Timestamp dataOra) throws SQLException {
-        final String query = "DELETE FROM CODIREZIONE WHERE TESSERAFIP=? AND CODICEPALESTRA=? AND DATA_ORA=?";
+        final String query = "DELETE FROM CODIREZIONE C WHERE c.TESSERAFIP=? AND c.CODICEPALESTRA=? AND c.DATA_ORA=?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, tesseraFIP);
             statement.setString(2, codicePalestra);
@@ -481,6 +563,7 @@ public class FeaturesPartita{
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
+        this.updateUfficiali();
     }
 
     public ObservableList<Partita> viewPartite() {
@@ -511,8 +594,7 @@ public class FeaturesPartita{
     
     public ObservableList<Performance> viewPerformance() {
         final String query = "select P.rimbalzi, P.assist, P.falli_fatti, P.falli_subiti, P.minuti, P.tiri_2, P.tiri_3, P.tiri_liberi, P.tiri_2_segnati, P.tiri_3_segnati, P.tiri_liberi_segnati, P.palle_rubate, P.palle_perse, P.stoppate, T.nome, T.cognome, M.nome_squadra "
-                +
-                "from performance p, membro_giocatore m, tesserato t, giocatore g " +
+                + "from performance p, membro_giocatore m, tesserato t, giocatore g " +
                 "where t.tesserafip=g.tesserafip " +
                 "and g.tesserafip=m.tesserafip " +
                 "and m.tesserafip=p.tesserafip";
@@ -535,7 +617,7 @@ public class FeaturesPartita{
             throw new IllegalStateException(e);
         }
     }
-    
+
     public ObservableList<Direzione> viewDirezione() {
         final String query = "SELECT T.NOME, T.COGNOME, D.RIMBORSO, P.DATA_ORA, C.NOME_SQUADRA AS NOME_SQUADRA1, O.NOME_SQUADRA AS NOME_SQUADRA2, G.NOME_PALESTRA "
                             + "FROM TESSERATO T, ARBITRO A, DIREZIONE D, PARTITA P, PARTECIPAZIONE_CASA C, PARTECIPAZIONE_OSPITI O, PALESTRA G "

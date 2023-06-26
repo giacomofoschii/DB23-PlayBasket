@@ -189,19 +189,20 @@ public class PartiteController implements Initializable{
             this.featuresPartita.addDirezione(Integer.parseInt(rimborso.getText()), tesseraFIPDirezione.getText(),
                     codicePalestraDirezione.getText(),
                     DateAdapter.dateToSqlDate(DateAdapter.buildDate(dataOraDirezione.getText()).get()));
-            codicePalestra.clear();
-            dataOra.clear();
-            tesseraFIP.clear();
+            tesseraFIPDirezione.clear();
+            dataOraDirezione.clear();
+            codicePalestraDirezione.clear();
+            rimborso.clear();
             this.viewDirezione();
         } catch (SQLIntegrityConstraintViolationException e) {
-            codicePalestra.clear();
-            codicePalestra.setPromptText("Errore di inserimento");
-            codicePalestra.setStyle("-fx-prompt-text-fill: red;");
+            tesseraFIPDirezione.clear();
+            tesseraFIPDirezione.setPromptText("Errore di inserimento");
+            tesseraFIPDirezione.setStyle("-fx-prompt-text-fill: red;");
             throw new IllegalArgumentException(e);
         } catch (SQLException e) {
-            codicePalestra.clear();
-            codicePalestra.setPromptText("Errore di inserimento");
-            codicePalestra.setStyle("-fx-prompt-text-fill: red;");
+            tesseraFIPDirezione.clear();
+            tesseraFIPDirezione.setPromptText("Errore di inserimento");
+            tesseraFIPDirezione.setStyle("-fx-prompt-text-fill: red;");
             throw new IllegalStateException(e);
         }
     }
@@ -212,19 +213,20 @@ public class PartiteController implements Initializable{
             this.featuresPartita.addCoDirezione(Integer.parseInt(rimborso.getText()), tesseraFIPDirezione.getText(),
                     codicePalestraDirezione.getText(),
                     DateAdapter.dateToSqlDate(DateAdapter.buildDate(dataOraDirezione.getText()).get()));
-            codicePalestra.clear();
-            dataOra.clear();
-            tesseraFIP.clear();
+            tesseraFIPDirezione.clear();
+            dataOraDirezione.clear();
+            codicePalestraDirezione.clear();
+            rimborso.clear();
             this.viewCoDirezione();
         } catch (SQLIntegrityConstraintViolationException e) {
-            codicePalestra.clear();
-            codicePalestra.setPromptText("Errore di inserimento");
-            codicePalestra.setStyle("-fx-prompt-text-fill: red;");
+            tesseraFIPDirezione.clear();
+            tesseraFIPDirezione.setPromptText("Errore di inserimento");
+            tesseraFIPDirezione.setStyle("-fx-prompt-text-fill: red;");
             throw new IllegalArgumentException(e);
         } catch (SQLException e) {
-            codicePalestra.clear();
-            codicePalestra.setPromptText("Errore di inserimento");
-            codicePalestra.setStyle("-fx-prompt-text-fill: red;");
+            tesseraFIPDirezione.clear();
+            tesseraFIPDirezione.setPromptText("Errore di inserimento");
+            tesseraFIPDirezione.setStyle("-fx-prompt-text-fill: red;");
             throw new IllegalStateException(e);
         }
     }
@@ -288,10 +290,10 @@ public class PartiteController implements Initializable{
         try {
             this.featuresPartita.removeDirezione(tesseraFIPDirezione.getText(), codicePalestraDirezione.getText(),
                     DateAdapter.dateToSqlDate(DateAdapter.buildDate(dataOraDirezione.getText()).get()));
+            this.viewDirezione();
             codicePalestraDirezione.clear();
             dataOraDirezione.clear();
             tesseraFIPDirezione.clear();
-            this.viewDirezione();
         } catch (SQLException e) {
             codicePalestraDirezione.clear();
             codicePalestraDirezione.setPromptText("Errore di rimozione");
@@ -305,10 +307,10 @@ public class PartiteController implements Initializable{
         try {
             this.featuresPartita.removeDirezione(tesseraFIPDirezione.getText(), codicePalestraDirezione.getText(),
                     DateAdapter.dateToSqlDate(DateAdapter.buildDate(dataOraDirezione.getText()).get()));
+            this.viewCoDirezione();
             codicePalestraDirezione.clear();
             dataOraDirezione.clear();
             tesseraFIPDirezione.clear();
-            this.viewDirezione();
         } catch (SQLException e) {
             codicePalestraDirezione.clear();
             codicePalestraDirezione.setPromptText("Errore di rimozione");
