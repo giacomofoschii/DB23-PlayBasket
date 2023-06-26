@@ -305,7 +305,7 @@ public class PartiteController implements Initializable{
     @FXML
     public void removeCoDirezione() {
         try {
-            this.featuresPartita.removeDirezione(tesseraFIPDirezione.getText(), codicePalestraDirezione.getText(),
+            this.featuresPartita.removeCoDirezione(tesseraFIPDirezione.getText(), codicePalestraDirezione.getText(),
                     DateAdapter.dateToSqlDate(DateAdapter.buildDate(dataOraDirezione.getText()).get()));
             this.viewCoDirezione();
             codicePalestraDirezione.clear();
