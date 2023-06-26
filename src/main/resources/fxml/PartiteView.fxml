@@ -123,41 +123,50 @@
                                  </font>
                               </Text>
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Codice palestra*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="yyyy-mm-dd hh:mm:ss*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Tessera FIP*" />
-                              <TextField prefHeight="25.0" prefWidth="190.0" promptText="Rimborso*" />
+                              <TextField fx:id="codicePalestraDirezione" prefHeight="25.0" prefWidth="190.0" promptText="Codice palestra*" />
+                              <TextField fx:id="dataOraDirezione" prefHeight="25.0" prefWidth="190.0" promptText="yyyy-mm-dd hh:mm:ss*" />
+                              <TextField fx:id="tesseraFIPDirezione" prefHeight="25.0" prefWidth="190.0" promptText="Tessera FIP*" />
+                              <TextField fx:id="rimborso" prefHeight="25.0" prefWidth="190.0" promptText="Rimborso*" />
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Aggiungi come direzione">
+                              <Button fx:id="addDirezione" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Aggiungi come direzione">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
                               </Button>
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Aggiungi come co-direzione">
+                              <Button fx:id="addCoDirezione" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Aggiungi come co-direzione">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
                               </Button>
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Rimuovi direzione">
+                              <Button fx:id="removeDirezione" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Rimuovi direzione">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
                               </Button>
                               <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Rimuovi co-direzione">
+                              <Button mnemonicParsing="false" onAction="#removeCoDirezione" prefHeight="25.0" prefWidth="200.0" text="Rimuovi co-direzione">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
                               </Button>
-                              <Separator focusTraversable="false" prefHeight="234.0" prefWidth="200.0" visible="false" />
+                              <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
+                              <Button mnemonicParsing="false" onAction="#viewDirezione" prefWidth="200.0" text="Visualizza direzione" />
+                              <Separator focusTraversable="false" prefHeight="10.0" prefWidth="200.0" visible="false" />
+                              <Button mnemonicParsing="false" onAction="#viewCoDirezione" prefWidth="200.0" text="Visualizza co-direzione" />
+                              <Separator focusTraversable="false" prefHeight="182.0" prefWidth="200.0" visible="false" />
                               <Button mnemonicParsing="false" onAction="#goManagement" prefWidth="200.0" text="Torna alla gestone" />
                            </children>
                         </FlowPane>
                      </left>
                      <center>
-                        <TableView fx:id="supplierView1" />
+                        <AnchorPane prefHeight="571.0" prefWidth="534.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <TableView fx:id="direzione" prefHeight="286.0" prefWidth="585.0" />
+                              <TableView fx:id="codirezione" layoutY="286.0" prefHeight="286.0" prefWidth="584.0" />
+                           </children>
+                        </AnchorPane>
                      </center>
                   </BorderPane>
                </content>

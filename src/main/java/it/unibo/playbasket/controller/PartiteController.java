@@ -7,7 +7,9 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import it.unibo.playbasket.db.features.FeaturesPartita;
+import it.unibo.playbasket.db.views.Direzione;
 import it.unibo.playbasket.db.views.Partita;
+import it.unibo.playbasket.db.views.Performance;
 import it.unibo.playbasket.utils.DateAdapter;
 import it.unibo.playbasket.view.impl.FxView;
 import javafx.fxml.FXML;
@@ -78,7 +80,21 @@ public class PartiteController implements Initializable{
     @FXML
     private TextField stoppate;
     @FXML
-    private TableView<Partita> performance;
+    private TableView<Performance> performance;
+    //Direzione
+    @FXML
+    private TextField codicePalestraDirezione;
+    @FXML
+    private TextField dataOraDirezione;
+    @FXML
+    private TextField tesseraFIPDirezione;
+    @FXML
+    private TextField rimborso;
+    @FXML
+    private TableView<Direzione> direzione;
+    @FXML
+    private TableView<Direzione> codirezione;
+
 
 
     /**
@@ -168,6 +184,52 @@ public class PartiteController implements Initializable{
     }
 
     @FXML
+    public void addDirezione() {
+        try {
+            this.featuresPartita.addDirezione(Integer.parseInt(rimborso.getText()), tesseraFIPDirezione.getText(),
+                    codicePalestraDirezione.getText(),
+                    DateAdapter.dateToSqlDate(DateAdapter.buildDate(dataOraDirezione.getText()).get()));
+            codicePalestra.clear();
+            dataOra.clear();
+            tesseraFIP.clear();
+            this.viewDirezione();
+        } catch (SQLIntegrityConstraintViolationException e) {
+            codicePalestra.clear();
+            codicePalestra.setPromptText("Errore di inserimento");
+            codicePalestra.setStyle("-fx-prompt-text-fill: red;");
+            throw new IllegalArgumentException(e);
+        } catch (SQLException e) {
+            codicePalestra.clear();
+            codicePalestra.setPromptText("Errore di inserimento");
+            codicePalestra.setStyle("-fx-prompt-text-fill: red;");
+            throw new IllegalStateException(e);
+        }
+    }
+
+    @FXML
+    public void addCoDirezione() {
+        try {
+            this.featuresPartita.addCoDirezione(Integer.parseInt(rimborso.getText()), tesseraFIPDirezione.getText(),
+                    codicePalestraDirezione.getText(),
+                    DateAdapter.dateToSqlDate(DateAdapter.buildDate(dataOraDirezione.getText()).get()));
+            codicePalestra.clear();
+            dataOra.clear();
+            tesseraFIP.clear();
+            this.viewCoDirezione();
+        } catch (SQLIntegrityConstraintViolationException e) {
+            codicePalestra.clear();
+            codicePalestra.setPromptText("Errore di inserimento");
+            codicePalestra.setStyle("-fx-prompt-text-fill: red;");
+            throw new IllegalArgumentException(e);
+        } catch (SQLException e) {
+            codicePalestra.clear();
+            codicePalestra.setPromptText("Errore di inserimento");
+            codicePalestra.setStyle("-fx-prompt-text-fill: red;");
+            throw new IllegalStateException(e);
+        }
+    }
+
+    @FXML
     public void removePartita() {
         try {
             this.featuresPartita.removePartita(codicePalestra.getText(), DateAdapter.dateToSqlDate(DateAdapter.buildDate(dataOra.getText()).get()));
@@ -190,7 +252,70 @@ public class PartiteController implements Initializable{
     }
 
     @FXML
-    public void removePerformance() {}
+    public void removePerformance() {
+        try {
+            this.featuresPartita.removePerformance(codicePalestraPerformance.getText(),
+                    DateAdapter.dateToSqlDate(DateAdapter.buildDate(dataOraPerformance.getText()).get()),
+                    tesseraFIP.getText());
+            codicePalestraPerformance.clear();
+            dataOraPerformance.clear();
+            tesseraFIP.clear();
+            rimbalzi.clear();
+            assist.clear();
+            falliFatti.clear();
+            falliSubiti.clear();
+            minuti.clear();
+            tiri2.clear();
+            tiri3.clear();
+            tiriLiberi.clear();
+            tiri2_segnati.clear();
+            tiri3_segnati.clear();
+            tiriLiberi_segnati.clear();
+            palleRubate.clear();
+            pallePerse.clear();
+            stoppate.clear();
+            this.viewPerformance();
+        } catch (SQLException e) {
+            codicePalestraPerformance.clear();
+            codicePalestraPerformance.setPromptText("Errore di rimozione");
+            codicePalestraPerformance.setStyle("-fx-prompt-text-fill: red;");
+            throw new IllegalStateException(e);
+        }
+    }
+    
+    @FXML
+    public void removeDirezione() {
+        try {
+            this.featuresPartita.removeDirezione(tesseraFIPDirezione.getText(), codicePalestraDirezione.getText(),
+                    DateAdapter.dateToSqlDate(DateAdapter.buildDate(dataOraDirezione.getText()).get()));
+            codicePalestraDirezione.clear();
+            dataOraDirezione.clear();
+            tesseraFIPDirezione.clear();
+            this.viewDirezione();
+        } catch (SQLException e) {
+            codicePalestraDirezione.clear();
+            codicePalestraDirezione.setPromptText("Errore di rimozione");
+            codicePalestraDirezione.setStyle("-fx-prompt-text-fill: red;");
+            throw new IllegalStateException(e);
+        }
+    }
+
+    @FXML
+    public void removeCoDirezione() {
+        try {
+            this.featuresPartita.removeDirezione(tesseraFIPDirezione.getText(), codicePalestraDirezione.getText(),
+                    DateAdapter.dateToSqlDate(DateAdapter.buildDate(dataOraDirezione.getText()).get()));
+            codicePalestraDirezione.clear();
+            dataOraDirezione.clear();
+            tesseraFIPDirezione.clear();
+            this.viewDirezione();
+        } catch (SQLException e) {
+            codicePalestraDirezione.clear();
+            codicePalestraDirezione.setPromptText("Errore di rimozione");
+            codicePalestraDirezione.setStyle("-fx-prompt-text-fill: red;");
+            throw new IllegalStateException(e);
+        }
+    }
 
     private void viewPartite() {
         this.partite.getColumns().clear();
@@ -214,18 +339,96 @@ public class PartiteController implements Initializable{
         nomeGironeColum.setCellValueFactory(new PropertyValueFactory<>("nomeGirone"));
         this.partite.getColumns().addAll(Arrays.asList(nomeCasaColum, puntiCasaColum, nomeOspitiColum, puntiOspitiColum,
                 dataOraColum, codicePalestraColum, idCampionatoColum, annoCampionatoColum, nomeGironeColum));
-        this.partite.getItems().addAll(this.featuresPartita.viewPartite());
+        this.partite.setItems(this.featuresPartita.viewPartite());
 
     }
     
     private void viewPerformance() {
-
+        this.performance.getColumns().clear();
+        TableColumn<Performance, String> codicePalestraColum = new TableColumn<>("Nome");
+        codicePalestraColum.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        TableColumn<Performance, String> dataOraColum = new TableColumn<>("Cognome");
+        dataOraColum.setCellValueFactory(new PropertyValueFactory<>("cognome"));
+        TableColumn<Performance, String> tesseraFIPColum = new TableColumn<>("Nome squadra");
+        tesseraFIPColum.setCellValueFactory(new PropertyValueFactory<>("nomeSquadra"));
+        TableColumn<Performance, Integer> rimbalziColum = new TableColumn<>("Rimbalzi");
+        rimbalziColum.setCellValueFactory(new PropertyValueFactory<>("rimbalzi"));
+        TableColumn<Performance, Integer> assistColum = new TableColumn<>("Assist");
+        assistColum.setCellValueFactory(new PropertyValueFactory<>("assist"));
+        TableColumn<Performance, Integer> falliFattiColum = new TableColumn<>("Falli Fatti");
+        falliFattiColum.setCellValueFactory(new PropertyValueFactory<>("falliFatti"));
+        TableColumn<Performance, Integer> falliSubitiColum = new TableColumn<>("Falli Subiti");
+        falliSubitiColum.setCellValueFactory(new PropertyValueFactory<>("falliSubiti"));
+        TableColumn<Performance, Integer> minutiColum = new TableColumn<>("Minuti");
+        minutiColum.setCellValueFactory(new PropertyValueFactory<>("minuti"));
+        TableColumn<Performance, Integer> tiri2Colum = new TableColumn<>("Tiri 2");
+        tiri2Colum.setCellValueFactory(new PropertyValueFactory<>("tiri2"));
+        TableColumn<Performance, Integer> tiri3Colum = new TableColumn<>("Tiri 3");
+        tiri3Colum.setCellValueFactory(new PropertyValueFactory<>("tiri3"));
+        TableColumn<Performance, Integer> tiriLiberiColum = new TableColumn<>("Tiri Liberi");
+        tiriLiberiColum.setCellValueFactory(new PropertyValueFactory<>("tiriLiberi"));
+        TableColumn<Performance, Integer> tiri2_segnatiColum = new TableColumn<>("Tiri 2 Segnati");
+        tiri2_segnatiColum.setCellValueFactory(new PropertyValueFactory<>("tiri2_segnati"));
+        TableColumn<Performance, Integer> tiri3_segnatiColum = new TableColumn<>("Tiri 3 Segnati");
+        tiri3_segnatiColum.setCellValueFactory(new PropertyValueFactory<>("tiri3_segnati"));
+        TableColumn<Performance, Integer> tiriLiberi_segnatiColum = new TableColumn<>("Tiri Liberi Segnati");
+        tiriLiberi_segnatiColum.setCellValueFactory(new PropertyValueFactory<>("tiriLiberi_segnati"));
+        TableColumn<Performance, Integer> palleRubateColum = new TableColumn<>("Palle Rubate");
+        palleRubateColum.setCellValueFactory(new PropertyValueFactory<>("palle_rubate"));
+        TableColumn<Performance, Integer> pallePerseColum = new TableColumn<>("Palle Perse");
+        pallePerseColum.setCellValueFactory(new PropertyValueFactory<>("palle_perse"));
+        TableColumn<Performance, Integer> stoppateColum = new TableColumn<>("Stoppate");
+        stoppateColum.setCellValueFactory(new PropertyValueFactory<>("stoppate"));
+        this.performance.getColumns()
+                .addAll(Arrays.asList(codicePalestraColum, dataOraColum, tesseraFIPColum, rimbalziColum, assistColum,
+                        falliFattiColum, falliSubitiColum, minutiColum, tiri2Colum, tiri3Colum, tiriLiberiColum,
+                        tiri2_segnatiColum, tiri3_segnatiColum, tiriLiberi_segnatiColum, palleRubateColum,
+                        pallePerseColum, stoppateColum));
+        this.performance.setItems(this.featuresPartita.viewPerformance());
     }
 
+    public void viewDirezione() {
+        this.direzione.getColumns().clear();
+        TableColumn<Direzione, String> nomeColum = new TableColumn<>("Nome");
+        nomeColum.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        TableColumn<Direzione, String> cognomeColum = new TableColumn<>("Cognome");
+        cognomeColum.setCellValueFactory(new PropertyValueFactory<>("cognome"));
+        TableColumn<Direzione, String> nomaSquadra1 = new TableColumn<>("Nome squadra casa");
+        nomaSquadra1.setCellValueFactory(new PropertyValueFactory<>("nomeSquadra1"));
+        TableColumn<Direzione, String> nomeSquadra2 = new TableColumn<>("Nome squadra ospite");
+        nomeSquadra2.setCellValueFactory(new PropertyValueFactory<>("nomeSquadra2"));
+        TableColumn<Direzione, String> dataOraColumn = new TableColumn<>("Data Ora");
+        dataOraColumn.setCellValueFactory(new PropertyValueFactory<>("dataOra"));
+        TableColumn<Direzione, String> rimborso = new TableColumn<>("Rimborso");
+        rimborso.setCellValueFactory(new PropertyValueFactory<>("rimborso"));
+        this.direzione.getColumns().addAll(Arrays.asList(nomeColum, cognomeColum, nomaSquadra1, nomeSquadra2,
+                dataOraColumn, rimborso));
+        this.direzione.setItems(this.featuresPartita.viewDirezione(tesseraFIPDirezione.getText()));
+    }
+
+    public void viewCoDirezione() {
+        this.direzione.getColumns().clear();
+        TableColumn<Direzione, String> nomeColum = new TableColumn<>("Nome");
+        nomeColum.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        TableColumn<Direzione, String> cognomeColum = new TableColumn<>("Cognome");
+        cognomeColum.setCellValueFactory(new PropertyValueFactory<>("cognome"));
+        TableColumn<Direzione, String> nomaSquadra1 = new TableColumn<>("Nome squadra casa");
+        nomaSquadra1.setCellValueFactory(new PropertyValueFactory<>("nomeSquadra1"));
+        TableColumn<Direzione, String> nomeSquadra2 = new TableColumn<>("Nome squadra ospite");
+        nomeSquadra2.setCellValueFactory(new PropertyValueFactory<>("nomeSquadra2"));
+        TableColumn<Direzione, String> dataOraColumn = new TableColumn<>("Data Ora");
+        dataOraColumn.setCellValueFactory(new PropertyValueFactory<>("dataOra"));
+        TableColumn<Direzione, String> rimborso = new TableColumn<>("Rimborso");
+        rimborso.setCellValueFactory(new PropertyValueFactory<>("rimborso"));
+        this.direzione.getColumns().addAll(Arrays.asList(nomeColum, cognomeColum, nomaSquadra1, nomeSquadra2,
+                dataOraColumn, rimborso));
+        this.codirezione.setItems(this.featuresPartita.viewCoDirezione(tesseraFIPDirezione.getText()));
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.viewPartite();
+        this.viewPerformance();
     }
 
     
