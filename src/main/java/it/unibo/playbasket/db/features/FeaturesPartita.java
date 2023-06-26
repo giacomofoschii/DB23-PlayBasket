@@ -88,6 +88,80 @@ public class FeaturesPartita{
             removePartita(codicePalestra, dataOra);
             throw new IllegalStateException(e);
         }
+        final String query2 = "UPDATE Squadra "
+                + "SET punti_segnati = punti_segnati + "
+                + "(SELECT punti_fatti "
+                + "FROM partecipazione_casa "
+                + "WHERE Squadra.idcampionato = partecipazione_casa.idcampionato "
+                + "AND Squadra.anno_campionato = partecipazione_casa.anno_campionato "
+                + "AND Squadra.nome_squadra = partecipazione_casa.nome_squadra "
+                + "AND Squadra.nome_girone = partecipazione_casa.nome_girone) "
+                + "WHERE (idcampionato, anno_campionato, nome_squadra, nome_girone) IN ( "
+                + "SELECT idcampionato, anno_campionato, nome_squadra, nome_girone "
+                + "FROM partecipazione_casa)";
+        try (PreparedStatement statement = connection.prepareStatement(query2)) {
+            statement.executeUpdate();
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw new IllegalArgumentException("Update2 partite fallito");
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
+        final String query3 = "UPDATE SQUADRA "
+                + "SET PUNTI_SUBITI=PUNTI_SUBITI+(SELECT partecipazione_casa.punti_fatti "
+                + "FROM partecipazione_ospiti, partecipazione_casa "
+                + "WHERE Squadra.idcampionato = partecipazione_ospiti.idcampionato "
+                + "AND Squadra.anno_campionato = partecipazione_ospiti.anno_campionato "
+                + "AND Squadra.nome_squadra = partecipazione_ospiti.nome_squadra "
+                + "AND Squadra.nome_girone = partecipazione_ospiti.nome_girone "
+                + "AND partecipazione_casa.codicepalestra = partecipazione_ospiti.codicepalestra "
+                + "AND partecipazione_casa.data_ora = partecipazione_ospiti.data_ora) "
+                + "WHERE (idcampionato, anno_campionato, nome_squadra, nome_girone) "
+                + "IN (SELECT idcampionato, anno_campionato, nome_squadra, nome_girone "
+                + "FROM partecipazione_ospiti) ";
+        try (PreparedStatement statement = connection.prepareStatement(query3)) {
+            statement.executeUpdate();
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw new IllegalArgumentException("Update3 partite fallito");
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
+        final String query4 = "UPDATE Squadra"
+                + "SET punti_segnati = punti_segnati + ( "
+                + "SELECT punti_fatti "
+                + "FROM partecipazione_ospiti "
+                + "WHERE Squadra.idcampionato = partecipazione_ospiti.idcampionato "
+                + "AND Squadra.anno_campionato = partecipazione_ospiti.anno_campionato "
+                + "AND Squadra.nome_squadra = partecipazione_ospiti.nome_squadra "
+                + "AND Squadra.nome_girone = partecipazione_ospiti.nome_girone) "
+                + "WHERE (idcampionato, anno_campionato, nome_squadra, nome_girone) "
+                + "IN (SELECT idcampionato, anno_campionato, nome_squadra, nome_girone "
+                + "FROM partecipazione_ospiti) ";
+        try (PreparedStatement statement = connection.prepareStatement(query4)) {
+            statement.executeUpdate();
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw new IllegalArgumentException("Update4 partite fallito");
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
+        final String query5 = "UPDATE SQUADRA "
+                + "SET PUNTI_SUBITI=PUNTI_SUBITI+(SELECT partecipazione_ospiti.punti_fatti "
+                + "FROM partecipazione_ospiti, partecipazione_casa "
+                + "WHERE Squadra.idcampionato = partecipazione_casa.idcampionato "
+                + "AND Squadra.anno_campionato = partecipazione_casa.anno_campionato "
+                + "AND Squadra.nome_squadra = partecipazione_casa.nome_squadra "
+                + "AND Squadra.nome_girone = partecipazione_casa.nome_girone "
+                + "AND partecipazione_casa.codicepalestra = partecipazione_ospiti.codicepalestra "
+                + "AND partecipazione_casa.data_ora = partecipazione_ospiti.data_ora) "
+                + "WHERE (idcampionato, anno_campionato, nome_squadra, nome_girone) "
+                + "IN (SELECT idcampionato, anno_campionato, nome_squadra, nome_girone "
+                + "FROM partecipazione_casa)";
+        try (PreparedStatement statement = connection.prepareStatement(query5)) {
+            statement.executeUpdate();
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw new IllegalArgumentException("Update5 partite fallito");
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
     }
     
     public void addPerformance(String codicePalestra, Timestamp dataOra, String tesseraFIP, int rimb, int assist,
@@ -294,12 +368,11 @@ public class FeaturesPartita{
         }
     }
     
-    public ObservableList<Direzione> viewDirezione(String tesseraFIP) {
+    public ObservableList<Direzione> viewDirezione() {
         final String query = "SELECT T.NOME, T.COGNOME, D.RIMBORSO, P.DATA_ORA, C.NOME_SQUADRA AS NOME_SQUADRA1, O.NOME_SQUADRA AS NOME_SQUADRA2, G.NOME_PALESTRA "
                             + "FROM TESSERATO T, ARBITRO A, DIREZIONE D, PARTITA P, PARTECIPAZIONE_CASA C, PARTECIPAZIONE_OSPITI O, PALESTRA G "
-                            + "WHERE T.TESSERAFIP= ? "
-                            + "AND T.TESSERAFIP=A.TESSERAFIP "
-                            + "AND T.TESSERAFIP=D.TESSERAFIP "
+                            + "WHERE T.TESSERAFIP=A.TESSERAFIP "
+                            + "AND A.TESSERAFIP=D.TESSERAFIP "
                             + "AND D.CODICEPALESTRA=P.CODICEPALESTRA "
                             + "AND D.DATA_ORA=P.DATA_ORA "
                             + "AND C.CODICEPALESTRA=P.CODICEPALESTRA "
@@ -308,7 +381,6 @@ public class FeaturesPartita{
                             + "AND O.DATA_ORA=P.DATA_ORA "
                             + "AND G.CODICEPALESTRA=P.CODICEPALESTRA ";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, tesseraFIP);
             ResultSet result = statement.executeQuery(query);
 
             final ObservableList<Direzione> data = FXCollections.observableArrayList();
@@ -324,12 +396,11 @@ public class FeaturesPartita{
         }
     }
     
-    public ObservableList<Direzione> viewCoDirezione(String tesseraFIP) {
+    public ObservableList<Direzione> viewCoDirezione() {
         final String query = "SELECT T.NOME, T.COGNOME, D.RIMBORSO, P.DATA_ORA, C.NOME_SQUADRA AS NOME_SQUADRA1, O.NOME_SQUADRA AS NOME_SQUADRA2, G.NOME_PALESTRA "
                             + "FROM TESSERATO T, UFFICIALE_DI_CAMPO A, CODIREZIONE D, PARTITA P, PARTECIPAZIONE_CASA C, PARTECIPAZIONE_OSPITI O, PALESTRA G "
-                            + "WHERE T.TESSERAFIP= ? "
-                            + "AND T.TESSERAFIP=A.TESSERAFIP "
-                            + "AND T.TESSERAFIP=D.TESSERAFIP "
+                            + "WHERE T.TESSERAFIP=A.TESSERAFIP "
+                            + "AND A.TESSERAFIP=D.TESSERAFIP "
                             + "AND D.CODICEPALESTRA=P.CODICEPALESTRA "
                             + "AND D.DATA_ORA=P.DATA_ORA "
                             + "AND C.CODICEPALESTRA=P.CODICEPALESTRA "
@@ -338,7 +409,6 @@ public class FeaturesPartita{
                             + "AND O.DATA_ORA=P.DATA_ORA "
                             + "AND G.CODICEPALESTRA=P.CODICEPALESTRA";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, tesseraFIP);
             ResultSet result = statement.executeQuery(query);
 
             final ObservableList<Direzione> data = FXCollections.observableArrayList();
