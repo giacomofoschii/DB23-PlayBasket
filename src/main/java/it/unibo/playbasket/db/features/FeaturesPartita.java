@@ -139,7 +139,7 @@ public class FeaturesPartita{
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException e) {
-            throw new IllegalArgumentException(e);
+            throw new IllegalArgumentException("Update2 partite fallito");
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
@@ -162,7 +162,7 @@ public class FeaturesPartita{
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException e) {
-            throw new IllegalArgumentException(e);
+            throw new IllegalArgumentException("Update4 partite fallito");
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
@@ -179,7 +179,7 @@ public class FeaturesPartita{
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException e) {
-            throw new IllegalArgumentException(e);
+            throw new IllegalArgumentException("Update3 partite fallito");
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
@@ -204,7 +204,7 @@ public class FeaturesPartita{
         try (PreparedStatement statement = connection.prepareStatement(query2)) {
             statement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException e) {
-            throw new IllegalArgumentException(e);
+            throw new IllegalArgumentException("Update5 partite fallito");
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
